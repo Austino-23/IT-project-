@@ -1,0 +1,557 @@
+/* ==========================================================================
+   ResolveHub — Digital Complaint Management & Case Resolution System
+   File: css/responsive.css (Responsive Media Queries, Layout Audit & Accessibility)
+   Tech Stack: Pure CSS3 (No frameworks)
+   Covers all 20 pages across Desktop, Tablet (<= 992px), Mobile (<= 768px),
+   and Small Mobile (<= 480px).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. Global Overflow & Flex/Grid Child Containment Safeguards
+   -------------------------------------------------------------------------- */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.app-shell,
+.main-wrapper,
+.workspace-content,
+.container,
+.hero-grid > *,
+.contact-layout > *,
+.case-layout > *,
+.bento-grid > *,
+.auth-page > *,
+.auth-form-panel,
+.card,
+.card-body,
+.stat-card,
+.kpi-card,
+.feature-card,
+.category-card,
+.feedback-card,
+.notification-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Long strings (emails, IDs, filenames, URLs) wrap cleanly instead of overflowing */
+.info-kv-value,
+.contact-info-value,
+.notification-card p,
+.message-body,
+.feedback-card p,
+.timeline-body,
+.workflow-step-desc {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Chart bar labels and values wrap gracefully if narrow */
+.chart-bar-meta {
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+/* Ensure tables inside containers scroll horizontally without breaking page width */
+.table-container,
+.table-responsive {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table,
+.data-table {
+  min-width: 640px;
+}
+
+/* --------------------------------------------------------------------------
+   1. Small Desktop / Large Tablet (<= 1100px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .grid-4,
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stats-grid-5 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .filter-grid,
+  .filter-grid-admin {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .case-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Tablet & Off-Canvas Dashboard Sidebar (<= 992px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  /* Auth Layout stacks vertically */
+  .auth-page {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-brand-panel {
+    padding: var(--space-8) var(--space-6);
+  }
+
+  .auth-brand-header,
+  .auth-feature-list {
+    max-width: 100%;
+  }
+
+  /* Convert desktop sidebar into slide-over mobile navigation drawer */
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: min(280px, 85vw);
+    height: 100dvh;
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-lg);
+    z-index: 120;
+  }
+
+  .sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-toggle-btn {
+    display: inline-flex;
+    min-width: 42px;
+    min-height: 42px;
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-grid,
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .bento-span-7,
+  .bento-span-5,
+  .bento-span-6,
+  .bento-span-4 {
+    grid-column: span 12;
+  }
+
+  /* Hide decorative topbar inline text on tablet/mobile so action buttons fit */
+  .topbar .metadata-inline {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Mobile Landscape & Portrait (<= 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  :root {
+    --text-3xl: 1.5rem;
+    --text-2xl: 1.25rem;
+    --text-xl: 1.125rem;
+  }
+
+  .section {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
+  }
+
+  .page-header {
+    padding: var(--space-6) 0;
+  }
+
+  .hero-section {
+    padding: var(--space-10) 0;
+  }
+
+  .hero-title {
+    font-size: 1.875rem;
+    line-height: 1.2;
+  }
+
+  .hero-lead {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-6);
+  }
+
+  .hero-tracker-panel {
+    padding: var(--space-5);
+  }
+
+  .workflow-step-card {
+    grid-template-columns: 44px 1fr;
+    padding: var(--space-4);
+    gap: var(--space-3);
+  }
+
+  .workflow-step-meta {
+    grid-column: 2;
+    text-align: left;
+  }
+
+  .cta-banner {
+    padding: var(--space-6);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+  }
+
+  .cta-banner-actions {
+    width: 100%;
+  }
+
+  .cta-banner-actions .btn {
+    flex: 1 1 auto;
+  }
+
+  .container,
+  .navbar-container,
+  .workspace-content,
+  .topbar {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .workspace-content {
+    padding-top: var(--space-5);
+    padding-bottom: var(--space-6);
+  }
+
+  /* Topbar wraps cleanly if multiple action buttons exist */
+  .topbar {
+    height: auto;
+    min-height: var(--navbar-height);
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .topbar-right {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  /* Public Navbar Mobile Drawer */
+  .navbar-container {
+    gap: var(--space-2);
+  }
+
+  .navbar-toggle {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .navbar-nav {
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    right: 0;
+    background-color: var(--bg-surface);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--space-3) var(--space-4);
+    display: none;
+    max-height: calc(100dvh - var(--navbar-height));
+    overflow-y: auto;
+    z-index: 110;
+  }
+
+  .navbar-nav.is-open {
+    display: flex;
+  }
+
+  .nav-link {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-2);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .nav-link.active::after,
+  .nav-link:hover::after {
+    display: none;
+  }
+
+  /* Stack Cards & Grids into Single Column on Mobile */
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .form-row,
+  .filter-grid,
+  .filter-grid-admin,
+  .attachment-grid,
+  .feedback-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid,
+  .stats-grid-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .page-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .page-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  /* Filter Bars, Search Wrappers & Segmented Tabs */
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .filter-bar > *,
+  .filter-bar .input-group,
+  [data-directory-search] {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .segmented-control {
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .segment-btn,
+  .tab-btn {
+    min-height: 40px;
+    padding: 0.45rem 0.85rem;
+  }
+
+  /* Charts Responsive Scaling (Prevent 6-column vertical chart overflow) */
+  .vertical-chart {
+    gap: var(--space-2);
+    height: 190px;
+    padding-top: var(--space-4);
+  }
+
+  .v-bar-pair {
+    gap: 3px;
+    height: 135px;
+  }
+
+  .v-bar {
+    width: 12px;
+  }
+
+  .v-bar-num {
+    font-size: 9.5px;
+    white-space: nowrap;
+  }
+
+  /* Notification, KV & Setting Rows on Mobile */
+  .notification-card,
+  .setting-item-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .info-kv-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .info-kv-value {
+    text-align: left;
+  }
+
+  /* Modals fit cleanly within mobile screens */
+  .modal-backdrop {
+    padding: var(--space-3);
+    align-items: flex-end;
+  }
+
+  .modal,
+  .modal-lg {
+    max-width: 100%;
+    max-height: calc(100dvh - 24px);
+    border-radius: var(--radius-lg);
+  }
+
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: var(--space-4) var(--space-5);
+  }
+
+  /* Dropdown Menus stay inside viewport */
+  .dropdown-menu {
+    max-width: calc(100vw - 32px);
+  }
+
+  /* Touch Target Compliance (>= 44px on mobile) */
+  .btn,
+  .form-control,
+  .form-select,
+  .sidebar-link,
+  .faq-trigger,
+  .star-btn {
+    min-height: 44px;
+  }
+
+  /* Keep compact table row action buttons tidy inside scrollable tables */
+  .table .btn-xs,
+  .data-table .btn-xs,
+  .table .btn-sm,
+  .data-table .btn-sm {
+    min-height: 34px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-2);
+    text-align: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Small Mobile Devices (<= 480px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .grid-4,
+  .stats-grid,
+  .stats-grid-5,
+  .role-selector {
+    grid-template-columns: 1fr;
+  }
+
+  /* Keep Public Navbar brand + buttons from overflowing on 320px-375px screens */
+  .navbar-brand {
+    font-size: var(--text-md);
+  }
+
+  .navbar-actions {
+    gap: var(--space-1);
+  }
+
+  .navbar-actions .btn-sm {
+    min-height: 36px;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  /* Stack Hero Case Tracker input and button vertically */
+  form[data-case-tracker-form] .flex-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  form[data-case-tracker-form] .btn {
+    width: 100%;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn,
+  .page-actions .btn {
+    width: 100%;
+  }
+
+  .auth-form-panel {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .auth-card,
+  .card-body,
+  .card-header,
+  .card-footer,
+  .table-header-bar {
+    padding: var(--space-4);
+  }
+
+  .auth-meta-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .modal-footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .modal-footer .btn {
+    width: 100%;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. Reduced Motion & Print Accessibility
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .navbar,
+  .sidebar,
+  .topbar,
+  .page-actions,
+  .site-footer,
+  .toast-container {
+    display: none !important;
+  }
+
+  body,
+  .card,
+  .table-container {
+    background: #FFFFFF !important;
+    box-shadow: none !important;
+  }
+}

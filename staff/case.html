@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case #RH-2026-8492 Investigation — ResolveHub Staff</title>
+  <meta name="description" content="Detailed staff case management view in ResolveHub. Inspect complaint details, attachments, user info, audit timeline, conversation thread, and resolution actions." />
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+
+  <div class="app-shell" id="staff-case-detail-page">
+    <!-- ==================================================================
+         1. STAFF SIDEBAR NAVIGATION
+         ================================================================== -->
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">ResolveHub</a>
+        <span class="sidebar-portal-label">Staff Portal</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Staff Workspace Navigation">
+        <div class="sidebar-section-label">Resolution Workspace</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-link-main">Dashboard</span>
+        </a>
+        <a href="cases.html" class="sidebar-link active">
+          <span class="sidebar-link-main">Cases</span>
+          <span class="sidebar-count">38</span>
+        </a>
+        <a href="reports.html" class="sidebar-link">
+          <span class="sidebar-link-main">Reports</span>
+        </a>
+
+        <div class="sidebar-section-label">Account</div>
+        <a href="../auth.html" class="sidebar-link">
+          <span class="sidebar-link-main">Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">TB</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Engr. Tunde Bakare</div>
+            <div class="sidebar-user-role">Senior Officer · ICT Unit</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================================================================
+         2. MAIN WORKSPACE AREA
+         ================================================================== -->
+    <div class="main-wrapper">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" class="sidebar-toggle-btn" data-sidebar-toggle aria-label="Toggle Sidebar">
+            ☰
+          </button>
+          <div class="topbar-breadcrumb">
+            <a href="dashboard.html" style="color: var(--text-muted);">Staff Portal</a>
+            <span>/</span>
+            <a href="cases.html" style="color: var(--text-muted);">Cases</a>
+            <span>/</span>
+            <strong class="font-mono">RH-2026-8492</strong>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <a href="cases.html" class="btn btn-secondary btn-sm">← Back to Queue</a>
+          <button type="button" class="btn btn-danger btn-sm" data-modal-open="escalate-case-modal">
+            Escalate Case
+          </button>
+          <button type="button" class="btn btn-success btn-sm" data-modal-open="resolve-case-modal">
+            Resolve Case
+          </button>
+        </div>
+      </header>
+
+      <!-- Workspace Content -->
+      <main class="workspace-content">
+        <!-- Case Header Banner -->
+        <div class="card" style="margin-bottom: var(--space-6);">
+          <div class="card-body">
+            <div class="flex-between" style="flex-wrap: wrap; margin-bottom: var(--space-3);">
+              <div class="metadata-inline">
+                <span class="font-mono" style="font-size: var(--text-sm); font-weight: var(--weight-bold); color: var(--color-primary);">
+                  Case ID: RH-2026-8492
+                </span>
+                <span class="metadata-sep">·</span>
+                <span>Submitted: <span class="font-mono">2026-10-02 · 09:14 WAT</span></span>
+                <span class="metadata-sep">·</span>
+                <span>SLA Target: <span class="font-mono">12h remaining</span></span>
+              </div>
+
+              <div class="flex-row" style="gap: var(--space-4);">
+                <span id="live-case-priority-label" class="priority-label priority-high">
+                  High Priority
+                </span>
+                <span id="live-case-status-badge" class="status-badge status-in-progress">
+                  <span class="status-indicator-symbol" aria-hidden="true">●</span> In Progress
+                </span>
+              </div>
+            </div>
+
+            <h1 class="page-title" style="margin-bottom: var(--space-2);">
+              Campus Wi-Fi Authentication Failure in Engineering Block B
+            </h1>
+            <p class="page-subtitle">
+              Assigned to <strong id="live-case-assigned-officer">Engr. Tunde Bakare (Senior ICT Officer)</strong> · Department: <strong>ICT &amp; Network Infrastructure Unit</strong>
+            </p>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             3. TWO-COLUMN CASE MANAGEMENT LAYOUT
+             ============================================================== -->
+        <div class="case-layout">
+          <!-- LEFT COLUMN (2fr): Complaint Info, Attachments, Conversation & Timeline -->
+          <div style="display: flex; flex-direction: column; gap: var(--space-6);">
+
+            <!-- A. Complaint Information & Attachments -->
+            <section class="card" aria-label="Complaint Details and Attachments">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Complaint Information &amp; Evidence</h2>
+                  <p class="card-subtitle">Submitted statement and supporting files provided by the complainant</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <p style="margin-bottom: var(--space-4); color: var(--text-primary);">
+                  Since Monday morning (October 1, 2026), students and faculty inside Engineering Block B (2nd and 3rd floor lecture halls and CAD laboratories) have been unable to authenticate onto the <span class="font-mono">ResolveHub-Campus-5G</span> wireless network. Devices connect to the access point but fail at the 802.1X RADIUS login prompt with a "DHCP Lease / Authentication Timeout" error.
+                </p>
+                <p style="margin-bottom: var(--space-5);">
+                  This is currently affecting over 180 final-year engineering students who require network access for cloud CAD simulations and continuous assessment portal submissions.
+                </p>
+
+                <div style="border-top: 1px solid var(--border-color); padding-top: var(--space-4);">
+                  <h3 style="font-size: var(--text-sm); font-weight: var(--weight-semibold); margin-bottom: var(--space-2);">
+                    Attached Evidence Files (2)
+                  </h3>
+                  <div class="attachment-grid">
+                    <div class="attachment-card">
+                      <div>
+                        <div class="attachment-name">wifi_error_screenshot_block_b.png</div>
+                        <div class="attachment-size">PNG Image · 1.4 MB · Uploaded Oct 02</div>
+                      </div>
+                      <button
+                        type="button"
+                        class="btn btn-secondary btn-sm"
+                        onclick="window.ResolveHub.showToast('Opening Attachment', 'Previewing wifi_error_screenshot_block_b.png (1.4 MB)', 'info')"
+                      >
+                        Download
+                      </button>
+                    </div>
+
+                    <div class="attachment-card">
+                      <div>
+                        <div class="attachment-name">network_diagnostics_log.pdf</div>
+                        <div class="attachment-size">PDF Document · 420 KB · Uploaded Oct 02</div>
+                      </div>
+                      <button
+                        type="button"
+                        class="btn btn-secondary btn-sm"
+                        onclick="window.ResolveHub.showToast('Opening Attachment', 'Downloading network_diagnostics_log.pdf (420 KB)', 'info')"
+                      >
+                        Download
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- B. Conversation / Message Section -->
+            <section class="card" aria-label="Case Conversation Thread">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Case Conversation &amp; Internal Notes</h2>
+                  <p class="card-subtitle">Direct communication with the complainant and internal staff investigation logs</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="message-thread" id="case-message-thread">
+                  <!-- Message 1: Complainant -->
+                  <article class="message-card">
+                    <div class="message-header">
+                      <div>
+                        <span class="message-author">Oluwaseun Adeyemi</span>
+                        <span class="message-role">Complainant (STU/2026/04819)</span>
+                      </div>
+                      <span class="message-time">Oct 02, 2026 · 09:14</span>
+                    </div>
+                    <p class="message-body">
+                      Good morning ICT team. I have attached the screenshot of the 802.1X RADIUS authentication failure from CAD Lab 2 on the 3rd floor of Engineering Block B. Please let us know when technicians can inspect the access points.
+                    </p>
+                  </article>
+
+                  <!-- Message 2: Assigned Staff -->
+                  <article class="message-card message-staff">
+                    <div class="message-header">
+                      <div>
+                        <span class="message-author">Engr. Tunde Bakare</span>
+                        <span class="message-role">Senior Resolution Officer · ICT Unit</span>
+                      </div>
+                      <span class="message-time">Oct 02, 2026 · 11:30</span>
+                    </div>
+                    <p class="message-body">
+                      Thank you for the detailed report and diagnostic log, Oluwaseun. Our network operations team has identified a DHCP lease exhaustion issue on Access Point controller AP-ENG-04 serving Block B. A field technician is scheduled to replace the faulty distribution switch port today.
+                    </p>
+                  </article>
+
+                  <!-- Message 3: Internal Staff Note -->
+                  <article class="message-card message-internal">
+                    <div class="message-header">
+                      <div>
+                        <span class="message-author">Engr. Tunde Bakare</span>
+                        <span class="message-role">Internal Staff Note (Hidden from Complainant)</span>
+                      </div>
+                      <span class="message-time">Oct 03, 2026 · 08:45</span>
+                    </div>
+                    <p class="message-body">
+                      Internal Note: Verified VLAN 40 trunk port on Block B 2nd-floor distribution cabinet. Expanding subnet pool from /24 to /22 to support peak lecture hall concurrency.
+                    </p>
+                  </article>
+                </div>
+
+                <!-- Reply to Complainant Form -->
+                <form data-staff-reply-form novalidate>
+                  <div class="form-group">
+                    <label class="form-label" for="staff-public-reply">Send Official Update to Complainant</label>
+                    <textarea
+                      id="staff-public-reply"
+                      class="form-textarea"
+                      placeholder="Write a transparent progress update or response to Oluwaseun Adeyemi..."
+                    ></textarea>
+                  </div>
+                  <div class="flex-between" style="flex-wrap: wrap;">
+                    <span class="form-hint" style="margin-top: 0;">
+                      This message will be visible to the complainant in their portal and logged in the audit timeline.
+                    </span>
+                    <button type="submit" class="btn btn-primary">Send Reply to User</button>
+                  </div>
+                </form>
+              </div>
+            </section>
+
+            <!-- C. Case Timeline -->
+            <section class="card" aria-label="Case Audit Timeline">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Case Audit Timeline</h2>
+                  <p class="card-subtitle">Complete chronological history of status changes, assignments, and investigation milestones</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="timeline" id="case-timeline-list">
+                  <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-header">
+                      <span class="timeline-title">Field Technician Dispatched to Engineering Block B</span>
+                      <span class="timeline-time">Oct 03, 2026 · 08:45</span>
+                    </div>
+                    <p class="timeline-body">
+                      Engr. Tunde Bakare logged an internal diagnostic update on distribution switch AP-ENG-04.
+                    </p>
+                  </div>
+
+                  <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-header">
+                      <span class="timeline-title">Status Changed to In Progress</span>
+                      <span class="timeline-time">Oct 02, 2026 · 11:30</span>
+                    </div>
+                    <p class="timeline-body">
+                      Initial triage completed within 2h 16m (SLA target: 4h). Official response sent to complainant.
+                    </p>
+                  </div>
+
+                  <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-header">
+                      <span class="timeline-title">Assigned to Engr. Tunde Bakare (ICT Unit)</span>
+                      <span class="timeline-time">Oct 02, 2026 · 09:40</span>
+                    </div>
+                    <p class="timeline-body">
+                      Case automatically routed to ICT &amp; Network Infrastructure Department and assigned to Senior Officer.
+                    </p>
+                  </div>
+
+                  <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-header">
+                      <span class="timeline-title">Complaint Submitted &amp; Case ID Generated (#RH-2026-8492)</span>
+                      <span class="timeline-time">Oct 02, 2026 · 09:14</span>
+                    </div>
+                    <p class="timeline-body">
+                      Filed by Oluwaseun Adeyemi under Category: ICT (High Priority) with 2 evidence attachments.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          <!-- RIGHT COLUMN (1fr): Case & User Metadata + 7 Staff Action Controls -->
+          <div style="display: flex; flex-direction: column; gap: var(--space-6);">
+
+            <!-- D. Case & User Information Card -->
+            <section class="card" aria-label="Case and Complainant Metadata">
+              <div class="card-header">
+                <h2 class="card-title">Case &amp; User Information</h2>
+              </div>
+              <div class="card-body">
+                <div class="info-kv-list">
+                  <div class="info-kv-row">
+                    <span class="info-kv-label">Complainant Name</span>
+                    <span class="info-kv-value">Oluwaseun Adeyemi</span>
+                  </div>
+                  <div class="info-kv-row">
+                    <span class="info-kv-label">Student / Staff ID</span>
+                    <span class="info-kv-value font-mono">STU/2026/04819</span>
+                  </div>
+                  <div class="info-kv-row">
+                    <span class="info-kv-label">Email Address</span>
+                    <span class="info-kv-value font-mono" style="font-size: var(--text-xs);">o.adeyemi@resolvehub.edu.ng</span>
+                  </div>
+                  <div class="info-kv-row">
+                    <span class="info-kv-label">Phone Number</span>
+                    <span class="info-kv-value font-mono">+234 803 555 0192</span>
+                  </div>
+                  <div class="info-kv-row">
+                    <span class="info-kv-label">Category</span>
+                    <span class="info-kv-value">ICT</span>
+                  </div>
+                  <div class="info-kv-row">
+                    <span class="info-kv-label">Department</span>
+                    <span class="info-kv-value">ICT &amp; Network Infrastructure</span>
+                  </div>
+                  <div class="info-kv-row">
+                    <span class="info-kv-label">Submission Date</span>
+                    <span class="info-kv-value font-mono">2026-10-02</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- E. Staff Actions Control Panel (All 7 Required Actions) -->
+            <section class="card" aria-label="Staff Case Management Actions">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Staff Case Actions</h2>
+                  <p class="card-subtitle">Update status, priority, assignment, or record notes</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <!-- Action 1: Change Status -->
+                <div class="form-group">
+                  <label class="form-label" for="staff-action-status-select">1. Change Status</label>
+                  <div class="flex-row" style="gap: var(--space-2);">
+                    <select id="staff-action-status-select" class="form-select">
+                      <option value="in-progress" selected>In Progress</option>
+                      <option value="pending">Pending</option>
+                      <option value="resolved">Resolved</option>
+                      <option value="escalated">Escalated</option>
+                    </select>
+                    <button type="button" class="btn btn-secondary btn-sm" data-action-status-btn>
+                      Update
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Action 2: Change Priority -->
+                <div class="form-group">
+                  <label class="form-label" for="staff-action-priority-select">2. Change Priority</label>
+                  <div class="flex-row" style="gap: var(--space-2);">
+                    <select id="staff-action-priority-select" class="form-select">
+                      <option value="high" selected>High Priority</option>
+                      <option value="medium">Medium Priority</option>
+                      <option value="low">Low Priority</option>
+                    </select>
+                    <button type="button" class="btn btn-secondary btn-sm" data-action-priority-btn>
+                      Update
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Action 3: Assign Case -->
+                <div class="form-group">
+                  <label class="form-label" for="staff-action-assign-select">3. Assign / Reassign Case</label>
+                  <div class="flex-row" style="gap: var(--space-2);">
+                    <select id="staff-action-assign-select" class="form-select">
+                      <option value="tunde" selected>Engr. Tunde Bakare (Senior ICT)</option>
+                      <option value="chisom">Chisom Eze (Network Specialist)</option>
+                      <option value="ibrahim">Ibrahim Danjuma (Systems Admin)</option>
+                      <option value="kemi">Kemi Adebayo (Portal Support Lead)</option>
+                    </select>
+                    <button type="button" class="btn btn-secondary btn-sm" data-action-assign-btn>
+                      Assign
+                    </button>
+                  </div>
+                </div>
+
+                <hr class="divider" style="margin: var(--space-4) 0;" />
+
+                <!-- Action 4: Request More Information -->
+                <div class="form-group">
+                  <label class="form-label" for="staff-request-info-input">4. Request More Information</label>
+                  <input
+                    type="text"
+                    id="staff-request-info-input"
+                    class="form-control"
+                    placeholder="Ask complainant for specific details..."
+                    style="margin-bottom: var(--space-2);"
+                  />
+                  <button type="button" class="btn btn-warning btn-sm btn-block" data-action-request-info>
+                    Send Clarification Request
+                  </button>
+                </div>
+
+                <!-- Action 5: Add Internal Note -->
+                <div class="form-group">
+                  <label class="form-label" for="staff-internal-note-input">5. Add Internal Note</label>
+                  <textarea
+                    id="staff-internal-note-input"
+                    class="form-textarea"
+                    style="min-height: 76px; margin-bottom: var(--space-2);"
+                    placeholder="Record private technical findings for staff/admin only..."
+                  ></textarea>
+                  <button type="button" class="btn btn-outline btn-sm btn-block" data-action-internal-note>
+                    Save Internal Note
+                  </button>
+                </div>
+
+                <hr class="divider" style="margin: var(--space-4) 0;" />
+
+                <!-- Action 6 & 7: Resolve Case & Escalate Case (Open Confirmation Modals) -->
+                <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                  <button
+                    type="button"
+                    class="btn btn-success btn-block"
+                    data-modal-open="resolve-case-modal"
+                  >
+                    6. Resolve Case (Confirm)
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-block"
+                    data-modal-open="escalate-case-modal"
+                  >
+                    7. Escalate Case (Confirm)
+                  </button>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       4. CONFIRMATION MODAL 1: RESOLVE CASE
+       ==================================================================== -->
+  <div
+    class="modal-backdrop"
+    id="resolve-case-modal"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="resolve-modal-title"
+  >
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="resolve-modal-title">Confirm Case Resolution (#RH-2026-8492)</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close dialog">✕</button>
+      </div>
+      <form data-confirm-resolve-form novalidate>
+        <div class="modal-body">
+          <div class="alert alert-info" style="margin-bottom: var(--space-4);">
+            <div class="alert-body">
+              <div class="alert-text">
+                Marking this case as <strong>Resolved</strong> will notify the complainant (Oluwaseun Adeyemi) to review and confirm the solution before final closure.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="resolve-summary-text">
+              Official Resolution Summary <span class="form-required">*</span>
+            </label>
+            <textarea
+              id="resolve-summary-text"
+              name="resolutionSummary"
+              class="form-textarea"
+              placeholder="Summarize the corrective action taken and verification performed..."
+              required
+            >Replaced faulty PoE switch port on AP-ENG-04 and expanded DHCP subnet pool. Verified stable 802.1X Wi-Fi authentication across all floors of Engineering Block B.</textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-check">
+              <input type="checkbox" checked />
+              <span>Attach diagnostic verification report to complainant notification</span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-success">Confirm &amp; Resolve Case</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       5. CONFIRMATION MODAL 2: ESCALATE CASE
+       ==================================================================== -->
+  <div
+    class="modal-backdrop"
+    id="escalate-case-modal"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="escalate-modal-title"
+  >
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="escalate-modal-title">Confirm Case Escalation (#RH-2026-8492)</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close dialog">✕</button>
+      </div>
+      <form data-confirm-escalate-form novalidate>
+        <div class="modal-body">
+          <div class="alert alert-danger" style="margin-bottom: var(--space-4);">
+            <div class="alert-body">
+              <div class="alert-text">
+                Escalating this case will elevate its priority to <strong>High / Critical</strong> and transfer oversight to senior leadership and the System Administrator queue.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="escalate-target-select">Escalate To Authority</label>
+            <select id="escalate-target-select" name="escalationTarget" class="form-select">
+              <option value="ict-director">Chief ICT Director &amp; System Administrator</option>
+              <option value="ombudsman">Institutional Ombudsman &amp; Quality Assurance</option>
+              <option value="facilities-head">Director of Works &amp; Physical Planning</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="escalate-reason-text">
+              Reason for Escalation <span class="form-required">*</span>
+            </label>
+            <textarea
+              id="escalate-reason-text"
+              name="escalationReason"
+              class="form-textarea"
+              placeholder="State why this case requires senior intervention or cross-departmental escalation..."
+              required
+            >Core fiber uplink hardware replacement required in Engineering Block B; needs emergency capital approval from Central ICT Director.</textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-danger">Confirm Escalation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

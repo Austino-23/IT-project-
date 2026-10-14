@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResolveHub</title>
+  <meta name="description" content="Digital Complaint Management & Case Resolution System — Your Concern. Our Responsibility." />
+  <meta property="og:title" content="ResolveHub" />
+  <meta property="og:description" content="Digital Complaint Management & Case Resolution System — Your Concern. Our Responsibility." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- ====================================================================
+       1. TOP NAVIGATION BAR (3-Zone Contract)
+       ==================================================================== -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <!-- Zone 1: Brand Wordmark -->
+      <a href="index.html" class="navbar-brand">ResolveHub</a>
+
+      <!-- Zone 2: Navigation Links -->
+      <nav class="navbar-nav" data-navbar-menu aria-label="Primary Navigation">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="categories.html" class="nav-link">Categories</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Zone 3: Primary Actions -->
+      <div class="navbar-actions">
+        <a href="auth.html" class="btn btn-ghost btn-sm">Login</a>
+        <a href="user/submit.html" class="btn btn-primary btn-sm">Submit Complaint</a>
+        <button type="button" class="navbar-toggle" data-navbar-toggle aria-label="Toggle Menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==================================================================
+         2. HERO SECTION & INTERACTIVE CASE STATUS TRACKER
+         ================================================================== -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          <!-- Left: Value Proposition & Primary Actions -->
+          <div>
+            <div class="hero-kicker">
+              <span>Institutional Case Resolution Platform</span>
+              <span>·</span>
+              <span>Verifiable SLA Tracking</span>
+            </div>
+            <h1 class="hero-title">Your Concern. Our Responsibility.</h1>
+            <p class="hero-lead">
+              ResolveHub provides students, staff, and community members with a structured, transparent digital channel to submit formal complaints, track departmental investigations in real time, and verify every resolution before a case is closed.
+            </p>
+            <div class="hero-actions">
+              <a href="user/submit.html" class="btn btn-accent btn-lg">Submit a Complaint</a>
+              <a href="#case-tracker-box" class="btn btn-hero-secondary btn-lg" onclick="document.getElementById('tracker-input-field').focus();">
+                Track a Case
+              </a>
+            </div>
+            <div class="hero-trust-row">
+              <span>8 Institutional Departments Connected</span>
+              <span>·</span>
+              <span>24-Hour Standard Initial Response SLA</span>
+              <span>·</span>
+              <span>End-to-End Audit Logs</span>
+            </div>
+          </div>
+
+          <!-- Right: Live Case Lookup & Resolution Preview -->
+          <div class="hero-tracker-panel" id="case-tracker-box">
+            <div class="tracker-panel-header">
+              <div>
+                <h2 style="font-size: var(--text-md); font-weight: var(--weight-bold); color: var(--text-primary);">
+                  Instant Case Status Lookup
+                </h2>
+                <p style="font-size: var(--text-xs); color: var(--text-muted);">
+                  Enter a Case ID or click a sample reference below to inspect live progress
+                </p>
+              </div>
+              <span class="status-badge status-resolved">
+                <span class="status-indicator-symbol" aria-hidden="true">●</span> Live Registry
+              </span>
+            </div>
+
+            <form data-case-tracker-form novalidate>
+              <div class="flex-row" style="gap: var(--space-2); margin-bottom: var(--space-3);">
+                <input
+                  type="text"
+                  id="tracker-input-field"
+                  class="form-control font-mono"
+                  placeholder="e.g. RH-2026-8492"
+                  value="RH-2026-8492"
+                  data-case-tracker-input
+                  aria-label="Case ID"
+                />
+                <button type="submit" class="btn btn-primary">Track Case</button>
+              </div>
+            </form>
+
+            <div class="metadata-inline" style="margin-bottom: var(--space-2);">
+              <span>Try sample IDs:</span>
+              <button type="button" class="btn btn-ghost btn-sm font-mono" style="padding: 2px 6px; min-height: 24px;" data-sample-case="RH-2026-8492">RH-2026-8492</button>
+              <span class="metadata-sep">·</span>
+              <button type="button" class="btn btn-ghost btn-sm font-mono" style="padding: 2px 6px; min-height: 24px;" data-sample-case="RH-2026-1042">RH-2026-1042</button>
+              <span class="metadata-sep">·</span>
+              <button type="button" class="btn btn-ghost btn-sm font-mono" style="padding: 2px 6px; min-height: 24px;" data-sample-case="RH-2026-1035">RH-2026-1035</button>
+            </div>
+
+            <div class="tracker-result-box" data-case-tracker-result aria-live="polite">
+              <div class="flex-between" style="margin-bottom: 8px; flex-wrap: wrap;">
+                <span class="font-mono" style="font-size: 12px; font-weight: 600; color: var(--color-primary);">RH-2026-8492</span>
+                <span class="status-badge status-in-progress">
+                  <span class="status-indicator-symbol" aria-hidden="true">●</span> In Progress — Field Technician Dispatched
+                </span>
+              </div>
+              <div style="font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">
+                Campus Wi-Fi Authentication Failure in Engineering Block B
+              </div>
+              <div class="metadata-inline" style="margin-bottom: 8px;">
+                <span>ICT</span>
+                <span class="metadata-sep">·</span>
+                <span>Network Infrastructure Unit</span>
+                <span class="metadata-sep">·</span>
+                <span>Officer: Engr. Tunde Bakare</span>
+              </div>
+              <div class="flex-between" style="padding-top: 8px; border-top: 1px solid var(--border-color); font-size: 12px;">
+                <span class="font-mono text-muted">14 minutes ago · SLA Target: 12h remaining</span>
+                <a href="user/case.html" style="font-weight: 600;">Open Full Case Log →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         3. SYSTEM STATISTICS SECTION (Quantitative Proof)
+         ================================================================== -->
+    <section class="section-sm" style="background-color: var(--bg-surface); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="flex-between" style="margin-bottom: var(--space-5); flex-wrap: wrap;">
+          <div>
+            <h2 style="font-size: var(--text-lg);">Verified Institutional Resolution Performance</h2>
+            <p style="font-size: var(--text-xs); color: var(--text-muted);">
+              Cumulative audit metrics across all 8 administrative and academic departments (2025–2026 academic session)
+            </p>
+          </div>
+          <a href="about.html#workflow" style="font-size: var(--text-xs); font-weight: var(--weight-semibold);">
+            View SLA Governance Standards →
+          </a>
+        </div>
+
+        <div class="stats-grid" style="margin-bottom: 0;">
+          <article class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Total Complaints Resolved</span>
+            </div>
+            <div class="stat-value">14,820</div>
+            <div class="stat-footer">
+              <span class="stat-delta positive">98.4%</span>
+              <span>overall case closure rate</span>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Median First-Response Time</span>
+            </div>
+            <div class="stat-value">4.2 hrs</div>
+            <div class="stat-footer">
+              <span class="stat-delta positive">-64% faster</span>
+              <span>than manual paper/email queues</span>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Resolved Within Target SLA</span>
+            </div>
+            <div class="stat-value">96.8%</div>
+            <div class="stat-footer">
+              <span class="stat-delta positive">+4.1% YoY</span>
+              <span>across all priority classifications</span>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Complainant Satisfaction</span>
+            </div>
+            <div class="stat-value">4.8 / 5.0</div>
+            <div class="stat-footer">
+              <span class="stat-delta positive">11,490+</span>
+              <span>verified post-resolution ratings</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         4. HOW IT WORKS SECTION
+         ================================================================== -->
+    <section id="how-it-works" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">Structured Case Lifecycle</div>
+            <h2 class="section-title">How ResolveHub Handles Your Complaint</h2>
+            <p class="section-desc">
+              Every submission follows a strict, auditable workflow from initial filing to complainant sign-off—preventing unacknowledged tickets or premature closures.
+            </p>
+          </div>
+          <a href="about.html#workflow" class="btn btn-outline">
+            Explore Full 11-Step Workflow →
+          </a>
+        </div>
+
+        <div class="grid-4">
+          <article class="feature-card">
+            <div>
+              <div class="feature-index">01. Submit &amp; Reference</div>
+              <h3 class="feature-title">Lodge Complaint &amp; Receive Case ID</h3>
+              <p class="feature-text">
+                Select the relevant category, describe the incident, and attach supporting evidence (receipts, photos, or documents). The system immediately generates a unique tracking ID.
+              </p>
+            </div>
+            <div class="metadata-inline">
+              <span class="font-mono">Instant confirmation</span>
+              <span class="metadata-sep">·</span>
+              <span>Steps 1–3</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div>
+              <div class="feature-index">02. Automated Routing</div>
+              <h3 class="feature-title">Department &amp; Officer Assignment</h3>
+              <p class="feature-text">
+                Your complaint is automatically routed to the responsible department (ICT, Bursary, Facilities, Academic, etc.) and assigned to a dedicated Case Resolution Officer.
+              </p>
+            </div>
+            <div class="metadata-inline">
+              <span class="font-mono">Under 2 hrs</span>
+              <span class="metadata-sep">·</span>
+              <span>Steps 4–5</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div>
+              <div class="feature-index">03. Active Investigation</div>
+              <h3 class="feature-title">Transparent Updates &amp; Dialogue</h3>
+              <p class="feature-text">
+                Follow timestamped investigation notes in real time. Communicate directly with the assigned officer and upload additional clarifications within the case thread.
+              </p>
+            </div>
+            <div class="metadata-inline">
+              <span class="font-mono">24h–48h SLA</span>
+              <span class="metadata-sep">·</span>
+              <span>Steps 6–8</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div>
+              <div class="feature-index">04. Verified Closure</div>
+              <h3 class="feature-title">User Confirmation &amp; Feedback</h3>
+              <p class="feature-text">
+                No case is closed until you review the proposed resolution, confirm that your concern has been addressed, and submit a quality rating for institutional auditing.
+              </p>
+            </div>
+            <div class="metadata-inline">
+              <span class="font-mono">Complainant verified</span>
+              <span class="metadata-sep">·</span>
+              <span>Steps 9–11</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="container"><hr class="divider" style="margin: 0;" /></div>
+
+    <!-- ==================================================================
+         5. BENEFITS & CAPABILITIES SECTION (Asymmetric Bento Grid)
+         ================================================================== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">Platform Architecture</div>
+            <h2 class="section-title">Built for Institutional Accountability</h2>
+            <p class="section-desc">
+              Traditional email inboxes and paper suggestion boxes lack tracking, ownership, and escalation rules. ResolveHub replaces ambiguity with measurable accountability.
+            </p>
+          </div>
+        </div>
+
+        <div class="bento-grid">
+          <article class="feature-card bento-span-7">
+            <div>
+              <div class="feature-index">01. Complete Auditability</div>
+              <h3 class="feature-title">Immutable Case Timeline &amp; Status History</h3>
+              <p class="feature-text">
+                Every action—from initial filing and departmental assignment to staff remarks and evidence uploads—is recorded with an exact timestamp and officer identifier. Complainants and administrators see a clear, tamper-evident record of how every case progressed.
+              </p>
+            </div>
+            <div class="metadata-inline">
+              <span>Timestamped Logs</span>
+              <span class="metadata-sep">·</span>
+              <span>Named Case Officers</span>
+              <span class="metadata-sep">·</span>
+              <span>Downloadable Case Summary</span>
+            </div>
+          </article>
+
+          <article class="feature-card bento-span-5">
+            <div>
+              <div class="feature-index">02. SLA Enforcement</div>
+              <h3 class="feature-title">Automated Escalation Matrix</h3>
+              <p class="feature-text">
+                Each category operates under defined Service Level Agreements (4h for critical safety/security, 24h–48h for standard cases). Cases approaching deadline automatically alert department heads and escalate to System Administrators.
+              </p>
+            </div>
+            <div class="metadata-inline">
+              <span>Zero Stalled Tickets</span>
+              <span class="metadata-sep">·</span>
+              <span>Real-Time SLA Countdown</span>
+            </div>
+          </article>
+
+          <article class="feature-card bento-span-5">
+            <div>
+              <div class="feature-index">03. Protected Reporting</div>
+              <h3 class="feature-title">Role-Based Access &amp; Privacy Controls</h3>
+              <p class="feature-text">
+                Sensitive complaints regarding security, harassment, or financial irregularities are restricted strictly to authorized investigators, protecting complainant identity against unauthorized viewing.
+              </p>
+            </div>
+            <div class="metadata-inline">
+              <span>Strict Access Control</span>
+              <span class="metadata-sep">·</span>
+              <span>Confidential Handling</span>
+            </div>
+          </article>
+
+          <article class="feature-card bento-span-7">
+            <div>
+              <div class="feature-index">04. Evidence-Backed Resolution</div>
+              <h3 class="feature-title">Centralized Document &amp; Media Evidence Vault</h3>
+              <p class="feature-text">
+                Attach payment receipts, portal screenshots, hostel maintenance photographs, or official correspondence directly to your case. Staff officers attach signed resolution memos or refund proofs before requesting closure confirmation.
+              </p>
+            </div>
+            <div class="metadata-inline">
+              <span>PDF, JPG, PNG &amp; DOCX Support</span>
+              <span class="metadata-sep">·</span>
+              <span>Complainant Sign-Off Required</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="container"><hr class="divider" style="margin: 0;" /></div>
+
+    <!-- ==================================================================
+         6. COMPLAINT CATEGORIES PREVIEW SECTION
+         ================================================================== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">Departmental Routing</div>
+            <h2 class="section-title">Complaint Categories Preview</h2>
+            <p class="section-desc">
+              Select the department that matches your concern for direct routing to specialized resolution staff.
+            </p>
+          </div>
+          <a href="categories.html" class="btn btn-outline">
+            View All 8 Categories →
+          </a>
+        </div>
+
+        <div class="grid-3">
+          <!-- Category 1: ICT -->
+          <article class="category-card">
+            <div>
+              <div class="category-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+              </div>
+              <h3 class="category-name">ICT</h3>
+              <p class="category-desc">
+                Student/staff portal login issues, campus Wi-Fi outages, institutional email access, and LMS technical errors.
+              </p>
+            </div>
+            <div class="category-footer">
+              <span class="category-count">2,840 resolved cases</span>
+              <a href="categories.html#cat-ict" style="font-size: var(--text-xs); font-weight: var(--weight-semibold);">Details →</a>
+            </div>
+          </article>
+
+          <!-- Category 2: Academic -->
+          <article class="category-card">
+            <div>
+              <div class="category-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                  <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                </svg>
+              </div>
+              <h3 class="category-name">Academic</h3>
+              <p class="category-desc">
+                Missing examination grades, course registration conflicts, transcript delays, and timetable scheduling disputes.
+              </p>
+            </div>
+            <div class="category-footer">
+              <span class="category-count">3,190 resolved cases</span>
+              <a href="categories.html#cat-academic" style="font-size: var(--text-xs); font-weight: var(--weight-semibold);">Details →</a>
+            </div>
+          </article>
+
+          <!-- Category 3: Finance/Bursary -->
+          <article class="category-card">
+            <div>
+              <div class="category-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                  <line x1="2" y1="10" x2="22" y2="10"></line>
+                </svg>
+              </div>
+              <h3 class="category-name">Finance / Bursary</h3>
+              <p class="category-desc">
+                Unreflected tuition payments, duplicate bank deductions, bursary disbursement inquiries, and official receipt generation.
+              </p>
+            </div>
+            <div class="category-footer">
+              <span class="category-count">2,415 resolved cases</span>
+              <a href="categories.html#cat-finance" style="font-size: var(--text-xs); font-weight: var(--weight-semibold);">Details →</a>
+            </div>
+          </article>
+
+          <!-- Category 4: Accommodation -->
+          <article class="category-card">
+            <div>
+              <div class="category-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+              </div>
+              <h3 class="category-name">Accommodation</h3>
+              <p class="category-desc">
+                Hostel room allocation issues, residence hall plumbing/water supply, furniture repairs, and sanitation concerns.
+              </p>
+            </div>
+            <div class="category-footer">
+              <span class="category-count">1,980 resolved cases</span>
+              <a href="categories.html#cat-accommodation" style="font-size: var(--text-xs); font-weight: var(--weight-semibold);">Details →</a>
+            </div>
+          </article>
+
+          <!-- Category 5: Security -->
+          <article class="category-card">
+            <div>
+              <div class="category-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <h3 class="category-name">Security</h3>
+              <p class="category-desc">
+                Campus safety hazards, lost property reports, unauthorized access incidents, and emergency lighting failures.
+              </p>
+            </div>
+            <div class="category-footer">
+              <span class="category-count">1,120 resolved cases</span>
+              <a href="categories.html#cat-security" style="font-size: var(--text-xs); font-weight: var(--weight-semibold);">Details →</a>
+            </div>
+          </article>
+
+          <!-- Category 6: Facilities -->
+          <article class="category-card">
+            <div>
+              <div class="category-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+              </div>
+              <h3 class="category-name">Facilities</h3>
+              <p class="category-desc">
+                Lecture hall air conditioning, laboratory equipment faults, backup generator power, and campus road maintenance.
+              </p>
+            </div>
+            <div class="category-footer">
+              <span class="category-count">1,765 resolved cases</span>
+              <a href="categories.html#cat-facilities" style="font-size: var(--text-xs); font-weight: var(--weight-semibold);">Details →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         7. CALL-TO-ACTION SECTION
+         ================================================================== -->
+    <section class="section" style="padding-top: var(--space-4);">
+      <div class="container">
+        <div class="cta-banner">
+          <div>
+            <h2 class="cta-banner-title">Ready to Lodge or Track a Formal Complaint?</h2>
+            <p class="cta-banner-text">
+              Sign in with your institutional credentials or create an account in under two minutes to submit a case and receive immediate SLA tracking updates.
+            </p>
+          </div>
+          <div class="cta-banner-actions">
+            <a href="user/submit.html" class="btn btn-accent btn-lg">Submit a Complaint</a>
+            <a href="auth.html#register" class="btn btn-hero-secondary btn-lg">Create an Account</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====================================================================
+       8. SITE FOOTER
+       ==================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-title">ResolveHub</div>
+          <p class="footer-tagline">Your Concern. Our Responsibility.</p>
+          <p style="font-size: var(--text-xs); color: rgba(255,255,255,0.65); max-width: 38ch;">
+            Official Digital Complaint Management &amp; Case Resolution System ensuring transparent accountability across all institutional departments.
+          </p>
+        </div>
+        <div>
+          <div class="footer-heading">Public Navigation</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About &amp; How It Works</a></li>
+            <li><a href="categories.html">Complaint Categories</a></li>
+            <li><a href="contact.html">Contact &amp; FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Account &amp; Portals</div>
+          <ul class="footer-links">
+            <li><a href="auth.html">Login / Register</a></li>
+            <li><a href="user/submit.html">Submit a Complaint</a></li>
+            <li><a href="user/dashboard.html">User Dashboard</a></li>
+            <li><a href="staff/dashboard.html">Staff Resolution Desk</a></li>
+            <li><a href="admin/dashboard.html">Admin Governance</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Helpdesk Contact</div>
+          <ul class="footer-links">
+            <li><a href="contact.html">Room 204, Central Admin Block</a></li>
+            <li><a href="mailto:support@resolvehub.edu.ng">support@resolvehub.edu.ng</a></li>
+            <li><a href="tel:+23418894200">+234 (0) 1 889 4200</a></li>
+            <li><span style="font-size: var(--text-xs); color: rgba(255,255,255,0.6);">Mon–Fri: 08:00 – 18:00 WAT</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 ResolveHub Digital Complaint Management System. All rights reserved.</span>
+        <span>Built with Pure HTML5, CSS3 &amp; Vanilla JavaScript</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login &amp; Register — ResolveHub</title>
+  <meta name="description" content="Sign in to your ResolveHub account or register with your Student/Staff ID to submit, track, and resolve institutional complaints." />
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- ====================================================================
+       1. TOP NAVIGATION BAR (3-Zone Contract)
+       ==================================================================== -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <!-- Zone 1: Brand Wordmark -->
+      <a href="index.html" class="navbar-brand">ResolveHub</a>
+
+      <!-- Zone 2: Navigation Links -->
+      <nav class="navbar-nav" data-navbar-menu aria-label="Primary Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html#how-it-works" class="nav-link">How It Works</a>
+        <a href="categories.html" class="nav-link">Categories</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Zone 3: Primary Actions -->
+      <div class="navbar-actions">
+        <a href="auth.html" class="btn btn-ghost btn-sm">Login</a>
+        <a href="user/submit.html" class="btn btn-primary btn-sm">Submit Complaint</a>
+        <button type="button" class="navbar-toggle" data-navbar-toggle aria-label="Toggle Menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       2. SPLIT-SCREEN INSTITUTIONAL AUTHENTICATION WORKSPACE
+       ==================================================================== -->
+  <main class="auth-page">
+    <!-- Left Brand & Institutional Trust Panel -->
+    <section class="auth-brand-panel">
+      <div class="auth-brand-header">
+        <div class="auth-kicker">ResolveHub Identity Gateway</div>
+        <h1 class="auth-brand-title">Your Concern. Our Responsibility.</h1>
+        <p class="auth-brand-desc">
+          Sign in or register with your verified Student or Staff ID to submit complaints, communicate directly with departmental case officers, and monitor real-time SLA progress.
+        </p>
+
+        <div class="auth-feature-list">
+          <div class="auth-feature-item">
+            <div class="auth-feature-title">01. Verified Institutional Identity</div>
+            <p class="auth-feature-text">
+              Every account is linked to a valid matriculation or staff number to prevent spam and prioritize genuine grievances.
+            </p>
+          </div>
+          <div class="auth-feature-item">
+            <div class="auth-feature-title">02. Real-Time Case Notifications</div>
+            <p class="auth-feature-text">
+              Receive instant status updates whenever a department officer is assigned, posts an investigation note, or proposes a resolution.
+            </p>
+          </div>
+          <div class="auth-feature-item">
+            <div class="auth-feature-title">03. Complainant Closure Authority</div>
+            <p class="auth-feature-text">
+              Review resolution proof and confirm satisfaction before any case is marked closed.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-brand-footer">
+        Need help signing in? Contact the ICT Helpdesk at <a href="contact.html" style="color: #FFFFFF; text-decoration: underline;">support@resolvehub.edu.ng</a>
+      </div>
+    </section>
+
+    <!-- Right Form Panel (Combined Login & Register) -->
+    <section class="auth-form-panel">
+      <div class="auth-card" style="max-width: 520px;">
+        <div class="auth-card-header">
+          <h2 class="auth-card-title" id="auth-dynamic-title">Sign In to ResolveHub</h2>
+          <p class="auth-card-subtitle" id="auth-dynamic-subtitle">
+            Access your complaint dashboard, case updates, and resolution logs.
+          </p>
+        </div>
+
+        <!-- JavaScript Mode Switcher Tabs -->
+        <div class="auth-tabs" role="tablist" aria-label="Authentication Mode">
+          <button
+            type="button"
+            id="login"
+            class="auth-tab active"
+            role="tab"
+            aria-selected="true"
+            data-auth-switch="login"
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            id="register"
+            class="auth-tab"
+            role="tab"
+            aria-selected="false"
+            data-auth-switch="register"
+          >
+            Register
+          </button>
+        </div>
+
+        <!-- ==============================================================
+             TAB 1: LOGIN FORM
+             ============================================================== -->
+        <div id="auth-panel-login" role="tabpanel">
+          <!-- Portal Role Selector -->
+          <span class="form-label">Select Workspace Portal</span>
+          <div class="role-selector">
+            <div class="role-option active" data-role-option tabindex="0">
+              <span class="role-option-title">Student / User</span>
+              <span class="role-option-desc">Complainant</span>
+            </div>
+            <div class="role-option" data-role-option tabindex="0">
+              <span class="role-option-title">Case Staff</span>
+              <span class="role-option-desc">Department Officer</span>
+            </div>
+            <div class="role-option" data-role-option tabindex="0">
+              <span class="role-option-title">Administrator</span>
+              <span class="role-option-desc">System Oversight</span>
+            </div>
+          </div>
+
+          <!-- Validation Success Banner (Hidden until valid submit) -->
+          <div id="login-success-banner" class="alert alert-success" style="display: none;" role="status">
+            <div class="alert-body">
+              <div>
+                <div class="alert-title">Credentials Validated</div>
+                <div class="alert-text" style="margin-bottom: var(--space-2);">
+                  Frontend validation succeeded. Choose a portal below to preview the workspace:
+                </div>
+                <div class="flex-row flex-wrap" style="gap: var(--space-2);">
+                  <a href="user/dashboard.html" class="btn btn-primary btn-sm">User Dashboard</a>
+                  <a href="staff/dashboard.html" class="btn btn-secondary btn-sm">Staff Portal</a>
+                  <a href="admin/dashboard.html" class="btn btn-secondary btn-sm">Admin Portal</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <form data-login-form novalidate>
+            <div class="form-group">
+              <label class="form-label" for="login-email">
+                Email Address <span class="form-required">*</span>
+              </label>
+              <input
+                type="email"
+                id="login-email"
+                name="loginEmail"
+                class="form-control"
+                placeholder="name@resolvehub.edu.ng"
+                required
+              />
+              <span id="err-login-email" class="form-error" style="display: none;">
+                Please enter a valid institutional or personal email address.
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="login-password">
+                Password <span class="form-required">*</span>
+              </label>
+              <div class="password-wrapper">
+                <input
+                  type="password"
+                  id="login-password"
+                  name="loginPassword"
+                  class="form-control"
+                  placeholder="Enter your password"
+                  required
+                />
+                <button type="button" class="password-toggle" data-password-toggle>Show</button>
+              </div>
+              <span id="err-login-password" class="form-error" style="display: none;">
+                Password must be at least 6 characters long.
+              </span>
+            </div>
+
+            <div class="auth-meta-row">
+              <label class="form-check">
+                <input type="checkbox" name="rememberMe" />
+                <span>Remember me on this device</span>
+              </label>
+              <button
+                type="button"
+                style="color: var(--color-accent); font-weight: var(--weight-semibold); font-size: var(--text-xs);"
+                data-modal-open="forgot-password-modal"
+              >
+                Forgot password?
+              </button>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg">
+              Login to Portal
+            </button>
+          </form>
+
+          <div class="auth-divider">Don't have an institutional account yet?</div>
+
+          <button
+            type="button"
+            class="btn btn-outline btn-block"
+            onclick="document.querySelector('[data-auth-switch=&quot;register&quot;]').click();"
+          >
+            Switch to Create Account
+          </button>
+        </div>
+
+        <!-- ==============================================================
+             TAB 2: REGISTER FORM
+             ============================================================== -->
+        <div id="auth-panel-register" role="tabpanel" style="display: none;">
+          <!-- Registration Success Banner (Hidden until valid submit) -->
+          <div id="register-success-banner" class="alert alert-success" style="display: none;" role="status">
+            <div class="alert-body">
+              <div>
+                <div class="alert-title">Account Registration Verified</div>
+                <div class="alert-text" style="margin-bottom: var(--space-2);">
+                  Your profile passed frontend validation. Proceed directly to your Citizen Dashboard or lodge a complaint:
+                </div>
+                <div class="flex-row flex-wrap" style="gap: var(--space-2);">
+                  <a href="user/dashboard.html" class="btn btn-primary btn-sm">Go to User Dashboard</a>
+                  <a href="user/submit.html" class="btn btn-secondary btn-sm">Submit a Complaint</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <form data-register-form novalidate>
+            <div class="form-group">
+              <label class="form-label" for="reg-fullname">
+                Full Name <span class="form-required">*</span>
+              </label>
+              <input
+                type="text"
+                id="reg-fullname"
+                name="fullName"
+                class="form-control"
+                placeholder="e.g., Oluwaseun Adeyemi"
+                required
+              />
+              <span id="err-reg-name" class="form-error" style="display: none;">
+                Please enter your full legal name (minimum 3 characters).
+              </span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="reg-email">
+                  Email Address <span class="form-required">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="reg-email"
+                  name="email"
+                  class="form-control"
+                  placeholder="o.adeyemi@resolvehub.edu.ng"
+                  required
+                />
+                <span id="err-reg-email" class="form-error" style="display: none;">
+                  Enter a valid email address.
+                </span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reg-phone">
+                  Phone Number <span class="form-required">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="reg-phone"
+                  name="phone"
+                  class="form-control font-mono"
+                  placeholder="+234 803 555 0192"
+                  required
+                />
+                <span id="err-reg-phone" class="form-error" style="display: none;">
+                  Enter a valid phone number.
+                </span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="reg-member-id">
+                  Student / Staff ID <span class="form-required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="reg-member-id"
+                  name="memberId"
+                  class="form-control font-mono"
+                  placeholder="e.g., STU/2026/04819"
+                  required
+                />
+                <span id="err-reg-id" class="form-error" style="display: none;">
+                  Enter a valid Student or Staff ID (min 4 chars).
+                </span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reg-department">
+                  Department / Faculty <span class="form-required">*</span>
+                </label>
+                <select id="reg-department" name="department" class="form-select" required>
+                  <option value="">Select department...</option>
+                  <option value="computer-science">Computer Science &amp; ICT</option>
+                  <option value="engineering">Faculty of Engineering</option>
+                  <option value="sciences">Faculty of Natural Sciences</option>
+                  <option value="management">Management &amp; Social Sciences</option>
+                  <option value="law-arts">Faculty of Law &amp; Humanities</option>
+                  <option value="bursary">Finance &amp; Bursary Division</option>
+                  <option value="facilities">Works, Facilities &amp; Hostels</option>
+                  <option value="registry">Central Administration &amp; Registry</option>
+                </select>
+                <span id="err-reg-dept" class="form-error" style="display: none;">
+                  Please select your department or faculty.
+                </span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="reg-password">
+                  Password <span class="form-required">*</span>
+                </label>
+                <div class="password-wrapper">
+                  <input
+                    type="password"
+                    id="reg-password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Min. 8 characters"
+                    required
+                  />
+                  <button type="button" class="password-toggle" data-password-toggle>Show</button>
+                </div>
+                <span id="err-reg-pass" class="form-error" style="display: none;">
+                  Password must be at least 8 characters.
+                </span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reg-confirm-password">
+                  Confirm Password <span class="form-required">*</span>
+                </label>
+                <div class="password-wrapper">
+                  <input
+                    type="password"
+                    id="reg-confirm-password"
+                    name="confirmPassword"
+                    class="form-control"
+                    placeholder="Re-enter password"
+                    required
+                  />
+                  <button type="button" class="password-toggle" data-password-toggle>Show</button>
+                </div>
+                <span id="err-reg-confirm" class="form-error" style="display: none;">
+                  Passwords do not match.
+                </span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-check">
+                <input type="checkbox" name="terms" required />
+                <span>
+                  I confirm that my Student/Staff ID is accurate and agree to the ResolveHub Institutional Terms of Service &amp; Privacy Policy.
+                </span>
+              </label>
+              <span id="err-reg-terms" class="form-error" style="display: none;">
+                You must accept the institutional terms to create an account.
+              </span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg">
+              Create Account
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ====================================================================
+       3. FORGOT PASSWORD MODAL DIALOG
+       ==================================================================== -->
+  <div
+    class="modal-backdrop"
+    id="forgot-password-modal"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="forgot-modal-title"
+  >
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="forgot-modal-title">Reset Your Portal Password</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close dialog">✕</button>
+      </div>
+      <form data-forgot-form novalidate>
+        <div class="modal-body">
+          <p style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-4);">
+            Enter the institutional email address associated with your Student or Staff ID. We will send a temporary password reset link.
+          </p>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="reset-email-input">
+              Registered Email Address <span class="form-required">*</span>
+            </label>
+            <input
+              type="email"
+              id="reset-email-input"
+              name="resetEmail"
+              class="form-control"
+              placeholder="name@resolvehub.edu.ng"
+              required
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Send Reset Link</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       4. SITE FOOTER
+       ==================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="padding-top: 0;">
+        <span>&copy; 2026 ResolveHub Digital Complaint Management System. All rights reserved.</span>
+        <div class="flex-row" style="gap: var(--space-4);">
+          <a href="index.html" style="color: rgba(255,255,255,0.75);">Home</a>
+          <a href="about.html" style="color: rgba(255,255,255,0.75);">About</a>
+          <a href="categories.html" style="color: rgba(255,255,255,0.75);">Categories</a>
+          <a href="contact.html" style="color: rgba(255,255,255,0.75);">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

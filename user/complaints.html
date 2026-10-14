@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Complaints — ResolveHub</title>
+  <meta name="description" content="View, search, and filter all your submitted complaints by status, category, and priority on ResolveHub." />
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+
+  <div class="app-shell">
+    <!-- ==================================================================
+         1. USER SIDEBAR NAVIGATION
+         ================================================================== -->
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">ResolveHub</a>
+        <span class="sidebar-portal-label">User Portal</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="User Portal Navigation">
+        <div class="sidebar-section-label">My Workspace</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-link-main">Dashboard</span>
+        </a>
+        <a href="submit.html" class="sidebar-link">
+          <span class="sidebar-link-main">Submit Complaint</span>
+        </a>
+        <a href="complaints.html" class="sidebar-link active">
+          <span class="sidebar-link-main">My Complaints</span>
+          <span class="sidebar-count" data-user-total-badge>6</span>
+        </a>
+        <a href="case.html" class="sidebar-link">
+          <span class="sidebar-link-main">Case Details</span>
+        </a>
+        <a href="notifications.html" class="sidebar-link">
+          <span class="sidebar-link-main">Notifications</span>
+          <span class="sidebar-count" data-unread-notif-badge>3</span>
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <span class="sidebar-link-main">Profile</span>
+        </a>
+
+        <div class="sidebar-section-label">Account</div>
+        <a href="../auth.html" class="sidebar-link">
+          <span class="sidebar-link-main">Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">AY</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Amina Yusuf</div>
+            <div class="sidebar-user-role">PG/2025/09412 · Computer Science</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================================================================
+         2. MAIN WORKSPACE AREA
+         ================================================================== -->
+    <div class="main-wrapper">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" class="sidebar-toggle-btn" data-sidebar-toggle aria-label="Toggle Sidebar">
+            ☰
+          </button>
+          <div class="topbar-breadcrumb">
+            <a href="dashboard.html" style="color: var(--text-muted);">User Portal</a>
+            <span>/</span>
+            <strong>My Complaints</strong>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <a href="submit.html" class="btn btn-primary btn-sm">+ Submit New Complaint</a>
+        </div>
+      </header>
+
+      <!-- Workspace Content -->
+      <main class="workspace-content">
+        <div class="flex-between" style="margin-bottom: var(--space-5); flex-wrap: wrap;">
+          <div>
+            <h1 class="page-title">My Submitted Complaints</h1>
+            <p class="page-subtitle">
+              Search and filter all complaints logged under your institutional account.
+            </p>
+          </div>
+          <div class="page-actions">
+            <span class="badge badge-neutral text-mono" data-user-cases-count>Showing 6 of 6 cases</span>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             3. STATUS TABS
+             ============================================================== -->
+        <div class="flex-between" style="margin-bottom: var(--space-4); flex-wrap: wrap;">
+          <div class="segmented-control" role="tablist" aria-label="Filter my complaints by status">
+            <button type="button" class="tab-btn active" data-user-case-tab="all" role="tab" aria-selected="true">All</button>
+            <button type="button" class="tab-btn" data-user-case-tab="pending" role="tab" aria-selected="false">Pending</button>
+            <button type="button" class="tab-btn" data-user-case-tab="in-progress" role="tab" aria-selected="false">In Progress</button>
+            <button type="button" class="tab-btn" data-user-case-tab="escalated" role="tab" aria-selected="false">Escalated</button>
+            <button type="button" class="tab-btn" data-user-case-tab="resolved" role="tab" aria-selected="false">Resolved</button>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             4. SEARCH & FILTER TOOLBAR
+             ============================================================== -->
+        <div class="filter-grid" aria-label="Filter My Complaints">
+          <div>
+            <label for="user-search" class="form-label">Search Complaints</label>
+            <input
+              type="search"
+              id="user-search"
+              class="form-control"
+              placeholder="Search by Case ID or subject..."
+              data-user-filter-search
+            />
+          </div>
+
+          <div>
+            <label for="user-cat-filter" class="form-label">Category</label>
+            <select id="user-cat-filter" class="form-select" data-user-filter-category>
+              <option value="all">All Categories</option>
+              <option value="ICT">ICT</option>
+              <option value="Academic">Academic</option>
+              <option value="Finance/Bursary">Finance/Bursary</option>
+              <option value="Accommodation">Accommodation</option>
+              <option value="Security">Security</option>
+              <option value="Facilities">Facilities</option>
+              <option value="Administration">Administration</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="user-prio-filter" class="form-label">Priority</label>
+            <select id="user-prio-filter" class="form-select" data-user-filter-priority>
+              <option value="all">All Priorities</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="user-status-filter" class="form-label">Status</label>
+            <select id="user-status-filter" class="form-select" data-user-filter-status>
+              <option value="all">All Statuses</option>
+              <option value="pending">Pending</option>
+              <option value="in-progress">In Progress</option>
+              <option value="escalated">Escalated</option>
+              <option value="resolved">Resolved</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="user-date-filter" class="form-label">Date</label>
+            <input type="date" id="user-date-filter" class="form-control" data-user-filter-date />
+          </div>
+
+          <div>
+            <button type="button" class="btn btn-secondary" data-user-filter-reset>Reset</button>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             5. MY COMPLAINTS TABLE
+             ============================================================== -->
+        <div class="table-container">
+          <div class="table-responsive">
+            <table class="data-table" id="user-complaints-table">
+              <thead>
+                <tr>
+                  <th>Case ID</th>
+                  <th>Subject</th>
+                  <th>Category</th>
+                  <th>Assigned Department</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody data-user-complaints-tbody>
+                <tr
+                  data-user-case-row
+                  data-category="ICT"
+                  data-priority="high"
+                  data-status="in-progress"
+                  data-date="2026-10-03"
+                >
+                  <td class="cell-id">#RH-2026-8492</td>
+                  <td class="cell-primary">Wi-Fi outage across Block C Postgraduate Hostel</td>
+                  <td>ICT</td>
+                  <td>ICT &amp; Infrastructure</td>
+                  <td><span class="priority-indicator priority-high"><span class="priority-dot"></span>High</span></td>
+                  <td><span class="badge badge-progress"><span class="badge-dot"></span>In Progress</span></td>
+                  <td class="text-mono">2026-10-03</td>
+                  <td class="text-right">
+                    <a href="case.html" class="btn btn-primary btn-xs">Open Case</a>
+                  </td>
+                </tr>
+
+                <tr
+                  data-user-case-row
+                  data-category="Finance/Bursary"
+                  data-priority="medium"
+                  data-status="resolved"
+                  data-date="2026-09-26"
+                >
+                  <td class="cell-id">#RH-2026-8410</td>
+                  <td class="cell-primary">Duplicate Remita library levy deduction on portal</td>
+                  <td>Finance/Bursary</td>
+                  <td>Bursary &amp; Accounts</td>
+                  <td><span class="priority-indicator priority-medium"><span class="priority-dot"></span>Medium</span></td>
+                  <td><span class="badge badge-resolved"><span class="badge-dot"></span>Resolved</span></td>
+                  <td class="text-mono">2026-09-26</td>
+                  <td class="text-right">
+                    <a href="case.html" class="btn btn-secondary btn-xs">Rate &amp; Confirm</a>
+                  </td>
+                </tr>
+
+                <tr
+                  data-user-case-row
+                  data-category="Accommodation"
+                  data-priority="low"
+                  data-status="pending"
+                  data-date="2026-09-22"
+                >
+                  <td class="cell-id">#RH-2026-8384</td>
+                  <td class="cell-primary">Broken study desk lamp socket in PG Hostel Room 204</td>
+                  <td>Accommodation</td>
+                  <td>Student Affairs</td>
+                  <td><span class="priority-indicator priority-low"><span class="priority-dot"></span>Low</span></td>
+                  <td><span class="badge badge-pending"><span class="badge-dot"></span>Pending</span></td>
+                  <td class="text-mono">2026-09-22</td>
+                  <td class="text-right">
+                    <a href="case.html" class="btn btn-secondary btn-xs">Open Case</a>
+                  </td>
+                </tr>
+
+                <tr
+                  data-user-case-row
+                  data-category="Academic"
+                  data-priority="medium"
+                  data-status="in-progress"
+                  data-date="2026-09-18"
+                >
+                  <td class="cell-id">#RH-2026-8340</td>
+                  <td class="cell-primary">CSC 804 seminar registration credit unit mismatch</td>
+                  <td>Academic</td>
+                  <td>Academic Affairs</td>
+                  <td><span class="priority-indicator priority-medium"><span class="priority-dot"></span>Medium</span></td>
+                  <td><span class="badge badge-progress"><span class="badge-dot"></span>In Progress</span></td>
+                  <td class="text-mono">2026-09-18</td>
+                  <td class="text-right">
+                    <a href="case.html" class="btn btn-secondary btn-xs">Open Case</a>
+                  </td>
+                </tr>
+
+                <tr
+                  data-user-case-row
+                  data-category="Facilities"
+                  data-priority="high"
+                  data-status="resolved"
+                  data-date="2026-09-10"
+                >
+                  <td class="cell-id">#RH-2026-8291</td>
+                  <td class="cell-primary">Projector HDMI port failure in PG Seminar Room B</td>
+                  <td>Facilities</td>
+                  <td>Facilities &amp; Works</td>
+                  <td><span class="priority-indicator priority-high"><span class="priority-dot"></span>High</span></td>
+                  <td><span class="badge badge-resolved"><span class="badge-dot"></span>Resolved</span></td>
+                  <td class="text-mono">2026-09-10</td>
+                  <td class="text-right">
+                    <a href="case.html" class="btn btn-secondary btn-xs">Open Case</a>
+                  </td>
+                </tr>
+
+                <tr
+                  data-user-case-row
+                  data-category="Administration"
+                  data-priority="low"
+                  data-status="resolved"
+                  data-date="2026-09-02"
+                >
+                  <td class="cell-id">#RH-2026-8215</td>
+                  <td class="cell-primary">Postgraduate ID card smartchip activation request</td>
+                  <td>Administration</td>
+                  <td>Central Registry</td>
+                  <td><span class="priority-indicator priority-low"><span class="priority-dot"></span>Low</span></td>
+                  <td><span class="badge badge-resolved"><span class="badge-dot"></span>Resolved</span></td>
+                  <td class="text-mono">2026-09-02</td>
+                  <td class="text-right">
+                    <a href="case.html" class="btn btn-secondary btn-xs">Open Case</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="empty-state" id="user-cases-empty" style="display: none; border: none;">
+            <div class="empty-state-icon">⌕</div>
+            <h3 class="empty-state-title">No Matching Complaints Found</h3>
+            <p class="empty-state-text">No complaints match your current search or filter criteria.</p>
+            <div class="empty-state-actions">
+              <button type="button" class="btn btn-secondary btn-sm" data-user-filter-reset>Reset Filters</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

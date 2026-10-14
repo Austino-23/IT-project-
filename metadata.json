@@ -1,0 +1,6 @@
+{
+  "name": "ResolveHub",
+  "description": "Digital Complaint Management & Case Resolution System — Your Concern. Our Responsibility.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

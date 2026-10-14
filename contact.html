@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact &amp; FAQ — ResolveHub</title>
+  <meta name="description" content="Contact the ResolveHub Institutional Helpdesk & Ombudsman Office. View office hours, location address, phone numbers, email channels, and frequently asked questions." />
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- ====================================================================
+       1. TOP NAVIGATION BAR (3-Zone Contract)
+       ==================================================================== -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <!-- Zone 1: Brand Wordmark -->
+      <a href="index.html" class="navbar-brand">ResolveHub</a>
+
+      <!-- Zone 2: Navigation Links -->
+      <nav class="navbar-nav" data-navbar-menu aria-label="Primary Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html#how-it-works" class="nav-link">How It Works</a>
+        <a href="categories.html" class="nav-link">Categories</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+      </nav>
+
+      <!-- Zone 3: Primary Actions -->
+      <div class="navbar-actions">
+        <a href="auth.html" class="btn btn-ghost btn-sm">Login</a>
+        <a href="user/submit.html" class="btn btn-primary btn-sm">Submit Complaint</a>
+        <button type="button" class="navbar-toggle" data-navbar-toggle aria-label="Toggle Menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       2. PAGE HEADER
+       ==================================================================== -->
+  <section class="page-header">
+    <div class="container">
+      <div class="page-header-inner">
+        <div>
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="breadcrumb-sep">/</span>
+            <span>Contact &amp; Support</span>
+          </nav>
+          <h1 class="page-title">Contact the Case Resolution Helpdesk</h1>
+          <p class="page-subtitle">
+            Reach our institutional support desk for portal assistance, urgent case escalations, or general inquiries. For formal grievances, please use the complaint submission portal.
+          </p>
+        </div>
+        <div class="page-actions">
+          <a href="#faq-section" class="btn btn-secondary">Read FAQs</a>
+          <a href="user/submit.html" class="btn btn-primary">Submit Formal Complaint</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container section">
+    <!-- ==================================================================
+         3. CONTACT INFORMATION & INQUIRY FORM
+         ================================================================== -->
+    <div class="contact-layout">
+      <!-- Left Column: Institutional Contact Details -->
+      <div class="contact-info-stack">
+        <div class="contact-info-card">
+          <div class="contact-info-label">Physical Office Address</div>
+          <div class="contact-info-value">Room 204, Central Administrative Complex</div>
+          <p class="contact-info-sub">
+            Main University Campus Avenue, Senate Building Wing B, Victoria Island, Lagos
+          </p>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="contact-info-label">Office Hours</div>
+          <div class="contact-info-value">Monday – Friday: 08:00 AM – 06:00 PM (WAT)</div>
+          <p class="contact-info-sub">
+            Saturday Triage Desk: 09:00 AM – 01:00 PM · Campus Security Control Room: 24 Hours Daily
+          </p>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="contact-info-label">Telephone &amp; Toll-Free Helpdesk</div>
+          <div class="contact-info-value font-mono">+234 (0) 1 889 4200</div>
+          <p class="contact-info-sub">
+            Campus Extension: <span class="font-mono">Ext. 4102</span> · Security Emergency Line: <span class="font-mono">+234 (0) 1 889 4999</span>
+          </p>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="contact-info-label">Official Email Channels</div>
+          <div class="contact-info-value font-mono">support@resolvehub.edu.ng</div>
+          <p class="contact-info-sub">
+            Ombudsman &amp; SLA Escalations: <span class="font-mono">ombudsman@resolvehub.edu.ng</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column: Contact Form -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title" style="font-size: var(--text-xl);">Send a Support Inquiry</h2>
+            <p class="card-subtitle">
+              Have a question about an existing Case ID or need portal access assistance? Send us a direct message below.
+            </p>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- Confirmation Alert (Hidden until form submission passes validation) -->
+          <div id="contact-form-feedback" class="alert alert-success" role="status" style="display: none;">
+            <div class="alert-body">
+              <div>
+                <div class="alert-title">Support Inquiry Logged Successfully</div>
+                <div class="alert-text">
+                  Your message has been routed to the ResolveHub Helpdesk. A support officer will reply to your email within 4 business hours.
+                </div>
+              </div>
+            </div>
+            <button type="button" class="alert-close" onclick="this.closest('.alert').style.display='none'" aria-label="Close">✕</button>
+          </div>
+
+          <form data-contact-form novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="contact-name">
+                  Full Name <span class="form-required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="contact-name"
+                  name="fullName"
+                  class="form-control"
+                  placeholder="e.g., Chidinma Nwosu"
+                  required
+                />
+                <span id="err-contact-name" class="form-error" style="display: none;">
+                  Please enter your full name (at least 2 characters).
+                </span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-email">
+                  Institutional or Personal Email <span class="form-required">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  name="email"
+                  class="form-control"
+                  placeholder="e.g., c.nwosu@resolvehub.edu.ng"
+                  required
+                />
+                <span id="err-contact-email" class="form-error" style="display: none;">
+                  Please enter a valid email address.
+                </span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="contact-role">Affiliation / Role</label>
+                <select id="contact-role" name="role" class="form-select">
+                  <option value="student">Undergraduate / Postgraduate Student</option>
+                  <option value="faculty">Academic Faculty / Lecturer</option>
+                  <option value="staff">Administrative / Technical Staff</option>
+                  <option value="visitor">Parent / Alumni / External Stakeholder</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-case-id">Existing Case ID (Optional)</label>
+                <input
+                  type="text"
+                  id="contact-case-id"
+                  name="caseId"
+                  class="form-control font-mono"
+                  placeholder="e.g., RH-2026-1042"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contact-subject">
+                Inquiry Subject <span class="form-required">*</span>
+              </label>
+              <input
+                type="text"
+                id="contact-subject"
+                name="subject"
+                class="form-control"
+                placeholder="e.g., Requesting status update on Bursary receipt verification"
+                required
+              />
+              <span id="err-contact-subject" class="form-error" style="display: none;">
+                Please provide a clear subject line (at least 4 characters).
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contact-message">
+                Message Details <span class="form-required">*</span>
+              </label>
+              <textarea
+                id="contact-message"
+                name="message"
+                class="form-textarea"
+                placeholder="Describe how our support team can assist you..."
+                required
+              ></textarea>
+              <span id="err-contact-message" class="form-error" style="display: none;">
+                Please enter a detailed message (at least 10 characters).
+              </span>
+            </div>
+
+            <div class="flex-between" style="flex-wrap: wrap;">
+              <span class="form-hint" style="margin-top: 0;">
+                Fields marked with <span class="form-required">*</span> are required.
+              </span>
+              <button type="submit" class="btn btn-primary">Send Message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" style="margin: var(--space-12) 0;" />
+
+    <!-- ==================================================================
+         4. FREQUENTLY ASKED QUESTIONS (Interactive Vanilla JS Accordion)
+         ================================================================== -->
+    <section id="faq-section">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Help Center &amp; Guidance</div>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-desc">
+            Click any question below to view institutional policies on complaint handling, response times, and privacy.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-list">
+        <!-- FAQ 1 -->
+        <div class="faq-item is-open">
+          <button type="button" class="faq-trigger" data-faq-trigger aria-expanded="true">
+            <span>How quickly will my complaint receive a response after submission?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-content">
+            Every submitted complaint receives an automated Case ID immediately. Initial human triage occurs within <strong>1 hour</strong> for Critical Security/Safety cases, within <strong>4 hours</strong> for High Priority cases, and within <strong>12–24 hours</strong> for Standard cases. Full resolution SLA targets range from 4 hours to 48 hours depending on category complexity.
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+          <button type="button" class="faq-trigger" data-faq-trigger aria-expanded="false">
+            <span>Can a staff officer close my complaint without my agreement?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-content">
+            No. Under ResolveHub's 11-step workflow, when a staff member completes an investigation and proposes a solution, the case enters Step 9 (<strong>User Confirmation</strong>). You must review the resolution proof and confirm that the issue is resolved—or request reopening with additional remarks—before the ticket transitions to Closed.
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+          <button type="button" class="faq-trigger" data-faq-trigger aria-expanded="false">
+            <span>What happens if the assigned department does not respond within the SLA deadline?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-content">
+            ResolveHub tracks live SLA countdown timers on every open case. When 75% of the allotted time elapses without an official update, the department head receives an automated warning. If the SLA deadline is breached, the case status automatically changes to <strong>Escalated</strong> and is routed to the System Administrator and Ombudsman queue.
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+          <button type="button" class="faq-trigger" data-faq-trigger aria-expanded="false">
+            <span>What types of evidence files can I attach to my complaint?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-content">
+            You can upload PDF documents (such as bank payment receipts or official letters), PNG/JPG images (such as portal screenshots or photographs of damaged hostel facilities), and DOCX files up to 10 MB per attachment. Additional files can also be attached later inside the case communication thread.
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-item">
+          <button type="button" class="faq-trigger" data-faq-trigger aria-expanded="false">
+            <span>Are sensitive complaints kept confidential?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-content">
+            Yes. ResolveHub enforces strict role-based access control. Your complaint is visible only to you, the specifically assigned departmental investigator, and authorized Ombudsman administrators. General staff in other departments cannot view your case details or attachments.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====================================================================
+       5. SITE FOOTER
+       ==================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-title">ResolveHub</div>
+          <p class="footer-tagline">Your Concern. Our Responsibility.</p>
+          <p style="font-size: var(--text-xs); color: rgba(255,255,255,0.65); max-width: 38ch;">
+            Official Digital Complaint Management &amp; Case Resolution System ensuring transparent accountability across all institutional departments.
+          </p>
+        </div>
+        <div>
+          <div class="footer-heading">Public Navigation</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About &amp; How It Works</a></li>
+            <li><a href="categories.html">Complaint Categories</a></li>
+            <li><a href="contact.html">Contact &amp; FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Account &amp; Portals</div>
+          <ul class="footer-links">
+            <li><a href="auth.html">Login / Register</a></li>
+            <li><a href="user/submit.html">Submit a Complaint</a></li>
+            <li><a href="user/dashboard.html">User Dashboard</a></li>
+            <li><a href="staff/dashboard.html">Staff Resolution Desk</a></li>
+            <li><a href="admin/dashboard.html">Admin Governance</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Helpdesk Contact</div>
+          <ul class="footer-links">
+            <li><a href="contact.html">Room 204, Central Admin Block</a></li>
+            <li><a href="mailto:support@resolvehub.edu.ng">support@resolvehub.edu.ng</a></li>
+            <li><a href="tel:+23418894200">+234 (0) 1 889 4200</a></li>
+            <li><span style="font-size: var(--text-xs); color: rgba(255,255,255,0.6);">Mon–Fri: 08:00 – 18:00 WAT</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 ResolveHub Digital Complaint Management System. All rights reserved.</span>
+        <span>Built with Pure HTML5, CSS3 &amp; Vanilla JavaScript</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

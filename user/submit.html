@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit a Complaint — ResolveHub</title>
+  <meta name="description" content="Submit an official institutional complaint on ResolveHub and receive an instant Case ID for transparent tracking." />
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+
+  <div class="app-shell">
+    <!-- ==================================================================
+         1. USER SIDEBAR NAVIGATION
+         ================================================================== -->
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">ResolveHub</a>
+        <span class="sidebar-portal-label">User Portal</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="User Portal Navigation">
+        <div class="sidebar-section-label">My Workspace</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-link-main">Dashboard</span>
+        </a>
+        <a href="submit.html" class="sidebar-link active">
+          <span class="sidebar-link-main">Submit Complaint</span>
+        </a>
+        <a href="complaints.html" class="sidebar-link">
+          <span class="sidebar-link-main">My Complaints</span>
+          <span class="sidebar-count" data-user-total-badge>6</span>
+        </a>
+        <a href="case.html" class="sidebar-link">
+          <span class="sidebar-link-main">Case Details</span>
+        </a>
+        <a href="notifications.html" class="sidebar-link">
+          <span class="sidebar-link-main">Notifications</span>
+          <span class="sidebar-count" data-unread-notif-badge>3</span>
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <span class="sidebar-link-main">Profile</span>
+        </a>
+
+        <div class="sidebar-section-label">Account</div>
+        <a href="../auth.html" class="sidebar-link">
+          <span class="sidebar-link-main">Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">AY</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Amina Yusuf</div>
+            <div class="sidebar-user-role">PG/2025/09412 · Computer Science</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================================================================
+         2. MAIN WORKSPACE AREA
+         ================================================================== -->
+    <div class="main-wrapper">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" class="sidebar-toggle-btn" data-sidebar-toggle aria-label="Toggle Sidebar">
+            ☰
+          </button>
+          <div class="topbar-breadcrumb">
+            <a href="dashboard.html" style="color: var(--text-muted);">User Portal</a>
+            <span>/</span>
+            <strong>Submit Complaint</strong>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <a href="complaints.html" class="btn btn-secondary btn-sm">My Complaints</a>
+        </div>
+      </header>
+
+      <!-- Workspace Content -->
+      <main class="workspace-content">
+        <div class="flex-between" style="margin-bottom: var(--space-6); flex-wrap: wrap;">
+          <div>
+            <h1 class="page-title">Submit an Official Complaint</h1>
+            <p class="page-subtitle">
+              Provide accurate details below. Upon submission, ResolveHub automatically generates a unique Case ID and routes your ticket to the responsible department.
+            </p>
+          </div>
+        </div>
+
+        <div class="case-layout">
+          <!-- Left Column: Submission Form -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Complaint Intake Form</h2>
+                <p class="card-subtitle">All fields marked with <span class="required">*</span> are required for SLA triage</p>
+              </div>
+              <span class="badge badge-neutral">Encrypted Submission</span>
+            </div>
+
+            <form data-complaint-submit-form novalidate>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="submit-subject" class="form-label">Complaint Subject / Headline <span class="required">*</span></label>
+                  <input
+                    type="text"
+                    id="submit-subject"
+                    name="subject"
+                    class="form-control"
+                    placeholder="e.g., MissingCSC 802 examination grade on postgraduate portal"
+                    required
+                  />
+                  <span class="form-hint">Summarize the core issue in 5 to 15 words.</span>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="submit-category" class="form-label">Complaint Category <span class="required">*</span></label>
+                    <select id="submit-category" name="category" class="form-select" data-category-auto-route required>
+                      <option value="">Select category...</option>
+                      <option value="ICT">ICT &amp; Digital Infrastructure</option>
+                      <option value="Academic">Academic Affairs</option>
+                      <option value="Finance/Bursary">Finance / Bursary</option>
+                      <option value="Accommodation">Accommodation &amp; Hostels</option>
+                      <option value="Security">Campus Security</option>
+                      <option value="Facilities">Facilities &amp; Works</option>
+                      <option value="Administration">Administration &amp; Registry</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="submit-priority" class="form-label">Urgency / Priority Level <span class="required">*</span></label>
+                    <select id="submit-priority" name="priority" class="form-select" required>
+                      <option value="medium" selected>Medium — Standard Issue (24h SLA)</option>
+                      <option value="high">High — Urgent / Safety / Outage (4h–12h SLA)</option>
+                      <option value="low">Low — Routine Request (48h SLA)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="submit-location" class="form-label">Specific Location / Building / Portal Module</label>
+                    <input
+                      type="text"
+                      id="submit-location"
+                      name="location"
+                      class="form-control"
+                      placeholder="e.g., Block C Hostel Wing B / Student Bursary Portal"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="submit-routed-dept" class="form-label">Auto-Assigned Department</label>
+                    <input
+                      type="text"
+                      id="submit-routed-dept"
+                      class="form-control"
+                      value="Select a category to preview routing..."
+                      data-routed-dept-display
+                      readonly
+                      style="background-color: var(--bg-subtle); color: var(--text-secondary);"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="submit-description" class="form-label">Detailed Explanation of Complaint <span class="required">*</span></label>
+                  <textarea
+                    id="submit-description"
+                    name="description"
+                    class="form-textarea"
+                    rows="5"
+                    placeholder="Describe what happened, when it started, any reference/receipt numbers, and what resolution you expect..."
+                    required
+                  ></textarea>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label for="submit-attachment" class="form-label">Supporting Evidence / Attachments (Optional)</label>
+                  <div class="upload-dropzone" style="padding: var(--space-5);">
+                    <input
+                      type="file"
+                      id="submit-attachment"
+                      name="attachment"
+                      class="form-control"
+                      accept=".pdf,.png,.jpg,.jpeg,.doc,.docx"
+                      data-file-input
+                    />
+                    <div class="upload-dropzone-hint" data-file-hint style="margin-top: var(--space-2);">
+                      Accepted formats: PDF, JPG, PNG, DOCX (Max 10MB — receipts, screenshots, or photos)
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-footer">
+                <button type="reset" class="btn btn-secondary">Clear Form</button>
+                <button type="submit" class="btn btn-primary">Submit Complaint &amp; Generate Case ID</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Right Column: Submission Guidelines -->
+          <div class="flex-col" style="display: flex; flex-direction: column; gap: var(--space-5);">
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">How Case IDs Work</h2>
+              </div>
+              <div class="card-body">
+                <div class="info-kv-list">
+                  <div class="info-kv-row">
+                    <span class="info-kv-label">Format</span>
+                    <span class="info-kv-value text-mono">#RH-2026-XXXX</span>
+                  </div>
+                  <div class="info-kv-row">
+                    <span class="info-kv-label">Triage Window</span>
+                    <span class="info-kv-value">Under 2 Hours</span>
+                  </div>
+                  <div class="info-kv-row">
+                    <span class="info-kv-label">Closure Rule</span>
+                    <span class="info-kv-value">Requires Your Confirmation</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       COMPLAINT CONFIRMATION RECEIPT MODAL (Displays Generated Case ID)
+       ==================================================================== -->
+  <div class="modal-backdrop" id="modal-case-generated" role="dialog" aria-modal="true" aria-labelledby="modal-generated-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-generated-title">Complaint Logged Successfully</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-success" style="margin-bottom: var(--space-4);">
+          <div class="alert-content">
+            <div class="alert-title">Official Case ID Generated</div>
+            <div class="alert-text">
+              Your complaint has been registered and routed to the appropriate department. Save your tracking ID below:
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 text-center" style="background: var(--bg-subtle); border: 1px dashed var(--border-strong); border-radius: var(--radius-md); margin-bottom: var(--space-4);">
+          <div style="font-size: var(--text-xs); text-transform: uppercase; letter-spacing: var(--tracking-wider); color: var(--text-muted); margin-bottom: 4px;">
+            Generated Case Tracking Number
+          </div>
+          <div class="text-mono" style="font-size: var(--text-2xl); font-weight: var(--weight-bold); color: var(--color-primary);" data-generated-case-id>
+            #RH-2026-8501
+          </div>
+        </div>
+
+        <div class="info-kv-list">
+          <div class="info-kv-row">
+            <span class="info-kv-label">Subject</span>
+            <span class="info-kv-value" data-generated-subject>—</span>
+          </div>
+          <div class="info-kv-row">
+            <span class="info-kv-label">Category &amp; Routing</span>
+            <span class="info-kv-value" data-generated-category>—</span>
+          </div>
+          <div class="info-kv-row">
+            <span class="info-kv-label">Initial Status</span>
+            <span class="info-kv-value"><span class="badge badge-pending"><span class="badge-dot"></span>Pending Triage</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>Stay on Page</button>
+        <a href="complaints.html" class="btn btn-primary">Go to My Complaints</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

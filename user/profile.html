@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile &amp; Security Settings — ResolveHub</title>
+  <meta name="description" content="Manage your ResolveHub profile details, contact preferences, and account password security." />
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+
+  <div class="app-shell">
+    <!-- ==================================================================
+         1. USER SIDEBAR NAVIGATION
+         ================================================================== -->
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">ResolveHub</a>
+        <span class="sidebar-portal-label">User Portal</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="User Portal Navigation">
+        <div class="sidebar-section-label">My Workspace</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-link-main">Dashboard</span>
+        </a>
+        <a href="submit.html" class="sidebar-link">
+          <span class="sidebar-link-main">Submit Complaint</span>
+        </a>
+        <a href="complaints.html" class="sidebar-link">
+          <span class="sidebar-link-main">My Complaints</span>
+          <span class="sidebar-count" data-user-total-badge>6</span>
+        </a>
+        <a href="case.html" class="sidebar-link">
+          <span class="sidebar-link-main">Case Details</span>
+        </a>
+        <a href="notifications.html" class="sidebar-link">
+          <span class="sidebar-link-main">Notifications</span>
+          <span class="sidebar-count" data-unread-notif-badge>3</span>
+        </a>
+        <a href="profile.html" class="sidebar-link active">
+          <span class="sidebar-link-main">Profile</span>
+        </a>
+
+        <div class="sidebar-section-label">Account</div>
+        <a href="../auth.html" class="sidebar-link">
+          <span class="sidebar-link-main">Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">AY</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Amina Yusuf</div>
+            <div class="sidebar-user-role">PG/2025/09412 · Computer Science</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================================================================
+         2. MAIN WORKSPACE AREA
+         ================================================================== -->
+    <div class="main-wrapper">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" class="sidebar-toggle-btn" data-sidebar-toggle aria-label="Toggle Sidebar">
+            ☰
+          </button>
+          <div class="topbar-breadcrumb">
+            <a href="dashboard.html" style="color: var(--text-muted);">User Portal</a>
+            <span>/</span>
+            <strong>Profile Settings</strong>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <span class="badge badge-resolved"><span class="badge-dot"></span>Verified Student ID</span>
+        </div>
+      </header>
+
+      <!-- Workspace Content -->
+      <main class="workspace-content">
+        <div class="flex-between" style="margin-bottom: var(--space-6); flex-wrap: wrap;">
+          <div>
+            <h1 class="page-title">Profile &amp; Account Security</h1>
+            <p class="page-subtitle">
+              Update your institutional contact information, hostel address, and account password.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <!-- Left Card: Institutional Profile Form -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Personal &amp; Institutional Information</h2>
+                <p class="card-subtitle">Used by resolution officers to contact you regarding active cases</p>
+              </div>
+            </div>
+            <form data-user-profile-form novalidate>
+              <div class="card-body">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="prof-name" class="form-label">Full Name <span class="required">*</span></label>
+                    <input type="text" id="prof-name" name="fullName" class="form-control" value="Amina Yusuf" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="prof-id" class="form-label">Matric / Staff ID</label>
+                    <input type="text" id="prof-id" class="form-control text-mono" value="PG/2025/09412" readonly style="background: var(--bg-subtle);" />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="prof-email" class="form-label">Institutional Email <span class="required">*</span></label>
+                    <input type="email" id="prof-email" name="email" class="form-control" value="amina.yusuf@resolvehub.edu" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="prof-phone" class="form-label">Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="prof-phone" name="phone" class="form-control" value="+234 803 491 8204" required />
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label for="prof-dept" class="form-label">Department / Hostel Block</label>
+                  <input type="text" id="prof-dept" name="department" class="form-control" value="Computer Science · Block C PG Hostel Room 208" />
+                </div>
+              </div>
+              <div class="card-footer">
+                <span style="font-size: var(--text-xs); color: var(--text-muted);">Changes apply immediately to active tickets</span>
+                <button type="submit" class="btn btn-primary btn-sm">Save Profile</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Right Card: Change Password with Password Visibility Toggles -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Change Password</h2>
+                <p class="card-subtitle">Use the Show/Hide toggle to verify your password characters</p>
+              </div>
+            </div>
+            <form data-user-password-form novalidate>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="curr-password" class="form-label">Current Password <span class="required">*</span></label>
+                  <div class="password-input-wrapper">
+                    <input type="password" id="curr-password" name="currentPassword" class="form-control" placeholder="Enter current password" required />
+                    <button type="button" class="password-toggle-btn" data-password-toggle="curr-password">Show</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="new-password" class="form-label">New Password <span class="required">*</span></label>
+                  <div class="password-input-wrapper">
+                    <input type="password" id="new-password" name="newPassword" class="form-control" placeholder="Minimum 8 characters" required />
+                    <button type="button" class="password-toggle-btn" data-password-toggle="new-password">Show</button>
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label for="confirm-new-password" class="form-label">Confirm New Password <span class="required">*</span></label>
+                  <div class="password-input-wrapper">
+                    <input type="password" id="confirm-new-password" name="confirmPassword" class="form-control" placeholder="Re-enter new password" required />
+                    <button type="button" class="password-toggle-btn" data-password-toggle="confirm-new-password">Show</button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <span style="font-size: var(--text-xs); color: var(--text-muted);">Minimum 8 characters required</span>
+                <button type="submit" class="btn btn-primary btn-sm">Update Password</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

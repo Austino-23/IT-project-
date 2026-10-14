@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notifications — ResolveHub</title>
+  <meta name="description" content="Manage your ResolveHub case notifications, officer replies, and SLA alerts with interactive read and unread controls." />
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+
+  <div class="app-shell">
+    <!-- ==================================================================
+         1. USER SIDEBAR NAVIGATION
+         ================================================================== -->
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">ResolveHub</a>
+        <span class="sidebar-portal-label">User Portal</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="User Portal Navigation">
+        <div class="sidebar-section-label">My Workspace</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-link-main">Dashboard</span>
+        </a>
+        <a href="submit.html" class="sidebar-link">
+          <span class="sidebar-link-main">Submit Complaint</span>
+        </a>
+        <a href="complaints.html" class="sidebar-link">
+          <span class="sidebar-link-main">My Complaints</span>
+          <span class="sidebar-count" data-user-total-badge>6</span>
+        </a>
+        <a href="case.html" class="sidebar-link">
+          <span class="sidebar-link-main">Case Details</span>
+        </a>
+        <a href="notifications.html" class="sidebar-link active">
+          <span class="sidebar-link-main">Notifications</span>
+          <span class="sidebar-count" data-unread-notif-badge>3</span>
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <span class="sidebar-link-main">Profile</span>
+        </a>
+
+        <div class="sidebar-section-label">Account</div>
+        <a href="../auth.html" class="sidebar-link">
+          <span class="sidebar-link-main">Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">AY</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Amina Yusuf</div>
+            <div class="sidebar-user-role">PG/2025/09412 · Computer Science</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================================================================
+         2. MAIN WORKSPACE AREA
+         ================================================================== -->
+    <div class="main-wrapper">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" class="sidebar-toggle-btn" data-sidebar-toggle aria-label="Toggle Sidebar">
+            ☰
+          </button>
+          <div class="topbar-breadcrumb">
+            <a href="dashboard.html" style="color: var(--text-muted);">User Portal</a>
+            <span>/</span>
+            <strong>Notifications</strong>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button type="button" class="btn btn-secondary btn-sm" data-mark-all-read>
+            ✓ Mark All as Read
+          </button>
+        </div>
+      </header>
+
+      <!-- Workspace Content -->
+      <main class="workspace-content">
+        <div class="flex-between" style="margin-bottom: var(--space-5); flex-wrap: wrap;">
+          <div>
+            <h1 class="page-title">Case Notifications &amp; Alerts</h1>
+            <p class="page-subtitle">
+              Real-time updates whenever a resolution officer replies, changes status, or requests confirmation on your complaints.
+            </p>
+          </div>
+          <div class="page-actions">
+            <span class="badge badge-progress" data-unread-summary-text>3 Unread Notifications</span>
+          </div>
+        </div>
+
+        <!-- Filter Tabs: All vs Unread -->
+        <div class="flex-between" style="margin-bottom: var(--space-5); flex-wrap: wrap;">
+          <div class="segmented-control" role="tablist" aria-label="Filter Notifications">
+            <button type="button" class="tab-btn active" data-notif-filter-tab="all" role="tab" aria-selected="true">
+              All Notifications
+            </button>
+            <button type="button" class="tab-btn" data-notif-filter-tab="unread" role="tab" aria-selected="false">
+              Unread Only
+            </button>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" data-mark-all-read>
+            Mark All Read
+          </button>
+        </div>
+
+        <!-- Notification List -->
+        <div class="notification-list" id="user-notification-list">
+          <!-- Unread Notification 1 -->
+          <div class="notification-card is-unread" data-notification-item data-read="false">
+            <div>
+              <div class="flex-center" style="justify-content: flex-start; margin-bottom: 6px;">
+                <span class="notification-dot"></span>
+                <span class="cell-id" style="margin-right: 8px;">#RH-2026-8492</span>
+                <strong style="font-size: var(--text-sm); color: var(--text-primary);">
+                  Officer Reply from Engr. Tunde Bakare (ICT Unit)
+                </strong>
+              </div>
+              <p style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: 6px;">
+                “We have restarted the DHCP relay service on switch SW-PG-BLK-C02 and restored wireless leases on Floor 2. Please test your connection.”
+              </p>
+              <div class="metadata-inline">
+                <span>Today, 09:42 WAT</span>
+                <span>Status: In Progress</span>
+              </div>
+            </div>
+            <div class="table-actions">
+              <a href="case.html" class="btn btn-primary btn-xs">View Case</a>
+              <button type="button" class="btn btn-secondary btn-xs" data-toggle-notif-read>Mark as Read</button>
+            </div>
+          </div>
+
+          <!-- Unread Notification 2 -->
+          <div class="notification-card is-unread" data-notification-item data-read="false">
+            <div>
+              <div class="flex-center" style="justify-content: flex-start; margin-bottom: 6px;">
+                <span class="notification-dot"></span>
+                <span class="cell-id" style="margin-right: 8px;">#RH-2026-8410</span>
+                <strong style="font-size: var(--text-sm); color: var(--text-primary);">
+                  Resolution Confirmation &amp; Rating Requested
+                </strong>
+              </div>
+              <p style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: 6px;">
+                Bursary &amp; Accounts marked your duplicate Remita library levy complaint as Resolved. Please confirm resolution and rate your experience.
+              </p>
+              <div class="metadata-inline">
+                <span>Yesterday, 15:20 WAT</span>
+                <span>Status: Resolved</span>
+              </div>
+            </div>
+            <div class="table-actions">
+              <a href="case.html" class="btn btn-primary btn-xs">Rate &amp; Confirm</a>
+              <button type="button" class="btn btn-secondary btn-xs" data-toggle-notif-read>Mark as Read</button>
+            </div>
+          </div>
+
+          <!-- Unread Notification 3 -->
+          <div class="notification-card is-unread" data-notification-item data-read="false">
+            <div>
+              <div class="flex-center" style="justify-content: flex-start; margin-bottom: 6px;">
+                <span class="notification-dot"></span>
+                <span class="cell-id" style="margin-right: 8px;">#RH-2026-8492</span>
+                <strong style="font-size: var(--text-sm); color: var(--text-primary);">
+                  Complaint Assigned to Senior Officer
+                </strong>
+              </div>
+              <p style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: 6px;">
+                Your ICT complaint has been assigned to Engr. Tunde Bakare with High Priority (12-Hour SLA).
+              </p>
+              <div class="metadata-inline">
+                <span>Today, 08:30 WAT</span>
+                <span>Department: ICT &amp; Infrastructure</span>
+              </div>
+            </div>
+            <div class="table-actions">
+              <a href="case.html" class="btn btn-secondary btn-xs">View Case</a>
+              <button type="button" class="btn btn-secondary btn-xs" data-toggle-notif-read>Mark as Read</button>
+            </div>
+          </div>
+
+          <!-- Read Notification 4 -->
+          <div class="notification-card" data-notification-item data-read="true">
+            <div>
+              <div class="flex-center" style="justify-content: flex-start; margin-bottom: 6px;">
+                <span class="notification-dot"></span>
+                <span class="cell-id" style="margin-right: 8px;">#RH-2026-8340</span>
+                <strong style="font-size: var(--text-sm); color: var(--text-primary);">
+                  Academic Affairs Investigation Update
+                </strong>
+              </div>
+              <p style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: 6px;">
+                Dr. Halima Sadiq requested your course adviser’s signed add/drop slip to reconcile CSC 804 credit units.
+              </p>
+              <div class="metadata-inline">
+                <span>2026-09-19 · 11:05 WAT</span>
+                <span>Status: In Progress</span>
+              </div>
+            </div>
+            <div class="table-actions">
+              <a href="case.html" class="btn btn-secondary btn-xs">View Case</a>
+              <button type="button" class="btn btn-ghost btn-xs" data-toggle-notif-read>Mark as Unread</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

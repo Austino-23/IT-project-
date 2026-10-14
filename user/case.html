@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case #RH-2026-8492 — ResolveHub</title>
+  <meta name="description" content="Track complaint progress, message your assigned officer, confirm resolution, and submit a 5-star satisfaction rating on ResolveHub." />
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+
+  <div class="app-shell">
+    <!-- ==================================================================
+         1. USER SIDEBAR NAVIGATION
+         ================================================================== -->
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">ResolveHub</a>
+        <span class="sidebar-portal-label">User Portal</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="User Portal Navigation">
+        <div class="sidebar-section-label">My Workspace</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-link-main">Dashboard</span>
+        </a>
+        <a href="submit.html" class="sidebar-link">
+          <span class="sidebar-link-main">Submit Complaint</span>
+        </a>
+        <a href="complaints.html" class="sidebar-link">
+          <span class="sidebar-link-main">My Complaints</span>
+          <span class="sidebar-count" data-user-total-badge>6</span>
+        </a>
+        <a href="case.html" class="sidebar-link active">
+          <span class="sidebar-link-main">Case Details</span>
+        </a>
+        <a href="notifications.html" class="sidebar-link">
+          <span class="sidebar-link-main">Notifications</span>
+          <span class="sidebar-count" data-unread-notif-badge>3</span>
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <span class="sidebar-link-main">Profile</span>
+        </a>
+
+        <div class="sidebar-section-label">Account</div>
+        <a href="../auth.html" class="sidebar-link">
+          <span class="sidebar-link-main">Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">AY</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Amina Yusuf</div>
+            <div class="sidebar-user-role">PG/2025/09412 · Computer Science</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================================================================
+         2. MAIN WORKSPACE AREA
+         ================================================================== -->
+    <div class="main-wrapper">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" class="sidebar-toggle-btn" data-sidebar-toggle aria-label="Toggle Sidebar">
+            ☰
+          </button>
+          <div class="topbar-breadcrumb">
+            <a href="complaints.html" style="color: var(--text-muted);">My Complaints</a>
+            <span>/</span>
+            <strong class="text-mono">#RH-2026-8492</strong>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button type="button" class="btn btn-primary btn-sm" data-modal-open="modal-user-confirm-close">
+            ✓ Confirm Resolution &amp; Rate
+          </button>
+        </div>
+      </header>
+
+      <!-- Workspace Content -->
+      <main class="workspace-content">
+        <!-- Case Header -->
+        <div class="card" style="margin-bottom: var(--space-6);">
+          <div class="card-body">
+            <div class="flex-between" style="flex-wrap: wrap; gap: var(--space-4);">
+              <div>
+                <div class="flex-center" style="justify-content: flex-start; gap: var(--space-3); margin-bottom: var(--space-2); flex-wrap: wrap;">
+                  <span class="cell-id" style="font-size: var(--text-base);">#RH-2026-8492</span>
+                  <span data-user-case-status-badge>
+                    <span class="badge badge-progress"><span class="badge-dot"></span>In Progress</span>
+                  </span>
+                  <span class="priority-indicator priority-high"><span class="priority-dot"></span>High Priority</span>
+                  <span class="badge badge-neutral">ICT &amp; Infrastructure</span>
+                </div>
+                <h1 class="page-title" style="font-size: var(--text-2xl);">
+                  Wi-Fi outage across Block C Postgraduate Hostel
+                </h1>
+                <div class="metadata-inline" style="margin-top: var(--space-2);">
+                  <span>Submitted: <strong class="text-mono">2026-10-03 08:14 WAT</strong></span>
+                  <span>Assigned Officer: <strong>Engr. Tunde Bakare</strong></span>
+                </div>
+              </div>
+
+              <div class="page-actions">
+                <button type="button" class="btn btn-primary btn-sm" data-modal-open="modal-user-confirm-close">
+                  ✓ Confirm Resolution
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-layout">
+          <!-- Left Column: Description, Conversation, and Rating Selection -->
+          <div style="display: flex; flex-direction: column; gap: var(--space-6);">
+            <!-- Complaint Details -->
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Submitted Complaint Statement</h2>
+              </div>
+              <div class="card-body">
+                <p style="font-size: var(--text-sm); color: var(--text-secondary); line-height: var(--leading-relaxed);">
+                  Since Tuesday evening (2026-10-01 at approximately 21:30), all three wireless access points on the 2nd and 3rd floors of Block C Postgraduate Hostel (`RH-PG-AP04`, `RH-PG-AP05`, and `RH-PG-AP06`) have been broadcasting SSIDs without assigning IP addresses via DHCP. Over 140 postgraduate researchers are currently unable to access the institutional repository.
+                </p>
+              </div>
+            </div>
+
+            <!-- Interactive Rating & Feedback Section (16. Rating Selection) -->
+            <div class="card" id="user-rating-card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Resolution Confirmation &amp; Satisfaction Rating</h2>
+                  <p class="card-subtitle">Select a star rating (1 to 5 stars) and share your feedback on how this case was handled</p>
+                </div>
+                <span class="badge badge-resolved" data-rating-badge>Select Rating</span>
+              </div>
+              <form data-user-rating-form novalidate>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label class="form-label">Select Satisfaction Rating <span class="required">*</span></label>
+                    <div class="star-rating-selector" role="radiogroup" aria-label="Star Rating Selection" data-star-rating-group>
+                      <button type="button" class="star-btn" data-star-value="1" aria-label="1 Star">★</button>
+                      <button type="button" class="star-btn" data-star-value="2" aria-label="2 Stars">★</button>
+                      <button type="button" class="star-btn" data-star-value="3" aria-label="3 Stars">★</button>
+                      <button type="button" class="star-btn" data-star-value="4" aria-label="4 Stars">★</button>
+                      <button type="button" class="star-btn" data-star-value="5" aria-label="5 Stars">★</button>
+                      <span style="margin-left: var(--space-3); font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--text-secondary);" data-star-rating-label>
+                        No rating selected yet
+                      </span>
+                    </div>
+                    <input type="hidden" name="ratingValue" value="0" data-star-rating-input />
+                  </div>
+
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label for="user-feedback-comment" class="form-label">Resolution Feedback Comment</label>
+                    <textarea
+                      id="user-feedback-comment"
+                      name="feedbackComment"
+                      class="form-textarea"
+                      rows="3"
+                      placeholder="Let the department know if the issue is completely resolved to your satisfaction..."
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <span style="font-size: var(--text-xs); color: var(--text-muted);">
+                    Confirming resolution closes the case and records your verified rating.
+                  </span>
+                  <button type="submit" class="btn btn-primary btn-sm">Submit Rating &amp; Confirm Closure</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Conversation Thread -->
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Case Communication Thread</h2>
+                  <p class="card-subtitle">Direct messages between you and Engr. Tunde Bakare (ICT Unit)</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="message-thread" data-user-message-thread>
+                  <div class="message-card">
+                    <div class="message-header">
+                      <div>
+                        <span class="message-author">Amina Yusuf</span>
+                        <span class="message-role">Complainant</span>
+                      </div>
+                      <span class="message-time">2026-10-03 · 08:14</span>
+                    </div>
+                    <p class="message-body">
+                      Attached the screenshot from room C-208 showing the self-assigned 169.254.x.x IP address.
+                    </p>
+                  </div>
+
+                  <div class="message-card message-staff">
+                    <div class="message-header">
+                      <div>
+                        <span class="message-author">Engr. Tunde Bakare</span>
+                        <span class="message-role">Senior Resolution Officer · ICT Unit</span>
+                      </div>
+                      <span class="message-time">2026-10-03 · 09:42</span>
+                    </div>
+                    <p class="message-body">
+                      Hello Amina, we traced the issue to a hung DHCP relay agent on the Block C distribution switch (`SW-PG-BLK-C02`). We have restarted the relay service and restored DHCP leases on Floor 2. Please test and let us know.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- User Reply Form -->
+                <form data-user-reply-form novalidate>
+                  <div class="form-group">
+                    <label for="user-reply-input" class="form-label">Send Reply to Assigned Officer <span class="required">*</span></label>
+                    <textarea
+                      id="user-reply-input"
+                      class="form-textarea"
+                      rows="3"
+                      placeholder="Write a message or update for Engr. Tunde Bakare..."
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="flex-between">
+                    <span class="form-hint">Officer receives an instant notification.</span>
+                    <button type="submit" class="btn btn-primary btn-sm">Send Message</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Case Timeline -->
+          <div>
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Case Audit Timeline</h2>
+              </div>
+              <div class="card-body">
+                <div class="case-timeline" data-user-case-timeline>
+                  <div class="timeline-item">
+                    <span class="timeline-dot active"></span>
+                    <div class="timeline-header">
+                      <span class="timeline-title">DHCP Relay Service Restarted</span>
+                      <span class="timeline-time">Today, 09:42</span>
+                    </div>
+                    <p class="timeline-body">
+                      Engr. Tunde Bakare restarted DHCP relay on switch `SW-PG-BLK-C02`.
+                    </p>
+                  </div>
+
+                  <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-header">
+                      <span class="timeline-title">Staff Assigned</span>
+                      <span class="timeline-time">Today, 08:30</span>
+                    </div>
+                    <p class="timeline-body">
+                      Assigned to Engr. Tunde Bakare (ICT &amp; Infrastructure).
+                    </p>
+                  </div>
+
+                  <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-header">
+                      <span class="timeline-title">Case ID #RH-2026-8492 Generated</span>
+                      <span class="timeline-time">Today, 08:14</span>
+                    </div>
+                    <p class="timeline-body">
+                      Complaint logged by Amina Yusuf and routed to ICT Unit.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Confirmation Dialog Modal for Confirming Case Closure -->
+  <div class="modal-backdrop" id="modal-user-confirm-close" role="dialog" aria-modal="true" aria-labelledby="modal-user-close-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-user-close-title">Confirm Case Resolution &amp; Closure</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: var(--text-sm); color: var(--text-secondary);">
+          Are you sure you want to confirm that Case <strong class="text-mono">#RH-2026-8492</strong> has been resolved to your satisfaction? This will mark the complaint as <strong>Resolved &amp; Closed</strong>.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+        <button type="button" class="btn btn-primary" data-confirm-user-case-close>Yes, Confirm Resolution</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

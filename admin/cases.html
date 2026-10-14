@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Cases — ResolveHub Admin</title>
+  <meta name="description" content="ResolveHub Master Case Management — Filter, inspect, assign, change status or priority, and escalate any complaint across all departments." />
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+
+  <div class="app-shell">
+    <!-- ==================================================================
+         1. ADMIN SIDEBAR NAVIGATION
+         ================================================================== -->
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">ResolveHub</a>
+        <span class="sidebar-portal-label">Admin Portal</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Admin Portal Navigation">
+        <div class="sidebar-section-label">System Governance</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-link-main">Dashboard</span>
+        </a>
+        <a href="cases.html" class="sidebar-link active">
+          <span class="sidebar-link-main">All Cases</span>
+          <span class="sidebar-count">12,840</span>
+        </a>
+        <a href="users.html" class="sidebar-link">
+          <span class="sidebar-link-main">Users &amp; Staff</span>
+        </a>
+        <a href="management.html" class="sidebar-link">
+          <span class="sidebar-link-main">Management</span>
+        </a>
+        <a href="settings.html" class="sidebar-link">
+          <span class="sidebar-link-main">Settings</span>
+        </a>
+
+        <div class="sidebar-section-label">Account</div>
+        <a href="../auth.html" class="sidebar-link">
+          <span class="sidebar-link-main">Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">SA</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Dr. Nkemjika Okafor</div>
+            <div class="sidebar-user-role">Chief System Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================================================================
+         2. MAIN WORKSPACE AREA
+         ================================================================== -->
+    <div class="main-wrapper">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" class="sidebar-toggle-btn" data-sidebar-toggle aria-label="Toggle Sidebar">
+            ☰
+          </button>
+          <div class="topbar-breadcrumb">
+            <a href="dashboard.html" style="color: var(--text-muted);">Admin Portal</a>
+            <span>/</span>
+            <strong>All Cases</strong>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <a href="users.html" class="btn btn-secondary btn-sm">Staff Directory</a>
+          <a href="settings.html" class="btn btn-primary btn-sm">SLA Rules</a>
+        </div>
+      </header>
+
+      <!-- Workspace Content -->
+      <main class="workspace-content">
+        <!-- Page Heading -->
+        <div class="flex-between" style="margin-bottom: var(--space-5); flex-wrap: wrap;">
+          <div>
+            <h1 class="page-title">Master Case Registry</h1>
+            <p class="page-subtitle">
+              Centralized administrative oversight across all institutional complaints. Filter by status, category, department, priority, or submission date.
+            </p>
+          </div>
+          <div class="page-actions">
+            <span class="badge badge-neutral text-mono" data-admin-cases-count>Showing 10 of 10 cases</span>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             3. STATUS TABS (All | Pending | In Progress | Escalated | Resolved | Closed)
+             ============================================================== -->
+        <div class="flex-between" style="margin-bottom: var(--space-4); flex-wrap: wrap;">
+          <div class="segmented-control" role="tablist" aria-label="Filter master cases by status tab">
+            <button type="button" class="tab-btn active" data-admin-case-tab="all" role="tab" aria-selected="true">
+              All <span class="text-mono" style="margin-left: 4px; opacity: 0.75;">(10)</span>
+            </button>
+            <button type="button" class="tab-btn" data-admin-case-tab="pending" role="tab" aria-selected="false">
+              Pending <span class="text-mono" style="margin-left: 4px; opacity: 0.75;">(2)</span>
+            </button>
+            <button type="button" class="tab-btn" data-admin-case-tab="in-progress" role="tab" aria-selected="false">
+              In Progress <span class="text-mono" style="margin-left: 4px; opacity: 0.75;">(3)</span>
+            </button>
+            <button type="button" class="tab-btn" data-admin-case-tab="escalated" role="tab" aria-selected="false">
+              Escalated <span class="text-mono" style="margin-left: 4px; opacity: 0.75;">(2)</span>
+            </button>
+            <button type="button" class="tab-btn" data-admin-case-tab="resolved" role="tab" aria-selected="false">
+              Resolved <span class="text-mono" style="margin-left: 4px; opacity: 0.75;">(2)</span>
+            </button>
+            <button type="button" class="tab-btn" data-admin-case-tab="closed" role="tab" aria-selected="false">
+              Closed <span class="text-mono" style="margin-left: 4px; opacity: 0.75;">(1)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             4. MULTI-FILTER BAR (Search, Status, Category, Department, Priority, Date)
+             ============================================================== -->
+        <div class="filter-grid-admin" aria-label="Master Case Filter Controls">
+          <div>
+            <label for="admin-case-search" class="form-label">Search Cases</label>
+            <input
+              type="search"
+              id="admin-case-search"
+              class="form-control"
+              placeholder="Case ID, subject, user, or officer..."
+              data-admin-filter-search
+            />
+          </div>
+
+          <div>
+            <label for="admin-filter-status" class="form-label">Status</label>
+            <select id="admin-filter-status" class="form-select" data-admin-filter-status>
+              <option value="all">All Statuses</option>
+              <option value="pending">Pending</option>
+              <option value="in-progress">In Progress</option>
+              <option value="escalated">Escalated</option>
+              <option value="resolved">Resolved</option>
+              <option value="closed">Closed</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="admin-filter-category" class="form-label">Category</label>
+            <select id="admin-filter-category" class="form-select" data-admin-filter-category>
+              <option value="all">All Categories</option>
+              <option value="ICT">ICT</option>
+              <option value="Academic">Academic</option>
+              <option value="Finance/Bursary">Finance/Bursary</option>
+              <option value="Accommodation">Accommodation</option>
+              <option value="Security">Security</option>
+              <option value="Facilities">Facilities</option>
+              <option value="Administration">Administration</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="admin-filter-department" class="form-label">Department</label>
+            <select id="admin-filter-department" class="form-select" data-admin-filter-department>
+              <option value="all">All Departments</option>
+              <option value="ICT & Infrastructure">ICT &amp; Infrastructure</option>
+              <option value="Academic Affairs">Academic Affairs</option>
+              <option value="Bursary & Accounts">Bursary &amp; Accounts</option>
+              <option value="Student Affairs">Student Affairs</option>
+              <option value="Campus Security">Campus Security</option>
+              <option value="Facilities & Works">Facilities &amp; Works</option>
+              <option value="Central Registry">Central Registry</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="admin-filter-priority" class="form-label">Priority</label>
+            <select id="admin-filter-priority" class="form-select" data-admin-filter-priority>
+              <option value="all">All Priorities</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="admin-filter-date" class="form-label">Date</label>
+            <input
+              type="date"
+              id="admin-filter-date"
+              class="form-control"
+              data-admin-filter-date
+            />
+          </div>
+
+          <div>
+            <button type="button" class="btn btn-secondary" data-admin-filter-reset>
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             5. MASTER CASES DATA TABLE
+             ============================================================== -->
+        <div class="table-container">
+          <div class="table-responsive">
+            <table class="data-table" id="admin-cases-table">
+              <thead>
+                <tr>
+                  <th>Case ID</th>
+                  <th>Subject</th>
+                  <th>User</th>
+                  <th>Category</th>
+                  <th>Department</th>
+                  <th>Assigned Officer</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th class="text-right">Administrative Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Row 1 -->
+                <tr
+                  data-admin-case-row
+                  data-case-id="#RH-2026-8492"
+                  data-subject="Wi-Fi outage across Block C Postgraduate Hostel"
+                  data-user="Amina Yusuf"
+                  data-category="ICT"
+                  data-department="ICT & Infrastructure"
+                  data-officer="Engr. Tunde Bakare"
+                  data-priority="high"
+                  data-status="in-progress"
+                  data-date="2026-10-03"
+                >
+                  <td class="cell-id">#RH-2026-8492</td>
+                  <td class="cell-primary">Wi-Fi outage across Block C Postgraduate Hostel</td>
+                  <td>Amina Yusuf</td>
+                  <td>ICT</td>
+                  <td data-cell-dept>ICT &amp; Infrastructure</td>
+                  <td data-cell-officer>Engr. Tunde Bakare</td>
+                  <td data-cell-priority>
+                    <span class="priority-indicator priority-high"><span class="priority-dot"></span>High</span>
+                  </td>
+                  <td data-cell-status>
+                    <span class="badge badge-progress"><span class="badge-dot"></span>In Progress</span>
+                  </td>
+                  <td class="text-mono">2026-10-03</td>
+                  <td class="text-right">
+                    <div class="table-actions">
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="view">View</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="assign">Assign</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="status">Status</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="priority">Priority</button>
+                      <button type="button" class="btn btn-danger btn-xs" data-admin-case-action="escalate">Escalate</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 2 -->
+                <tr
+                  data-admin-case-row
+                  data-case-id="#RH-2026-8489"
+                  data-subject="Double tuition debit on Remita receipt #9941-B"
+                  data-user="Chinedu Okafor"
+                  data-category="Finance/Bursary"
+                  data-department="Bursary & Accounts"
+                  data-officer="Unassigned"
+                  data-priority="high"
+                  data-status="pending"
+                  data-date="2026-10-03"
+                >
+                  <td class="cell-id">#RH-2026-8489</td>
+                  <td class="cell-primary">Double tuition debit on Remita receipt #9941-B</td>
+                  <td>Chinedu Okafor</td>
+                  <td>Finance/Bursary</td>
+                  <td data-cell-dept>Bursary &amp; Accounts</td>
+                  <td data-cell-officer>Unassigned</td>
+                  <td data-cell-priority>
+                    <span class="priority-indicator priority-high"><span class="priority-dot"></span>High</span>
+                  </td>
+                  <td data-cell-status>
+                    <span class="badge badge-pending"><span class="badge-dot"></span>Pending</span>
+                  </td>
+                  <td class="text-mono">2026-10-03</td>
+                  <td class="text-right">
+                    <div class="table-actions">
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="view">View</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="assign">Assign</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="status">Status</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="priority">Priority</button>
+                      <button type="button" class="btn btn-danger btn-xs" data-admin-case-action="escalate">Escalate</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 3 -->
+                <tr
+                  data-admin-case-row
+                  data-case-id="#RH-2026-8474"
+                  data-subject="Water pump failure in Queen Amina Hall Wing B"
+                  data-user="Zainab Bello"
+                  data-category="Accommodation"
+                  data-department="Student Affairs"
+                  data-officer="Arc. Segun Oladele"
+                  data-priority="high"
+                  data-status="escalated"
+                  data-date="2026-10-02"
+                >
+                  <td class="cell-id">#RH-2026-8474</td>
+                  <td class="cell-primary">Water pump failure in Queen Amina Hall Wing B</td>
+                  <td>Zainab Bello</td>
+                  <td>Accommodation</td>
+                  <td data-cell-dept>Student Affairs</td>
+                  <td data-cell-officer>Arc. Segun Oladele</td>
+                  <td data-cell-priority>
+                    <span class="priority-indicator priority-high"><span class="priority-dot"></span>High</span>
+                  </td>
+                  <td data-cell-status>
+                    <span class="badge badge-escalated"><span class="badge-dot"></span>Escalated</span>
+                  </td>
+                  <td class="text-mono">2026-10-02</td>
+                  <td class="text-right">
+                    <div class="table-actions">
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="view">View</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="assign">Assign</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="status">Status</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="priority">Priority</button>
+                      <button type="button" class="btn btn-danger btn-xs" data-admin-case-action="escalate">Escalate</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 4 -->
+                <tr
+                  data-admin-case-row
+                  data-case-id="#RH-2026-8468"
+                  data-subject="Missing CHM 301 continuous assessment score on portal"
+                  data-user="David Adeleke"
+                  data-category="Academic"
+                  data-department="Academic Affairs"
+                  data-officer="Dr. Halima Sadiq"
+                  data-priority="medium"
+                  data-status="in-progress"
+                  data-date="2026-10-01"
+                >
+                  <td class="cell-id">#RH-2026-8468</td>
+                  <td class="cell-primary">Missing CHM 301 continuous assessment score on portal</td>
+                  <td>David Adeleke</td>
+                  <td>Academic</td>
+                  <td data-cell-dept>Academic Affairs</td>
+                  <td data-cell-officer>Dr. Halima Sadiq</td>
+                  <td data-cell-priority>
+                    <span class="priority-indicator priority-medium"><span class="priority-dot"></span>Medium</span>
+                  </td>
+                  <td data-cell-status>
+                    <span class="badge badge-progress"><span class="badge-dot"></span>In Progress</span>
+                  </td>
+                  <td class="text-mono">2026-10-01</td>
+                  <td class="text-right">
+                    <div class="table-actions">
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="view">View</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="assign">Assign</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="status">Status</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="priority">Priority</button>
+                      <button type="button" class="btn btn-danger btn-xs" data-admin-case-action="escalate">Escalate</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 5 -->
+                <tr
+                  data-admin-case-row
+                  data-case-id="#RH-2026-8460"
+                  data-subject="Faulty air conditioning chiller in Main Library Reading Hall"
+                  data-user="Kemi Olanrewaju"
+                  data-category="Facilities"
+                  data-department="Facilities & Works"
+                  data-officer="Engr. Victor Eze"
+                  data-priority="medium"
+                  data-status="in-progress"
+                  data-date="2026-09-30"
+                >
+                  <td class="cell-id">#RH-2026-8460</td>
+                  <td class="cell-primary">Faulty air conditioning chiller in Main Library Reading Hall</td>
+                  <td>Kemi Olanrewaju</td>
+                  <td>Facilities</td>
+                  <td data-cell-dept>Facilities &amp; Works</td>
+                  <td data-cell-officer>Engr. Victor Eze</td>
+                  <td data-cell-priority>
+                    <span class="priority-indicator priority-medium"><span class="priority-dot"></span>Medium</span>
+                  </td>
+                  <td data-cell-status>
+                    <span class="badge badge-progress"><span class="badge-dot"></span>In Progress</span>
+                  </td>
+                  <td class="text-mono">2026-09-30</td>
+                  <td class="text-right">
+                    <div class="table-actions">
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="view">View</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="assign">Assign</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="status">Status</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="priority">Priority</button>
+                      <button type="button" class="btn btn-danger btn-xs" data-admin-case-action="escalate">Escalate</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 6 -->
+                <tr
+                  data-admin-case-row
+                  data-case-id="#RH-2026-8455"
+                  data-subject="Transformer spark hazard near Engineering Workshop B"
+                  data-user="Prof. Olumide Soyinka"
+                  data-category="Facilities"
+                  data-department="Facilities & Works"
+                  data-officer="Engr. Victor Eze"
+                  data-priority="high"
+                  data-status="escalated"
+                  data-date="2026-09-30"
+                >
+                  <td class="cell-id">#RH-2026-8455</td>
+                  <td class="cell-primary">Transformer spark hazard near Engineering Workshop B</td>
+                  <td>Prof. Olumide Soyinka</td>
+                  <td>Facilities</td>
+                  <td data-cell-dept>Facilities &amp; Works</td>
+                  <td data-cell-officer>Engr. Victor Eze</td>
+                  <td data-cell-priority>
+                    <span class="priority-indicator priority-high"><span class="priority-dot"></span>High</span>
+                  </td>
+                  <td data-cell-status>
+                    <span class="badge badge-escalated"><span class="badge-dot"></span>Escalated</span>
+                  </td>
+                  <td class="text-mono">2026-09-30</td>
+                  <td class="text-right">
+                    <div class="table-actions">
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="view">View</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="assign">Assign</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="status">Status</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="priority">Priority</button>
+                      <button type="button" class="btn btn-danger btn-xs" data-admin-case-action="escalate">Escalate</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 7 -->
+                <tr
+                  data-admin-case-row
+                  data-case-id="#RH-2026-8451"
+                  data-subject="Broken perimeter streetlight along West Medical Walkway"
+                  data-user="Dr. Ibrahim Musa"
+                  data-category="Security"
+                  data-department="Campus Security"
+                  data-officer="Capt. Danjuma Garba"
+                  data-priority="medium"
+                  data-status="resolved"
+                  data-date="2026-09-29"
+                >
+                  <td class="cell-id">#RH-2026-8451</td>
+                  <td class="cell-primary">Broken perimeter streetlight along West Medical Walkway</td>
+                  <td>Dr. Ibrahim Musa</td>
+                  <td>Security</td>
+                  <td data-cell-dept>Campus Security</td>
+                  <td data-cell-officer>Capt. Danjuma Garba</td>
+                  <td data-cell-priority>
+                    <span class="priority-indicator priority-medium"><span class="priority-dot"></span>Medium</span>
+                  </td>
+                  <td data-cell-status>
+                    <span class="badge badge-resolved"><span class="badge-dot"></span>Resolved</span>
+                  </td>
+                  <td class="text-mono">2026-09-29</td>
+                  <td class="text-right">
+                    <div class="table-actions">
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="view">View</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="assign">Assign</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="status">Status</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="priority">Priority</button>
+                      <button type="button" class="btn btn-danger btn-xs" data-admin-case-action="escalate">Escalate</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 8 -->
+                <tr
+                  data-admin-case-row
+                  data-case-id="#RH-2026-8443"
+                  data-subject="Delayed NYSC mobilization senate list verification"
+                  data-user="Blessing Nwosu"
+                  data-category="Administration"
+                  data-department="Central Registry"
+                  data-officer="Unassigned"
+                  data-priority="low"
+                  data-status="pending"
+                  data-date="2026-09-28"
+                >
+                  <td class="cell-id">#RH-2026-8443</td>
+                  <td class="cell-primary">Delayed NYSC mobilization senate list verification</td>
+                  <td>Blessing Nwosu</td>
+                  <td>Administration</td>
+                  <td data-cell-dept>Central Registry</td>
+                  <td data-cell-officer>Unassigned</td>
+                  <td data-cell-priority>
+                    <span class="priority-indicator priority-low"><span class="priority-dot"></span>Low</span>
+                  </td>
+                  <td data-cell-status>
+                    <span class="badge badge-pending"><span class="badge-dot"></span>Pending</span>
+                  </td>
+                  <td class="text-mono">2026-09-28</td>
+                  <td class="text-right">
+                    <div class="table-actions">
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="view">View</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="assign">Assign</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="status">Status</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="priority">Priority</button>
+                      <button type="button" class="btn btn-danger btn-xs" data-admin-case-action="escalate">Escalate</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 9 -->
+                <tr
+                  data-admin-case-row
+                  data-case-id="#RH-2026-8432"
+                  data-subject="Institutional email 2FA reset after phone replacement"
+                  data-user="Sadiq Abubakar"
+                  data-category="ICT"
+                  data-department="ICT & Infrastructure"
+                  data-officer="Engr. Tunde Bakare"
+                  data-priority="low"
+                  data-status="resolved"
+                  data-date="2026-09-27"
+                >
+                  <td class="cell-id">#RH-2026-8432</td>
+                  <td class="cell-primary">Institutional email 2FA reset after phone replacement</td>
+                  <td>Sadiq Abubakar</td>
+                  <td>ICT</td>
+                  <td data-cell-dept>ICT &amp; Infrastructure</td>
+                  <td data-cell-officer>Engr. Tunde Bakare</td>
+                  <td data-cell-priority>
+                    <span class="priority-indicator priority-low"><span class="priority-dot"></span>Low</span>
+                  </td>
+                  <td data-cell-status>
+                    <span class="badge badge-resolved"><span class="badge-dot"></span>Resolved</span>
+                  </td>
+                  <td class="text-mono">2026-09-27</td>
+                  <td class="text-right">
+                    <div class="table-actions">
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="view">View</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="assign">Assign</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="status">Status</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="priority">Priority</button>
+                      <button type="button" class="btn btn-danger btn-xs" data-admin-case-action="escalate">Escalate</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 10 -->
+                <tr
+                  data-admin-case-row
+                  data-case-id="#RH-2026-8418"
+                  data-subject="Cafeteria hygiene inspection request at Annex Complex"
+                  data-user="Toluwani Adeyemi"
+                  data-category="Other"
+                  data-department="Student Affairs"
+                  data-officer="Mrs. Ngozi Obi"
+                  data-priority="low"
+                  data-status="closed"
+                  data-date="2026-09-25"
+                >
+                  <td class="cell-id">#RH-2026-8418</td>
+                  <td class="cell-primary">Cafeteria hygiene inspection request at Annex Complex</td>
+                  <td>Toluwani Adeyemi</td>
+                  <td>Other</td>
+                  <td data-cell-dept>Student Affairs</td>
+                  <td data-cell-officer>Mrs. Ngozi Obi</td>
+                  <td data-cell-priority>
+                    <span class="priority-indicator priority-low"><span class="priority-dot"></span>Low</span>
+                  </td>
+                  <td data-cell-status>
+                    <span class="badge badge-closed"><span class="badge-dot"></span>Closed</span>
+                  </td>
+                  <td class="text-mono">2026-09-25</td>
+                  <td class="text-right">
+                    <div class="table-actions">
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="view">View</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="assign">Assign</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="status">Status</button>
+                      <button type="button" class="btn btn-secondary btn-xs" data-admin-case-action="priority">Priority</button>
+                      <button type="button" class="btn btn-danger btn-xs" data-admin-case-action="escalate">Escalate</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Empty State when no cases match filter -->
+          <div class="empty-state" id="admin-cases-empty" style="display: none; border: none;">
+            <div class="empty-state-icon">⌕</div>
+            <h3 class="empty-state-title">No Matching System Cases Found</h3>
+            <p class="empty-state-text">
+              No complaints match your selected status, category, department, priority, or date filter.
+            </p>
+            <div class="empty-state-actions">
+              <button type="button" class="btn btn-secondary btn-sm" data-admin-filter-reset>Reset All Filters</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       ADMIN CASE ACTION MODALS (View, Assign, Status, Priority, Escalate)
+       ==================================================================== -->
+
+  <!-- 1. View Case Summary Modal -->
+  <div class="modal-backdrop" id="modal-admin-view-case" role="dialog" aria-modal="true" aria-labelledby="modal-admin-view-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-admin-view-title">Case Inspection Summary</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="info-kv-list">
+          <div class="info-kv-row">
+            <span class="info-kv-label">Case ID</span>
+            <span class="info-kv-value text-mono" data-modal-case-id>#RH-2026-8492</span>
+          </div>
+          <div class="info-kv-row">
+            <span class="info-kv-label">Subject</span>
+            <span class="info-kv-value" data-modal-case-subject>Wi-Fi outage across Block C Postgraduate Hostel</span>
+          </div>
+          <div class="info-kv-row">
+            <span class="info-kv-label">Complainant</span>
+            <span class="info-kv-value" data-modal-case-user>Amina Yusuf</span>
+          </div>
+          <div class="info-kv-row">
+            <span class="info-kv-label">Category</span>
+            <span class="info-kv-value" data-modal-case-category>ICT</span>
+          </div>
+          <div class="info-kv-row">
+            <span class="info-kv-label">Assigned Department</span>
+            <span class="info-kv-value" data-modal-case-dept>ICT &amp; Infrastructure</span>
+          </div>
+          <div class="info-kv-row">
+            <span class="info-kv-label">Assigned Officer</span>
+            <span class="info-kv-value" data-modal-case-officer>Engr. Tunde Bakare</span>
+          </div>
+          <div class="info-kv-row">
+            <span class="info-kv-label">Submitted Date</span>
+            <span class="info-kv-value text-mono" data-modal-case-date>2026-10-03</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>Close</button>
+        <a href="../staff/case.html" class="btn btn-primary">Open Full Investigation Workspace</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Assign Case Modal -->
+  <div class="modal-backdrop" id="modal-admin-assign-case" role="dialog" aria-modal="true" aria-labelledby="modal-admin-assign-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-admin-assign-title">Assign Case <span class="text-mono" data-modal-case-id>#RH-2026-8492</span></h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <form data-admin-assign-form novalidate>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="admin-assign-dept" class="form-label">Target Department <span class="required">*</span></label>
+            <select id="admin-assign-dept" name="department" class="form-select" required>
+              <option value="ICT & Infrastructure">ICT &amp; Infrastructure</option>
+              <option value="Bursary & Accounts">Bursary &amp; Accounts</option>
+              <option value="Student Affairs">Student Affairs</option>
+              <option value="Academic Affairs">Academic Affairs</option>
+              <option value="Facilities & Works">Facilities &amp; Works</option>
+              <option value="Campus Security">Campus Security</option>
+              <option value="Central Registry">Central Registry</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="admin-assign-officer" class="form-label">Resolution Officer <span class="required">*</span></label>
+            <select id="admin-assign-officer" name="officer" class="form-select" required>
+              <option value="Engr. Tunde Bakare">Engr. Tunde Bakare (ICT Unit)</option>
+              <option value="Mrs. Folake Adeyemi">Mrs. Folake Adeyemi (Bursary)</option>
+              <option value="Arc. Segun Oladele">Arc. Segun Oladele (Student Affairs)</option>
+              <option value="Dr. Halima Sadiq">Dr. Halima Sadiq (Academic Affairs)</option>
+              <option value="Engr. Victor Eze">Engr. Victor Eze (Facilities &amp; Works)</option>
+              <option value="Capt. Danjuma Garba">Capt. Danjuma Garba (Campus Security)</option>
+              <option value="Mrs. Ngozi Obi">Mrs. Ngozi Obi (Central Registry)</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm Assignment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Change Status Modal -->
+  <div class="modal-backdrop" id="modal-admin-status-case" role="dialog" aria-modal="true" aria-labelledby="modal-admin-status-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-admin-status-title">Change Status — <span class="text-mono" data-modal-case-id>#RH-2026-8492</span></h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <form data-admin-status-form novalidate>
+        <div class="modal-body">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="admin-new-status" class="form-label">Select New Lifecycle Status <span class="required">*</span></label>
+            <select id="admin-new-status" name="status" class="form-select" required>
+              <option value="pending">Pending</option>
+              <option value="in-progress">In Progress</option>
+              <option value="escalated">Escalated</option>
+              <option value="resolved">Resolved</option>
+              <option value="closed">Closed</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Update Status</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. Change Priority Modal -->
+  <div class="modal-backdrop" id="modal-admin-priority-case" role="dialog" aria-modal="true" aria-labelledby="modal-admin-priority-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-admin-priority-title">Change Priority — <span class="text-mono" data-modal-case-id>#RH-2026-8492</span></h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <form data-admin-priority-form novalidate>
+        <div class="modal-body">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="admin-new-priority" class="form-label">Select Urgency Level <span class="required">*</span></label>
+            <select id="admin-new-priority" name="priority" class="form-select" required>
+              <option value="high">High Priority (4-Hour SLA)</option>
+              <option value="medium">Medium Priority (24-Hour SLA)</option>
+              <option value="low">Low Priority (48-Hour SLA)</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Update Priority</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 5. Escalate Case Modal -->
+  <div class="modal-backdrop" id="modal-admin-escalate-case" role="dialog" aria-modal="true" aria-labelledby="modal-admin-escalate-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-admin-escalate-title">Escalate Case <span class="text-mono" data-modal-case-id>#RH-2026-8492</span></h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <form data-admin-escalate-form novalidate>
+        <div class="modal-body">
+          <div class="alert alert-danger" style="margin-bottom: var(--space-4);">
+            <div class="alert-content">
+              <div class="alert-title">Administrative Escalation Directive</div>
+              <div class="alert-text">
+                Escalating this case immediately elevates priority to <strong>High</strong>, marks status as <strong>Escalated</strong>, and dispatches an executive SLA directive to the Department Head.
+              </div>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="admin-escalate-note" class="form-label">Administrative Escalation Directive</label>
+            <textarea
+              id="admin-escalate-note"
+              name="directive"
+              class="form-textarea"
+              rows="3"
+              placeholder="Provide executive instructions or SLA deadline requirements..."
+            ></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-danger">Confirm Escalation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — ResolveHub</title>
+  <meta name="description" content="ResolveHub System Administrator Dashboard — Institution-wide complaint trends, status distribution, category distribution, recent activity, and case oversight." />
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+
+  <div class="app-shell">
+    <!-- ==================================================================
+         1. ADMIN SIDEBAR NAVIGATION
+         ================================================================== -->
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">ResolveHub</a>
+        <span class="sidebar-portal-label">Admin Portal</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Admin Portal Navigation">
+        <div class="sidebar-section-label">System Governance</div>
+        <a href="dashboard.html" class="sidebar-link active">
+          <span class="sidebar-link-main">Dashboard</span>
+        </a>
+        <a href="cases.html" class="sidebar-link">
+          <span class="sidebar-link-main">All Cases</span>
+          <span class="sidebar-count">12,840</span>
+        </a>
+        <a href="users.html" class="sidebar-link">
+          <span class="sidebar-link-main">Users &amp; Staff</span>
+        </a>
+        <a href="management.html" class="sidebar-link">
+          <span class="sidebar-link-main">Management</span>
+        </a>
+        <a href="settings.html" class="sidebar-link">
+          <span class="sidebar-link-main">Settings</span>
+        </a>
+
+        <div class="sidebar-section-label">Account</div>
+        <a href="../auth.html" class="sidebar-link">
+          <span class="sidebar-link-main">Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">SA</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Dr. Nkemjika Okafor</div>
+            <div class="sidebar-user-role">Chief System Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================================================================
+         2. MAIN WORKSPACE AREA
+         ================================================================== -->
+    <div class="main-wrapper">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" class="sidebar-toggle-btn" data-sidebar-toggle aria-label="Toggle Sidebar">
+            ☰
+          </button>
+          <div class="topbar-breadcrumb">
+            <span>Admin Portal</span>
+            <span>/</span>
+            <strong>Dashboard</strong>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="dropdown" data-dropdown>
+            <button type="button" class="btn btn-secondary btn-sm" data-dropdown-toggle aria-expanded="false">
+              Dr. Nkemjika Okafor ▾
+            </button>
+            <div class="dropdown-menu" role="menu">
+              <div class="dropdown-header">Chief System Admin</div>
+              <a href="cases.html" class="dropdown-item" role="menuitem">Master Case Registry</a>
+              <a href="users.html" class="dropdown-item" role="menuitem">Users &amp; Staff Directory</a>
+              <a href="management.html" class="dropdown-item" role="menuitem">Departments &amp; Categories</a>
+              <a href="settings.html" class="dropdown-item" role="menuitem">Analytics &amp; System Settings</a>
+              <div class="dropdown-divider"></div>
+              <a href="../auth.html" class="dropdown-item" role="menuitem" style="color: var(--color-danger);">Sign Out</a>
+            </div>
+          </div>
+          <a href="cases.html" class="btn btn-primary btn-sm">Manage All Cases</a>
+        </div>
+      </header>
+
+      <!-- Workspace Content -->
+      <main class="workspace-content">
+        <!-- Page Heading -->
+        <div class="flex-between" style="margin-bottom: var(--space-6); flex-wrap: wrap;">
+          <div>
+            <h1 class="page-title">System Governance Overview</h1>
+            <p class="page-subtitle">
+              Real-time institutional oversight across all 8 departments, 142 resolution officers, and 12,840 total logged cases.
+            </p>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-secondary btn-sm" data-toggle-section="admin-kpi-section">
+              Show / Hide KPIs
+            </button>
+            <a href="management.html" class="btn btn-secondary btn-sm">Departments &amp; Categories</a>
+            <a href="settings.html" class="btn btn-accent btn-sm">Analytics &amp; SLA Settings</a>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             3. 5 KEY SYSTEM STATISTICS CARDS
+             ============================================================== -->
+        <section id="admin-kpi-section" class="stats-grid-5" aria-label="System-Wide Case Statistics">
+          <!-- Stat 1: Total Cases -->
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">Total Cases</span>
+              <span class="badge badge-neutral">All Time</span>
+            </div>
+            <div class="kpi-value">12,840</div>
+            <div class="kpi-trend">
+              <span class="kpi-trend-up">+6.4%</span>
+              <span>vs. previous month (842 this month)</span>
+            </div>
+          </div>
+
+          <!-- Stat 2: Pending -->
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">Pending</span>
+              <span class="badge badge-pending"><span class="badge-dot"></span>Awaiting Triage</span>
+            </div>
+            <div class="kpi-value">184</div>
+            <div class="kpi-trend">
+              <span>1.4% of total · Avg wait 1h 40m</span>
+            </div>
+          </div>
+
+          <!-- Stat 3: In Progress -->
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">In Progress</span>
+              <span class="badge badge-progress"><span class="badge-dot"></span>Active</span>
+            </div>
+            <div class="kpi-value">312</div>
+            <div class="kpi-trend">
+              <span>Assigned across 8 departments</span>
+            </div>
+          </div>
+
+          <!-- Stat 4: Resolved -->
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">Resolved</span>
+              <span class="badge badge-resolved"><span class="badge-dot"></span>94.4% Rate</span>
+            </div>
+            <div class="kpi-value">12,126</div>
+            <div class="kpi-trend">
+              <span class="kpi-trend-up">+4.8%</span>
+              <span>4.8 / 5.0 citizen satisfaction</span>
+            </div>
+          </div>
+
+          <!-- Stat 5: Escalated -->
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">Escalated</span>
+              <span class="badge badge-escalated"><span class="badge-dot"></span>Priority</span>
+            </div>
+            <div class="kpi-value">42</div>
+            <div class="kpi-trend">
+              <span class="kpi-trend-down">11 SLA breaches</span>
+              <span>require director action</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==============================================================
+             4. COMPLAINT TRENDS & STATUS DISTRIBUTION
+             ============================================================== -->
+        <div class="grid-2" style="margin-bottom: var(--space-8);">
+          <!-- Complaint Trends (6-Month Volume Bar Chart) -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">System-Wide Complaint Trends (6 Months)</h2>
+                <p class="card-subtitle">Monthly intake volume compared against verified resolutions across all departments</p>
+              </div>
+              <div class="flex-center" style="gap: var(--space-3); font-size: var(--text-xs);">
+                <span style="display: inline-flex; align-items: center; gap: 6px;">
+                  <span style="width: 10px; height: 10px; background: var(--color-primary); border-radius: 2px; display: inline-block;"></span>
+                  Submitted
+                </span>
+                <span style="display: inline-flex; align-items: center; gap: 6px;">
+                  <span style="width: 10px; height: 10px; background: var(--color-success); border-radius: 2px; display: inline-block;"></span>
+                  Resolved
+                </span>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="vertical-chart">
+                <div class="v-bar-col">
+                  <div class="v-bar-num">710 / 685</div>
+                  <div class="v-bar-pair">
+                    <div class="v-bar v-bar-submitted" style="height: 74%;" title="Submitted: 710"></div>
+                    <div class="v-bar v-bar-resolved" style="height: 71%;" title="Resolved: 685"></div>
+                  </div>
+                  <div class="v-bar-month">May</div>
+                </div>
+                <div class="v-bar-col">
+                  <div class="v-bar-num">765 / 740</div>
+                  <div class="v-bar-pair">
+                    <div class="v-bar v-bar-submitted" style="height: 80%;" title="Submitted: 765"></div>
+                    <div class="v-bar v-bar-resolved" style="height: 77%;" title="Resolved: 740"></div>
+                  </div>
+                  <div class="v-bar-month">Jun</div>
+                </div>
+                <div class="v-bar-col">
+                  <div class="v-bar-num">690 / 678</div>
+                  <div class="v-bar-pair">
+                    <div class="v-bar v-bar-submitted" style="height: 72%;" title="Submitted: 690"></div>
+                    <div class="v-bar v-bar-resolved" style="height: 70%;" title="Resolved: 678"></div>
+                  </div>
+                  <div class="v-bar-month">Jul</div>
+                </div>
+                <div class="v-bar-col">
+                  <div class="v-bar-num">820 / 794</div>
+                  <div class="v-bar-pair">
+                    <div class="v-bar v-bar-submitted" style="height: 86%;" title="Submitted: 820"></div>
+                    <div class="v-bar v-bar-resolved" style="height: 83%;" title="Resolved: 794"></div>
+                  </div>
+                  <div class="v-bar-month">Aug</div>
+                </div>
+                <div class="v-bar-col">
+                  <div class="v-bar-num">912 / 876</div>
+                  <div class="v-bar-pair">
+                    <div class="v-bar v-bar-submitted" style="height: 95%;" title="Submitted: 912"></div>
+                    <div class="v-bar v-bar-resolved" style="height: 91%;" title="Resolved: 876"></div>
+                  </div>
+                  <div class="v-bar-month">Sep</div>
+                </div>
+                <div class="v-bar-col">
+                  <div class="v-bar-num">842 / 798</div>
+                  <div class="v-bar-pair">
+                    <div class="v-bar v-bar-submitted" style="height: 88%;" title="Submitted: 842"></div>
+                    <div class="v-bar v-bar-resolved" style="height: 83%;" title="Resolved: 798"></div>
+                  </div>
+                  <div class="v-bar-month">Oct</div>
+                </div>
+              </div>
+              <div class="flex-between" style="margin-top: var(--space-4); font-size: var(--text-xs); color: var(--text-secondary);">
+                <span>6-Month Total Intake: <strong class="text-mono">4,739 cases</strong></span>
+                <span>Net Resolution Efficiency: <strong class="text-mono" style="color: var(--color-success);">96.4%</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Status Distribution -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Status Distribution</h2>
+                <p class="card-subtitle">Current lifecycle breakdown of all 12,840 complaints</p>
+              </div>
+              <span class="badge badge-neutral text-mono">12,840 Total</span>
+            </div>
+            <div class="card-body">
+              <div class="chart-list">
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">Resolved (Verified &amp; Confirmed)</span>
+                    <span class="chart-bar-value">12,126 cases (94.4%)</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill fill-success" style="width: 94.4%;"></div>
+                  </div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">In Progress (Active Investigation)</span>
+                    <span class="chart-bar-value">312 cases (2.4%)</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill fill-accent" style="width: 24%;"></div>
+                  </div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">Pending (Awaiting Initial Triage)</span>
+                    <span class="chart-bar-value">184 cases (1.4%)</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill fill-warning" style="width: 16%;"></div>
+                  </div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">Closed (Archived / Duplicate)</span>
+                    <span class="chart-bar-value">176 cases (1.4%)</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill" style="width: 15%; background-color: var(--text-muted);"></div>
+                  </div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">Escalated (Executive / SLA Alert)</span>
+                    <span class="chart-bar-value">42 cases (0.3%)</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill fill-danger" style="width: 8%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             5. CATEGORY DISTRIBUTION & RECENT ACTIVITY
+             ============================================================== -->
+        <div class="grid-2" style="margin-bottom: var(--space-8);">
+          <!-- Category Distribution -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Category Distribution</h2>
+                <p class="card-subtitle">Complaint volume by institutional service category</p>
+              </div>
+              <a href="management.html" class="btn btn-ghost btn-sm">Manage Categories →</a>
+            </div>
+            <div class="card-body">
+              <div class="chart-list">
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">ICT &amp; Digital Infrastructure</span>
+                    <span class="chart-bar-value">3,140 cases (24.5%)</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill fill-accent" style="width: 82%;"></div>
+                  </div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">Finance / Bursary</span>
+                    <span class="chart-bar-value">2,490 cases (19.4%)</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill fill-success" style="width: 68%;"></div>
+                  </div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">Accommodation &amp; Hostels</span>
+                    <span class="chart-bar-value">2,180 cases (17.0%)</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill" style="width: 60%;"></div>
+                  </div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">Academic Affairs</span>
+                    <span class="chart-bar-value">1,920 cases (15.0%)</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill fill-warning" style="width: 52%;"></div>
+                  </div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">Facilities &amp; Works</span>
+                    <span class="chart-bar-value">1,410 cases (11.0%)</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill fill-accent" style="width: 40%;"></div>
+                  </div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">Security, Administration &amp; Other</span>
+                    <span class="chart-bar-value">1,700 cases (13.1%)</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill" style="width: 46%; background-color: var(--text-muted);"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent System Activity -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Recent System Activity</h2>
+                <p class="card-subtitle">Live audit log of administrative and departmental actions</p>
+              </div>
+              <span class="badge badge-progress"><span class="badge-dot"></span>Live Audit</span>
+            </div>
+            <div class="card-body">
+              <div class="case-timeline">
+                <div class="timeline-item">
+                  <span class="timeline-dot warning"></span>
+                  <div class="timeline-header">
+                    <span class="timeline-title">Case #RH-2026-8455 Auto-Escalated to Director</span>
+                    <span class="timeline-time">18 mins ago</span>
+                  </div>
+                  <p class="timeline-body">
+                    SLA deadline exceeded by 4 hours in Facilities &amp; Works. Escalated to Director of Physical Planning.
+                  </p>
+                </div>
+
+                <div class="timeline-item">
+                  <span class="timeline-dot resolved"></span>
+                  <div class="timeline-header">
+                    <span class="timeline-title">Bursary Batch Reconciliation Completed</span>
+                    <span class="timeline-time">1 hour ago</span>
+                  </div>
+                  <p class="timeline-body">
+                    Mrs. Folake Adeyemi resolved 14 duplicate tuition receipt complaints with verified Remita payment logs.
+                  </p>
+                </div>
+
+                <div class="timeline-item">
+                  <span class="timeline-dot active"></span>
+                  <div class="timeline-header">
+                    <span class="timeline-title">New Staff Officer Provisioned</span>
+                    <span class="timeline-time">3 hours ago</span>
+                  </div>
+                  <p class="timeline-body">
+                    Admin Dr. Nkemjika Okafor added <strong>Engr. Musa Abdullahi</strong> to the Campus Security Unit.
+                  </p>
+                </div>
+
+                <div class="timeline-item">
+                  <span class="timeline-dot"></span>
+                  <div class="timeline-header">
+                    <span class="timeline-title">SLA Policy Updated for High Priority Cases</span>
+                    <span class="timeline-time">Yesterday, 16:40</span>
+                  </div>
+                  <p class="timeline-body">
+                    Target response window tightened from 6 hours to 4 hours across ICT and Campus Security departments.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             6. RECENT COMPLAINTS TABLE
+             ============================================================== -->
+        <div class="table-container">
+          <div class="table-header-bar">
+            <div>
+              <h2 class="card-title">Recent System Complaints</h2>
+              <p class="card-subtitle">Latest complaints logged across all institutional departments</p>
+            </div>
+            <div class="page-actions">
+              <a href="cases.html" class="btn btn-primary btn-sm">View All 12,840 Cases →</a>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Case ID</th>
+                  <th>Subject</th>
+                  <th>Complainant</th>
+                  <th>Category</th>
+                  <th>Department</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="cell-id">#RH-2026-8492</td>
+                  <td class="cell-primary">Wi-Fi outage across Block C Postgraduate Hostel</td>
+                  <td>Amina Yusuf</td>
+                  <td>ICT</td>
+                  <td>ICT &amp; Infrastructure</td>
+                  <td><span class="priority-indicator priority-high"><span class="priority-dot"></span>High</span></td>
+                  <td><span class="badge badge-progress"><span class="badge-dot"></span>In Progress</span></td>
+                  <td class="text-mono">2026-10-03</td>
+                  <td class="text-right">
+                    <a href="cases.html" class="btn btn-secondary btn-sm">Manage</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="cell-id">#RH-2026-8489</td>
+                  <td class="cell-primary">Double tuition debit on Remita receipt #9941-B</td>
+                  <td>Chinedu Okafor</td>
+                  <td>Finance/Bursary</td>
+                  <td>Bursary &amp; Student Accounts</td>
+                  <td><span class="priority-indicator priority-high"><span class="priority-dot"></span>High</span></td>
+                  <td><span class="badge badge-pending"><span class="badge-dot"></span>Pending</span></td>
+                  <td class="text-mono">2026-10-03</td>
+                  <td class="text-right">
+                    <a href="cases.html" class="btn btn-secondary btn-sm">Manage</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="cell-id">#RH-2026-8474</td>
+                  <td class="cell-primary">Water pump failure in Queen Amina Hall Wing B</td>
+                  <td>Zainab Bello</td>
+                  <td>Accommodation</td>
+                  <td>Student Affairs &amp; Hostels</td>
+                  <td><span class="priority-indicator priority-high"><span class="priority-dot"></span>High</span></td>
+                  <td><span class="badge badge-escalated"><span class="badge-dot"></span>Escalated</span></td>
+                  <td class="text-mono">2026-10-02</td>
+                  <td class="text-right">
+                    <a href="cases.html" class="btn btn-secondary btn-sm">Manage</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="cell-id">#RH-2026-8468</td>
+                  <td class="cell-primary">Missing CHM 301 continuous assessment score on portal</td>
+                  <td>David Adeleke</td>
+                  <td>Academic</td>
+                  <td>Academic Affairs &amp; Exams</td>
+                  <td><span class="priority-indicator priority-medium"><span class="priority-dot"></span>Medium</span></td>
+                  <td><span class="badge badge-progress"><span class="badge-dot"></span>In Progress</span></td>
+                  <td class="text-mono">2026-10-01</td>
+                  <td class="text-right">
+                    <a href="cases.html" class="btn btn-secondary btn-sm">Manage</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="cell-id">#RH-2026-8451</td>
+                  <td class="cell-primary">Broken perimeter streetlight along West Medical Walkway</td>
+                  <td>Dr. Ibrahim Musa</td>
+                  <td>Security</td>
+                  <td>Campus Security Unit</td>
+                  <td><span class="priority-indicator priority-medium"><span class="priority-dot"></span>Medium</span></td>
+                  <td><span class="badge badge-resolved"><span class="badge-dot"></span>Resolved</span></td>
+                  <td class="text-mono">2026-09-29</td>
+                  <td class="text-right">
+                    <a href="cases.html" class="btn btn-secondary btn-sm">Manage</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

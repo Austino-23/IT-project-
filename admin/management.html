@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Department &amp; Category Management — ResolveHub Admin</title>
+  <meta name="description" content="ResolveHub Department & Category Governance — Add, edit, delete, activate/deactivate departments and complaint categories, and configure routing." />
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+
+  <div class="app-shell">
+    <!-- ==================================================================
+         1. ADMIN SIDEBAR NAVIGATION
+         ================================================================== -->
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">ResolveHub</a>
+        <span class="sidebar-portal-label">Admin Portal</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Admin Portal Navigation">
+        <div class="sidebar-section-label">System Governance</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-link-main">Dashboard</span>
+        </a>
+        <a href="cases.html" class="sidebar-link">
+          <span class="sidebar-link-main">All Cases</span>
+          <span class="sidebar-count">12,840</span>
+        </a>
+        <a href="users.html" class="sidebar-link">
+          <span class="sidebar-link-main">Users &amp; Staff</span>
+        </a>
+        <a href="management.html" class="sidebar-link active">
+          <span class="sidebar-link-main">Management</span>
+        </a>
+        <a href="settings.html" class="sidebar-link">
+          <span class="sidebar-link-main">Settings</span>
+        </a>
+
+        <div class="sidebar-section-label">Account</div>
+        <a href="../auth.html" class="sidebar-link">
+          <span class="sidebar-link-main">Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">SA</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Dr. Nkemjika Okafor</div>
+            <div class="sidebar-user-role">Chief System Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================================================================
+         2. MAIN WORKSPACE AREA
+         ================================================================== -->
+    <div class="main-wrapper">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" class="sidebar-toggle-btn" data-sidebar-toggle aria-label="Toggle Sidebar">
+            ☰
+          </button>
+          <div class="topbar-breadcrumb">
+            <a href="dashboard.html" style="color: var(--text-muted);">Admin Portal</a>
+            <span>/</span>
+            <strong>Management</strong>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button type="button" class="btn btn-secondary btn-sm" data-modal-open="modal-add-department">
+            + New Department
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" data-modal-open="modal-add-category">
+            + New Category
+          </button>
+        </div>
+      </header>
+
+      <!-- Workspace Content -->
+      <main class="workspace-content" data-tab-scope>
+        <!-- Page Heading -->
+        <div class="flex-between" style="margin-bottom: var(--space-5); flex-wrap: wrap;">
+          <div>
+            <h1 class="page-title">Department &amp; Category Management</h1>
+            <p class="page-subtitle">
+              Configure institutional resolution units, manage complaint taxonomy, and map categories to their responsible departments.
+            </p>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             3. TABS ([Departments] | [Categories])
+             ============================================================== -->
+        <div class="flex-between" style="margin-bottom: var(--space-5); flex-wrap: wrap;">
+          <div class="segmented-control" role="tablist" aria-label="Management Tabs">
+            <button
+              type="button"
+              class="tab-btn active"
+              data-workspace-tab="panel-departments"
+              role="tab"
+              aria-selected="true"
+            >
+              Departments <span class="text-mono" style="margin-left: 4px; opacity: 0.75;">(7)</span>
+            </button>
+            <button
+              type="button"
+              class="tab-btn"
+              data-workspace-tab="panel-categories"
+              role="tab"
+              aria-selected="false"
+            >
+              Categories <span class="text-mono" style="margin-left: 4px; opacity: 0.75;">(8)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             4. TAB PANEL 1: [DEPARTMENTS]
+             ============================================================== -->
+        <section id="panel-departments" class="tab-panel is-active" aria-label="Departments Management">
+          <div class="table-container">
+            <div class="table-header-bar">
+              <div>
+                <h2 class="card-title">Institutional Resolution Departments</h2>
+                <p class="card-subtitle">Active operational units receiving and resolving categorized complaints</p>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" data-modal-open="modal-add-department">
+                + Add Department
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table" id="admin-departments-table">
+                <thead>
+                  <tr>
+                    <th>Code</th>
+                    <th>Department Name</th>
+                    <th>Head of Unit</th>
+                    <th>Official Contact Email</th>
+                    <th>Staff Count</th>
+                    <th>Status</th>
+                    <th class="text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    data-mgmt-row
+                    data-entity-type="department"
+                    data-code="DEPT-ICT"
+                    data-name="ICT & Infrastructure"
+                    data-head="Director Adebayo Lawal"
+                    data-email="ict-support@resolvehub.edu"
+                    data-status="active"
+                  >
+                    <td class="cell-id" data-col-code>DEPT-ICT</td>
+                    <td class="cell-primary" data-col-name>ICT &amp; Infrastructure</td>
+                    <td data-col-head>Director Adebayo Lawal</td>
+                    <td data-col-email>ict-support@resolvehub.edu</td>
+                    <td class="text-mono">14 officers</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-department>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-mgmt-status>Deactivate</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-delete-mgmt-row>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-mgmt-row
+                    data-entity-type="department"
+                    data-code="DEPT-BUR"
+                    data-name="Bursary & Student Accounts"
+                    data-head="Mrs. Folake Adeyemi"
+                    data-email="bursary-help@resolvehub.edu"
+                    data-status="active"
+                  >
+                    <td class="cell-id" data-col-code>DEPT-BUR</td>
+                    <td class="cell-primary" data-col-name>Bursary &amp; Student Accounts</td>
+                    <td data-col-head>Mrs. Folake Adeyemi</td>
+                    <td data-col-email>bursary-help@resolvehub.edu</td>
+                    <td class="text-mono">11 officers</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-department>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-mgmt-status>Deactivate</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-delete-mgmt-row>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-mgmt-row
+                    data-entity-type="department"
+                    data-code="DEPT-STA"
+                    data-name="Student Affairs & Hostels"
+                    data-head="Prof. Emeka Okafor"
+                    data-email="hostels@resolvehub.edu"
+                    data-status="active"
+                  >
+                    <td class="cell-id" data-col-code>DEPT-STA</td>
+                    <td class="cell-primary" data-col-name>Student Affairs &amp; Hostels</td>
+                    <td data-col-head>Prof. Emeka Okafor</td>
+                    <td data-col-email>hostels@resolvehub.edu</td>
+                    <td class="text-mono">18 officers</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-department>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-mgmt-status>Deactivate</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-delete-mgmt-row>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-mgmt-row
+                    data-entity-type="department"
+                    data-code="DEPT-ACA"
+                    data-name="Academic Affairs & Exams"
+                    data-head="Dr. Halima Sadiq"
+                    data-email="academics@resolvehub.edu"
+                    data-status="active"
+                  >
+                    <td class="cell-id" data-col-code>DEPT-ACA</td>
+                    <td class="cell-primary" data-col-name>Academic Affairs &amp; Exams</td>
+                    <td data-col-head>Dr. Halima Sadiq</td>
+                    <td data-col-email>academics@resolvehub.edu</td>
+                    <td class="text-mono">12 officers</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-department>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-mgmt-status>Deactivate</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-delete-mgmt-row>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-mgmt-row
+                    data-entity-type="department"
+                    data-code="DEPT-FAC"
+                    data-name="Facilities & Works"
+                    data-head="Engr. Victor Eze"
+                    data-email="works@resolvehub.edu"
+                    data-status="active"
+                  >
+                    <td class="cell-id" data-col-code>DEPT-FAC</td>
+                    <td class="cell-primary" data-col-name>Facilities &amp; Works</td>
+                    <td data-col-head>Engr. Victor Eze</td>
+                    <td data-col-email>works@resolvehub.edu</td>
+                    <td class="text-mono">15 officers</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-department>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-mgmt-status>Deactivate</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-delete-mgmt-row>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-mgmt-row
+                    data-entity-type="department"
+                    data-code="DEPT-SEC"
+                    data-name="Campus Security Unit"
+                    data-head="Capt. Danjuma Garba"
+                    data-email="security@resolvehub.edu"
+                    data-status="active"
+                  >
+                    <td class="cell-id" data-col-code>DEPT-SEC</td>
+                    <td class="cell-primary" data-col-name>Campus Security Unit</td>
+                    <td data-col-head>Capt. Danjuma Garba</td>
+                    <td data-col-email>security@resolvehub.edu</td>
+                    <td class="text-mono">9 officers</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-department>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-mgmt-status>Deactivate</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-delete-mgmt-row>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-mgmt-row
+                    data-entity-type="department"
+                    data-code="DEPT-REG"
+                    data-name="Central Registry & Admin"
+                    data-head="Mrs. Ngozi Obi"
+                    data-email="registry@resolvehub.edu"
+                    data-status="inactive"
+                  >
+                    <td class="cell-id" data-col-code>DEPT-REG</td>
+                    <td class="cell-primary" data-col-name>Central Registry &amp; Admin</td>
+                    <td data-col-head>Mrs. Ngozi Obi</td>
+                    <td data-col-email>registry@resolvehub.edu</td>
+                    <td class="text-mono">7 officers</td>
+                    <td data-col-status>
+                      <span class="badge badge-closed"><span class="badge-dot"></span>Inactive</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-department>Edit</button>
+                        <button type="button" class="btn btn-accent btn-xs" data-toggle-mgmt-status>Activate</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-delete-mgmt-row>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==============================================================
+             5. TAB PANEL 2: [CATEGORIES]
+             ============================================================== -->
+        <section id="panel-categories" class="tab-panel" aria-label="Categories Management">
+          <div class="table-container">
+            <div class="table-header-bar">
+              <div>
+                <h2 class="card-title">Complaint Categories &amp; Departmental Routing</h2>
+                <p class="card-subtitle">Each category automatically routes incoming complaints to its assigned department</p>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" data-modal-open="modal-add-category">
+                + Add Category
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table" id="admin-categories-table">
+                <thead>
+                  <tr>
+                    <th>Category Name</th>
+                    <th>Description</th>
+                    <th>Assigned Department</th>
+                    <th>Default SLA Target</th>
+                    <th>Status</th>
+                    <th class="text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    data-mgmt-row
+                    data-entity-type="category"
+                    data-name="ICT"
+                    data-desc="Campus Wi-Fi, portal login, LMS, and institutional email issues"
+                    data-dept="ICT & Infrastructure"
+                    data-sla="24 Hours"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>ICT</td>
+                    <td data-col-desc>Campus Wi-Fi, portal login, LMS, and institutional email issues</td>
+                    <td data-col-dept><span class="badge badge-neutral">ICT &amp; Infrastructure</span></td>
+                    <td class="text-mono" data-col-sla>24 Hours</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-assign-category-dept>Assign Dept</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-category>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-mgmt-status>Deactivate</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-delete-mgmt-row>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-mgmt-row
+                    data-entity-type="category"
+                    data-name="Academic"
+                    data-desc="Course registration, missing grades, transcripts, and timetable clashes"
+                    data-dept="Academic Affairs & Exams"
+                    data-sla="48 Hours"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Academic</td>
+                    <td data-col-desc>Course registration, missing grades, transcripts, and timetable clashes</td>
+                    <td data-col-dept><span class="badge badge-neutral">Academic Affairs &amp; Exams</span></td>
+                    <td class="text-mono" data-col-sla>48 Hours</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-assign-category-dept>Assign Dept</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-category>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-mgmt-status>Deactivate</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-delete-mgmt-row>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-mgmt-row
+                    data-entity-type="category"
+                    data-name="Finance/Bursary"
+                    data-desc="Tuition receipts, double debit reversals, and scholarship disbursements"
+                    data-dept="Bursary & Student Accounts"
+                    data-sla="24 Hours"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Finance/Bursary</td>
+                    <td data-col-desc>Tuition receipts, double debit reversals, and scholarship disbursements</td>
+                    <td data-col-dept><span class="badge badge-neutral">Bursary &amp; Student Accounts</span></td>
+                    <td class="text-mono" data-col-sla>24 Hours</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-assign-category-dept>Assign Dept</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-category>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-mgmt-status>Deactivate</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-delete-mgmt-row>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-mgmt-row
+                    data-entity-type="category"
+                    data-name="Accommodation"
+                    data-desc="Hostel allocation, plumbing, room electricals, and sanitation"
+                    data-dept="Student Affairs & Hostels"
+                    data-sla="24 Hours"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Accommodation</td>
+                    <td data-col-desc>Hostel allocation, plumbing, room electricals, and sanitation</td>
+                    <td data-col-dept><span class="badge badge-neutral">Student Affairs &amp; Hostels</span></td>
+                    <td class="text-mono" data-col-sla>24 Hours</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-assign-category-dept>Assign Dept</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-category>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-mgmt-status>Deactivate</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-delete-mgmt-row>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-mgmt-row
+                    data-entity-type="category"
+                    data-name="Security"
+                    data-desc="Safety incidents, access control, lost items, and perimeter lighting"
+                    data-dept="Campus Security Unit"
+                    data-sla="4 Hours"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Security</td>
+                    <td data-col-desc>Safety incidents, access control, lost items, and perimeter lighting</td>
+                    <td data-col-dept><span class="badge badge-neutral">Campus Security Unit</span></td>
+                    <td class="text-mono" data-col-sla>4 Hours</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-assign-category-dept>Assign Dept</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-category>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-mgmt-status>Deactivate</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-delete-mgmt-row>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-mgmt-row
+                    data-entity-type="category"
+                    data-name="Facilities"
+                    data-desc="Lecture hall HVAC, power generators, elevators, and civil works"
+                    data-dept="Facilities & Works"
+                    data-sla="24 Hours"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Facilities</td>
+                    <td data-col-desc>Lecture hall HVAC, power generators, elevators, and civil works</td>
+                    <td data-col-dept><span class="badge badge-neutral">Facilities &amp; Works</span></td>
+                    <td class="text-mono" data-col-sla>24 Hours</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-assign-category-dept>Assign Dept</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-category>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-mgmt-status>Deactivate</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-delete-mgmt-row>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-mgmt-row
+                    data-entity-type="category"
+                    data-name="Administration"
+                    data-desc="ID cards, NYSC mobilization, clearance letters, and registry records"
+                    data-dept="Central Registry & Admin"
+                    data-sla="48 Hours"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Administration</td>
+                    <td data-col-desc>ID cards, NYSC mobilization, clearance letters, and registry records</td>
+                    <td data-col-dept><span class="badge badge-neutral">Central Registry &amp; Admin</span></td>
+                    <td class="text-mono" data-col-sla>48 Hours</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-assign-category-dept>Assign Dept</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-category>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-mgmt-status>Deactivate</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-delete-mgmt-row>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-mgmt-row
+                    data-entity-type="category"
+                    data-name="Other"
+                    data-desc="General inquiries, inter-departmental matters, and special petitions"
+                    data-dept="Student Affairs & Hostels"
+                    data-sla="48 Hours"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Other</td>
+                    <td data-col-desc>General inquiries, inter-departmental matters, and special petitions</td>
+                    <td data-col-dept><span class="badge badge-neutral">Student Affairs &amp; Hostels</span></td>
+                    <td class="text-mono" data-col-sla>48 Hours</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-assign-category-dept>Assign Dept</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-category>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-mgmt-status>Deactivate</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-delete-mgmt-row>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       MODALS FOR DEPARTMENTS & CATEGORIES
+       ==================================================================== -->
+
+  <!-- 1. Add Department Modal -->
+  <div class="modal-backdrop" id="modal-add-department" role="dialog" aria-modal="true" aria-labelledby="modal-add-dept-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-add-dept-title">Add New Department</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <form data-add-department-form novalidate>
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dept-add-code" class="form-label">Department Code <span class="required">*</span></label>
+              <input type="text" id="dept-add-code" name="code" class="form-control text-mono" placeholder="e.g., DEPT-MED" required />
+            </div>
+            <div class="form-group">
+              <label for="dept-add-name" class="form-label">Department Name <span class="required">*</span></label>
+              <input type="text" id="dept-add-name" name="name" class="form-control" placeholder="e.g., Health & Medical Services" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="dept-add-head" class="form-label">Head of Department <span class="required">*</span></label>
+              <input type="text" id="dept-add-head" name="head" class="form-control" placeholder="e.g., Dr. Chioma Nwankwo" required />
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="dept-add-email" class="form-label">Official Contact Email <span class="required">*</span></label>
+              <input type="email" id="dept-add-email" name="email" class="form-control" placeholder="clinic@resolvehub.edu" required />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Department</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Edit Department Modal -->
+  <div class="modal-backdrop" id="modal-edit-department" role="dialog" aria-modal="true" aria-labelledby="modal-edit-dept-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-edit-dept-title">Edit Department</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <form data-edit-department-form novalidate>
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dept-edit-code" class="form-label">Department Code <span class="required">*</span></label>
+              <input type="text" id="dept-edit-code" name="code" class="form-control text-mono" required />
+            </div>
+            <div class="form-group">
+              <label for="dept-edit-name" class="form-label">Department Name <span class="required">*</span></label>
+              <input type="text" id="dept-edit-name" name="name" class="form-control" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="dept-edit-head" class="form-label">Head of Department <span class="required">*</span></label>
+              <input type="text" id="dept-edit-head" name="head" class="form-control" required />
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="dept-edit-email" class="form-label">Official Contact Email <span class="required">*</span></label>
+              <input type="email" id="dept-edit-email" name="email" class="form-control" required />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Department</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Add Category Modal -->
+  <div class="modal-backdrop" id="modal-add-category" role="dialog" aria-modal="true" aria-labelledby="modal-add-cat-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-add-cat-title">Create Complaint Category</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <form data-add-category-form novalidate>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="cat-add-name" class="form-label">Category Name <span class="required">*</span></label>
+            <input type="text" id="cat-add-name" name="name" class="form-control" placeholder="e.g., Health & Medical Center" required />
+          </div>
+          <div class="form-group">
+            <label for="cat-add-desc" class="form-label">Short Description <span class="required">*</span></label>
+            <input type="text" id="cat-add-desc" name="description" class="form-control" placeholder="Describe what complaints belong in this category..." required />
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="cat-add-dept" class="form-label">Assign to Department <span class="required">*</span></label>
+              <select id="cat-add-dept" name="department" class="form-select" required>
+                <option value="ICT & Infrastructure">ICT &amp; Infrastructure</option>
+                <option value="Academic Affairs & Exams">Academic Affairs &amp; Exams</option>
+                <option value="Bursary & Student Accounts">Bursary &amp; Student Accounts</option>
+                <option value="Student Affairs & Hostels">Student Affairs &amp; Hostels</option>
+                <option value="Campus Security Unit">Campus Security Unit</option>
+                <option value="Facilities & Works">Facilities &amp; Works</option>
+                <option value="Central Registry & Admin">Central Registry &amp; Admin</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="cat-add-sla" class="form-label">Default SLA Target</label>
+              <select id="cat-add-sla" name="sla" class="form-select">
+                <option value="4 Hours">4 Hours (Critical)</option>
+                <option value="24 Hours" selected>24 Hours (Standard)</option>
+                <option value="48 Hours">48 Hours (Extended)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Category</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. Edit Category Modal -->
+  <div class="modal-backdrop" id="modal-edit-category" role="dialog" aria-modal="true" aria-labelledby="modal-edit-cat-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-edit-cat-title">Edit Category</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <form data-edit-category-form novalidate>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="cat-edit-name" class="form-label">Category Name <span class="required">*</span></label>
+            <input type="text" id="cat-edit-name" name="name" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label for="cat-edit-desc" class="form-label">Short Description <span class="required">*</span></label>
+            <input type="text" id="cat-edit-desc" name="description" class="form-control" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="cat-edit-dept" class="form-label">Assigned Department <span class="required">*</span></label>
+              <select id="cat-edit-dept" name="department" class="form-select" required>
+                <option value="ICT & Infrastructure">ICT &amp; Infrastructure</option>
+                <option value="Academic Affairs & Exams">Academic Affairs &amp; Exams</option>
+                <option value="Bursary & Student Accounts">Bursary &amp; Student Accounts</option>
+                <option value="Student Affairs & Hostels">Student Affairs &amp; Hostels</option>
+                <option value="Campus Security Unit">Campus Security Unit</option>
+                <option value="Facilities & Works">Facilities &amp; Works</option>
+                <option value="Central Registry & Admin">Central Registry &amp; Admin</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="cat-edit-sla" class="form-label">Default SLA Target</label>
+              <select id="cat-edit-sla" name="sla" class="form-select">
+                <option value="4 Hours">4 Hours</option>
+                <option value="24 Hours">24 Hours</option>
+                <option value="48 Hours">48 Hours</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Category</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 5. Assign Category to Department Modal -->
+  <div class="modal-backdrop" id="modal-assign-category-dept" role="dialog" aria-modal="true" aria-labelledby="modal-assign-cat-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-assign-cat-title">Assign Category to Department</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <form data-assign-category-dept-form novalidate>
+        <div class="modal-body">
+          <p style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-4);">
+            Select the primary resolution department responsible for handling all new submissions under <strong data-assign-cat-label>ICT</strong>.
+          </p>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="cat-route-dept" class="form-label">Responsible Department <span class="required">*</span></label>
+            <select id="cat-route-dept" name="department" class="form-select" required>
+              <option value="ICT & Infrastructure">ICT &amp; Infrastructure</option>
+              <option value="Academic Affairs & Exams">Academic Affairs &amp; Exams</option>
+              <option value="Bursary & Student Accounts">Bursary &amp; Student Accounts</option>
+              <option value="Student Affairs & Hostels">Student Affairs &amp; Hostels</option>
+              <option value="Campus Security Unit">Campus Security Unit</option>
+              <option value="Facilities & Works">Facilities &amp; Works</option>
+              <option value="Central Registry & Admin">Central Registry &amp; Admin</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Update Routing Assignment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 6. Delete Confirmation Dialog Modal -->
+  <div class="modal-backdrop" id="modal-confirm-delete" role="dialog" aria-modal="true" aria-labelledby="modal-confirm-delete-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-confirm-delete-title">Confirm Record Deletion</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger" style="margin-bottom: var(--space-3);">
+          <div class="alert-content">
+            <div class="alert-title">Permanent Governance Action</div>
+            <div class="alert-text">
+              Are you sure you want to delete <strong data-delete-item-name>this record</strong>? Existing historical cases will remain archived, but new submissions will no longer route here.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+        <button type="button" class="btn btn-danger" data-confirm-delete-btn>Yes, Delete Record</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

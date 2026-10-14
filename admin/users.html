@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Users &amp; Staff Directory — ResolveHub Admin</title>
+  <meta name="description" content="ResolveHub Users & Staff Directory — Manage registered students, complainants, and departmental resolution officers." />
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+
+  <div class="app-shell">
+    <!-- ==================================================================
+         1. ADMIN SIDEBAR NAVIGATION
+         ================================================================== -->
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">ResolveHub</a>
+        <span class="sidebar-portal-label">Admin Portal</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Admin Portal Navigation">
+        <div class="sidebar-section-label">System Governance</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-link-main">Dashboard</span>
+        </a>
+        <a href="cases.html" class="sidebar-link">
+          <span class="sidebar-link-main">All Cases</span>
+          <span class="sidebar-count">12,840</span>
+        </a>
+        <a href="users.html" class="sidebar-link active">
+          <span class="sidebar-link-main">Users &amp; Staff</span>
+        </a>
+        <a href="management.html" class="sidebar-link">
+          <span class="sidebar-link-main">Management</span>
+        </a>
+        <a href="settings.html" class="sidebar-link">
+          <span class="sidebar-link-main">Settings</span>
+        </a>
+
+        <div class="sidebar-section-label">Account</div>
+        <a href="../auth.html" class="sidebar-link">
+          <span class="sidebar-link-main">Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">SA</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Dr. Nkemjika Okafor</div>
+            <div class="sidebar-user-role">Chief System Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================================================================
+         2. MAIN WORKSPACE AREA
+         ================================================================== -->
+    <div class="main-wrapper">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" class="sidebar-toggle-btn" data-sidebar-toggle aria-label="Toggle Sidebar">
+            ☰
+          </button>
+          <div class="topbar-breadcrumb">
+            <a href="dashboard.html" style="color: var(--text-muted);">Admin Portal</a>
+            <span>/</span>
+            <strong>Users &amp; Staff</strong>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button type="button" class="btn btn-primary btn-sm" data-modal-open="modal-admin-add-account">
+            + Add User / Staff
+          </button>
+        </div>
+      </header>
+
+      <!-- Workspace Content -->
+      <main class="workspace-content" data-tab-scope>
+        <!-- Page Heading -->
+        <div class="flex-between" style="margin-bottom: var(--space-5); flex-wrap: wrap;">
+          <div>
+            <h1 class="page-title">Users &amp; Staff Directory</h1>
+            <p class="page-subtitle">
+              Provision, edit, and control account access for registered institutional users and departmental resolution officers.
+            </p>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary" data-modal-open="modal-admin-add-account">
+              + Add New Account
+            </button>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             3. TABS ([Users] | [Staff]) & SEARCH BAR
+             ============================================================== -->
+        <div class="flex-between" style="margin-bottom: var(--space-5); flex-wrap: wrap;">
+          <div class="segmented-control" role="tablist" aria-label="Directory Role Tabs">
+            <button
+              type="button"
+              class="tab-btn active"
+              data-workspace-tab="panel-users"
+              role="tab"
+              aria-selected="true"
+            >
+              Users <span class="text-mono" style="margin-left: 4px; opacity: 0.75;">(6)</span>
+            </button>
+            <button
+              type="button"
+              class="tab-btn"
+              data-workspace-tab="panel-staff"
+              role="tab"
+              aria-selected="false"
+            >
+              Staff <span class="text-mono" style="margin-left: 4px; opacity: 0.75;">(6)</span>
+            </button>
+          </div>
+
+          <div style="min-width: 280px;">
+            <input
+              type="search"
+              class="form-control"
+              placeholder="Search name, email, ID, or department..."
+              data-directory-search
+              aria-label="Search directory"
+            />
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             4. TAB PANEL 1: [USERS]
+             ============================================================== -->
+        <section id="panel-users" class="tab-panel is-active" aria-label="Registered Users Directory">
+          <div class="table-container">
+            <div class="table-header-bar">
+              <div>
+                <h2 class="card-title">Registered Complainants (Students &amp; Institutional Users)</h2>
+                <p class="card-subtitle">Verified accounts authorized to submit and track institutional complaints</p>
+              </div>
+              <button type="button" class="btn btn-secondary btn-sm" data-open-add-role="user">
+                + Add User
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table" id="admin-users-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Student/Staff ID</th>
+                    <th>Department</th>
+                    <th>Status</th>
+                    <th>Date Joined</th>
+                    <th class="text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    data-directory-row
+                    data-account-type="user"
+                    data-name="Amina Yusuf"
+                    data-email="amina.yusuf@resolvehub.edu"
+                    data-id-num="PG/2025/09412"
+                    data-department="Computer Science"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Amina Yusuf</td>
+                    <td data-col-email>amina.yusuf@resolvehub.edu</td>
+                    <td class="text-mono" data-col-id>PG/2025/09412</td>
+                    <td data-col-dept>Computer Science</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-mono">2025-09-14</td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-account>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-account-status>Deactivate</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-directory-row
+                    data-account-type="user"
+                    data-name="Chinedu Okafor"
+                    data-email="c.okafor@resolvehub.edu"
+                    data-id-num="UG/2024/18403"
+                    data-department="Mechanical Engineering"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Chinedu Okafor</td>
+                    <td data-col-email>c.okafor@resolvehub.edu</td>
+                    <td class="text-mono" data-col-id>UG/2024/18403</td>
+                    <td data-col-dept>Mechanical Engineering</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-mono">2024-10-02</td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-account>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-account-status>Deactivate</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-directory-row
+                    data-account-type="user"
+                    data-name="Zainab Bello"
+                    data-email="zainab.bello@resolvehub.edu"
+                    data-id-num="UG/2025/22109"
+                    data-department="Biochemistry"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Zainab Bello</td>
+                    <td data-col-email>zainab.bello@resolvehub.edu</td>
+                    <td class="text-mono" data-col-id>UG/2025/22109</td>
+                    <td data-col-dept>Biochemistry</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-mono">2025-01-19</td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-account>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-account-status>Deactivate</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-directory-row
+                    data-account-type="user"
+                    data-name="David Adeleke"
+                    data-email="d.adeleke@resolvehub.edu"
+                    data-id-num="UG/2023/11084"
+                    data-department="Industrial Chemistry"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>David Adeleke</td>
+                    <td data-col-email>d.adeleke@resolvehub.edu</td>
+                    <td class="text-mono" data-col-id>UG/2023/11084</td>
+                    <td data-col-dept>Industrial Chemistry</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-mono">2023-11-08</td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-account>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-account-status>Deactivate</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-directory-row
+                    data-account-type="user"
+                    data-name="Blessing Nwosu"
+                    data-email="b.nwosu@resolvehub.edu"
+                    data-id-num="UG/2022/04918"
+                    data-department="Economics &amp; Statistics"
+                    data-status="inactive"
+                  >
+                    <td class="cell-primary" data-col-name>Blessing Nwosu</td>
+                    <td data-col-email>b.nwosu@resolvehub.edu</td>
+                    <td class="text-mono" data-col-id>UG/2022/04918</td>
+                    <td data-col-dept>Economics &amp; Statistics</td>
+                    <td data-col-status>
+                      <span class="badge badge-closed"><span class="badge-dot"></span>Inactive</span>
+                    </td>
+                    <td class="text-mono">2022-09-25</td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-account>Edit</button>
+                        <button type="button" class="btn btn-accent btn-xs" data-toggle-account-status>Activate</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-directory-row
+                    data-account-type="user"
+                    data-name="Dr. Ibrahim Musa"
+                    data-email="i.musa@resolvehub.edu"
+                    data-id-num="STF/MED/01492"
+                    data-department="Clinical Sciences"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Dr. Ibrahim Musa</td>
+                    <td data-col-email>i.musa@resolvehub.edu</td>
+                    <td class="text-mono" data-col-id>STF/MED/01492</td>
+                    <td data-col-dept>Clinical Sciences</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-mono">2024-03-11</td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-account>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-account-status>Deactivate</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==============================================================
+             5. TAB PANEL 2: [STAFF]
+             ============================================================== -->
+        <section id="panel-staff" class="tab-panel" aria-label="Departmental Staff Directory">
+          <div class="table-container">
+            <div class="table-header-bar">
+              <div>
+                <h2 class="card-title">Departmental Resolution Staff</h2>
+                <p class="card-subtitle">Authorized case officers assigned to investigate and resolve institutional complaints</p>
+              </div>
+              <button type="button" class="btn btn-secondary btn-sm" data-open-add-role="staff">
+                + Add Staff Officer
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table" id="admin-staff-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Cases Assigned</th>
+                    <th>Status</th>
+                    <th class="text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    data-directory-row
+                    data-account-type="staff"
+                    data-name="Engr. Tunde Bakare"
+                    data-email="t.bakare@resolvehub.edu"
+                    data-id-num="STF/ICT/0041"
+                    data-department="ICT & Infrastructure"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Engr. Tunde Bakare</td>
+                    <td data-col-email>t.bakare@resolvehub.edu</td>
+                    <td data-col-dept>ICT &amp; Infrastructure</td>
+                    <td class="text-mono">38 active cases</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-account>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-account-status>Deactivate</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-directory-row
+                    data-account-type="staff"
+                    data-name="Mrs. Folake Adeyemi"
+                    data-email="f.adeyemi@resolvehub.edu"
+                    data-id-num="STF/BUR/0019"
+                    data-department="Bursary & Accounts"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Mrs. Folake Adeyemi</td>
+                    <td data-col-email>f.adeyemi@resolvehub.edu</td>
+                    <td data-col-dept>Bursary &amp; Accounts</td>
+                    <td class="text-mono">29 active cases</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-account>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-account-status>Deactivate</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-directory-row
+                    data-account-type="staff"
+                    data-name="Arc. Segun Oladele"
+                    data-email="s.oladele@resolvehub.edu"
+                    data-id-num="STF/STA/0082"
+                    data-department="Student Affairs"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Arc. Segun Oladele</td>
+                    <td data-col-email>s.oladele@resolvehub.edu</td>
+                    <td data-col-dept>Student Affairs</td>
+                    <td class="text-mono">34 active cases</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-account>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-account-status>Deactivate</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-directory-row
+                    data-account-type="staff"
+                    data-name="Dr. Halima Sadiq"
+                    data-email="h.sadiq@resolvehub.edu"
+                    data-id-num="STF/ACA/0054"
+                    data-department="Academic Affairs"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Dr. Halima Sadiq</td>
+                    <td data-col-email>h.sadiq@resolvehub.edu</td>
+                    <td data-col-dept>Academic Affairs</td>
+                    <td class="text-mono">24 active cases</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-account>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-account-status>Deactivate</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-directory-row
+                    data-account-type="staff"
+                    data-name="Engr. Victor Eze"
+                    data-email="v.eze@resolvehub.edu"
+                    data-id-num="STF/FAC/0031"
+                    data-department="Facilities & Works"
+                    data-status="active"
+                  >
+                    <td class="cell-primary" data-col-name>Engr. Victor Eze</td>
+                    <td data-col-email>v.eze@resolvehub.edu</td>
+                    <td data-col-dept>Facilities &amp; Works</td>
+                    <td class="text-mono">31 active cases</td>
+                    <td data-col-status>
+                      <span class="badge badge-resolved"><span class="badge-dot"></span>Active</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-account>Edit</button>
+                        <button type="button" class="btn btn-secondary btn-xs" data-toggle-account-status>Deactivate</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr
+                    data-directory-row
+                    data-account-type="staff"
+                    data-name="Capt. Danjuma Garba"
+                    data-email="d.garba@resolvehub.edu"
+                    data-id-num="STF/SEC/0012"
+                    data-department="Campus Security"
+                    data-status="inactive"
+                  >
+                    <td class="cell-primary" data-col-name>Capt. Danjuma Garba</td>
+                    <td data-col-email>d.garba@resolvehub.edu</td>
+                    <td data-col-dept>Campus Security</td>
+                    <td class="text-mono">0 active cases (On Leave)</td>
+                    <td data-col-status>
+                      <span class="badge badge-closed"><span class="badge-dot"></span>Inactive</span>
+                    </td>
+                    <td class="text-right">
+                      <div class="table-actions">
+                        <button type="button" class="btn btn-secondary btn-xs" data-edit-account>Edit</button>
+                        <button type="button" class="btn btn-accent btn-xs" data-toggle-account-status>Activate</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       MODALS FOR ADDING & EDITING USERS / STAFF
+       ==================================================================== -->
+
+  <!-- 1. Add Account Modal -->
+  <div class="modal-backdrop" id="modal-admin-add-account" role="dialog" aria-modal="true" aria-labelledby="modal-add-account-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-add-account-title">Provision New User or Staff Account</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <form data-admin-add-account-form novalidate>
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="add-account-role" class="form-label">Account Role <span class="required">*</span></label>
+              <select id="add-account-role" name="accountRole" class="form-select" required>
+                <option value="user">User (Student / Complainant)</option>
+                <option value="staff">Staff (Resolution Officer)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="add-account-id" class="form-label">Student / Staff ID <span class="required">*</span></label>
+              <input type="text" id="add-account-id" name="accountId" class="form-control text-mono" placeholder="e.g., UG/2026/30412" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="add-account-name" class="form-label">Full Name <span class="required">*</span></label>
+            <input type="text" id="add-account-name" name="fullName" class="form-control" placeholder="e.g., Engr. Musa Abdullahi" required />
+          </div>
+
+          <div class="form-group">
+            <label for="add-account-email" class="form-label">Institutional Email <span class="required">*</span></label>
+            <input type="email" id="add-account-email" name="email" class="form-control" placeholder="name@resolvehub.edu" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="add-account-dept" class="form-label">Department / Unit <span class="required">*</span></label>
+              <select id="add-account-dept" name="department" class="form-select" required>
+                <option value="ICT & Infrastructure">ICT &amp; Infrastructure</option>
+                <option value="Bursary & Accounts">Bursary &amp; Accounts</option>
+                <option value="Student Affairs">Student Affairs</option>
+                <option value="Academic Affairs">Academic Affairs</option>
+                <option value="Facilities & Works">Facilities &amp; Works</option>
+                <option value="Campus Security">Campus Security</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="add-account-status" class="form-label">Initial Status</label>
+              <select id="add-account-status" name="status" class="form-select">
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Edit Account Modal -->
+  <div class="modal-backdrop" id="modal-admin-edit-account" role="dialog" aria-modal="true" aria-labelledby="modal-edit-account-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-edit-account-title">Edit Account Profile</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <form data-admin-edit-account-form novalidate>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="edit-account-name" class="form-label">Full Name <span class="required">*</span></label>
+            <input type="text" id="edit-account-name" name="fullName" class="form-control" required />
+          </div>
+
+          <div class="form-group">
+            <label for="edit-account-email" class="form-label">Institutional Email <span class="required">*</span></label>
+            <input type="email" id="edit-account-email" name="email" class="form-control" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="edit-account-dept" class="form-label">Department / Unit <span class="required">*</span></label>
+              <input type="text" id="edit-account-dept" name="department" class="form-control" required />
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="edit-account-status" class="form-label">Account Status</label>
+              <select id="edit-account-status" name="status" class="form-select">
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

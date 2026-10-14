@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Dashboard — ResolveHub</title>
+  <meta name="description" content="ResolveHub Citizen & Student Dashboard — Submit new complaints, generate instant Case IDs, track active investigations, and view notifications." />
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+
+  <div class="app-shell">
+    <!-- ==================================================================
+         1. USER SIDEBAR NAVIGATION
+         ================================================================== -->
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">ResolveHub</a>
+        <span class="sidebar-portal-label">User Portal</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="User Portal Navigation">
+        <div class="sidebar-section-label">My Workspace</div>
+        <a href="dashboard.html" class="sidebar-link active">
+          <span class="sidebar-link-main">Dashboard</span>
+        </a>
+        <a href="submit.html" class="sidebar-link">
+          <span class="sidebar-link-main">Submit Complaint</span>
+        </a>
+        <a href="complaints.html" class="sidebar-link">
+          <span class="sidebar-link-main">My Complaints</span>
+          <span class="sidebar-count" data-user-total-badge>6</span>
+        </a>
+        <a href="case.html" class="sidebar-link">
+          <span class="sidebar-link-main">Case Details</span>
+        </a>
+        <a href="notifications.html" class="sidebar-link">
+          <span class="sidebar-link-main">Notifications</span>
+          <span class="sidebar-count" data-unread-notif-badge>3</span>
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <span class="sidebar-link-main">Profile</span>
+        </a>
+
+        <div class="sidebar-section-label">Account</div>
+        <a href="../auth.html" class="sidebar-link">
+          <span class="sidebar-link-main">Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">AY</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Amina Yusuf</div>
+            <div class="sidebar-user-role">PG/2025/09412 · Computer Science</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================================================================
+         2. MAIN WORKSPACE AREA
+         ================================================================== -->
+    <div class="main-wrapper">
+      <!-- Top Bar with Interactive Dropdown Menus -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" class="sidebar-toggle-btn" data-sidebar-toggle aria-label="Toggle Sidebar">
+            ☰
+          </button>
+          <div class="topbar-breadcrumb">
+            <span>User Portal</span>
+            <span>/</span>
+            <strong>Dashboard</strong>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <button type="button" class="btn btn-accent btn-sm" data-modal-open="modal-quick-complaint">
+            + Quick Submit Modal
+          </button>
+
+          <!-- Interactive Account Dropdown Menu -->
+          <div class="dropdown" data-dropdown>
+            <button type="button" class="btn btn-secondary btn-sm" data-dropdown-toggle aria-expanded="false">
+              Amina Yusuf ▾
+            </button>
+            <div class="dropdown-menu" role="menu">
+              <div class="dropdown-header">PG/2025/09412</div>
+              <a href="profile.html" class="dropdown-item" role="menuitem">Profile &amp; Security</a>
+              <a href="notifications.html" class="dropdown-item" role="menuitem">
+                <span>Notifications</span>
+                <span class="badge badge-progress" data-unread-notif-badge>3</span>
+              </a>
+              <a href="complaints.html" class="dropdown-item" role="menuitem">My Complaints</a>
+              <div class="dropdown-divider"></div>
+              <a href="../auth.html" class="dropdown-item" role="menuitem" style="color: var(--color-danger);">Sign Out</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Workspace Content -->
+      <main class="workspace-content">
+        <!-- Page Heading -->
+        <div class="flex-between" style="margin-bottom: var(--space-6); flex-wrap: wrap;">
+          <div>
+            <h1 class="page-title">Welcome back, Amina Yusuf</h1>
+            <p class="page-subtitle">
+              Track your active institutional complaints, review officer updates, or submit a new case with automatic Case ID generation.
+            </p>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-secondary btn-sm" data-toggle-section="dashboard-sla-guide">
+              Hide / Show SLA Guide
+            </button>
+            <a href="submit.html" class="btn btn-primary btn-sm">+ Submit Full Complaint</a>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             3. USER KPI STATISTICS CARDS
+             ============================================================== -->
+        <section class="stats-grid" aria-label="My Complaint Statistics">
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">Total Submitted</span>
+              <span class="badge badge-neutral">All Time</span>
+            </div>
+            <div class="kpi-value" data-stat-user-total>6</div>
+            <div class="kpi-trend">
+              <span>100% assigned Case IDs</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">Pending Triage</span>
+              <span class="badge badge-pending"><span class="badge-dot"></span>Queue</span>
+            </div>
+            <div class="kpi-value" data-stat-user-pending>1</div>
+            <div class="kpi-trend">
+              <span>Awaiting department officer</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">In Progress</span>
+              <span class="badge badge-progress"><span class="badge-dot"></span>Active</span>
+            </div>
+            <div class="kpi-value" data-stat-user-progress>2</div>
+            <div class="kpi-trend">
+              <span>Officer investigation underway</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span class="kpi-label">Resolved Cases</span>
+              <span class="badge badge-resolved"><span class="badge-dot"></span>Completed</span>
+            </div>
+            <div class="kpi-value" data-stat-user-resolved>3</div>
+            <div class="kpi-trend">
+              <span class="kpi-trend-up">Verified</span>
+              <span>with satisfaction feedback</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==============================================================
+             4. SHOW / HIDE COLLAPSIBLE DASHBOARD SECTION
+             ============================================================== -->
+        <div class="card" id="dashboard-sla-guide" style="margin-bottom: var(--space-6);">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Institutional SLA Response Commitments</h2>
+              <p class="card-subtitle">Expected resolution timelines based on complaint urgency level</p>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" data-toggle-section="dashboard-sla-body">
+              Toggle Section ▾
+            </button>
+          </div>
+          <div class="card-body collapsible-body" id="dashboard-sla-body">
+            <div class="grid-3">
+              <div class="p-4" style="background: var(--bg-body); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                <div class="flex-between" style="margin-bottom: var(--space-2);">
+                  <span class="priority-indicator priority-high"><span class="priority-dot"></span>High Priority</span>
+                  <span class="text-mono" style="font-size: var(--text-xs);">4h – 12h SLA</span>
+                </div>
+                <p style="font-size: var(--text-xs); color: var(--text-secondary);">
+                  Power hazards, campus security incidents, or multi-block hostel infrastructure outages.
+                </p>
+              </div>
+              <div class="p-4" style="background: var(--bg-body); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                <div class="flex-between" style="margin-bottom: var(--space-2);">
+                  <span class="priority-indicator priority-medium"><span class="priority-dot"></span>Medium Priority</span>
+                  <span class="text-mono" style="font-size: var(--text-xs);">24h SLA</span>
+                </div>
+                <p style="font-size: var(--text-xs); color: var(--text-secondary);">
+                  Tuition receipt reconciliation, missing continuous assessment scores, and room repairs.
+                </p>
+              </div>
+              <div class="p-4" style="background: var(--bg-body); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                <div class="flex-between" style="margin-bottom: var(--space-2);">
+                  <span class="priority-indicator priority-low"><span class="priority-dot"></span>Low Priority</span>
+                  <span class="text-mono" style="font-size: var(--text-xs);">48h SLA</span>
+                </div>
+                <p style="font-size: var(--text-xs); color: var(--text-secondary);">
+                  General administrative requests, ID card renewals, and routine feedback.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             5. RECENT USER COMPLAINTS TABLE
+             ============================================================== -->
+        <div class="table-container">
+          <div class="table-header-bar">
+            <div>
+              <h2 class="card-title">My Recent Complaints</h2>
+              <p class="card-subtitle">Live status of your submitted cases</p>
+            </div>
+            <div class="page-actions">
+              <button type="button" class="btn btn-accent btn-sm" data-modal-open="modal-quick-complaint">
+                + New Complaint (Modal)
+              </button>
+              <a href="complaints.html" class="btn btn-secondary btn-sm">View All →</a>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table" id="user-dashboard-table">
+              <thead>
+                <tr>
+                  <th>Case ID</th>
+                  <th>Subject</th>
+                  <th>Category</th>
+                  <th>Department</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody data-user-complaints-tbody>
+                <tr>
+                  <td class="cell-id">#RH-2026-8492</td>
+                  <td class="cell-primary">Wi-Fi outage across Block C Postgraduate Hostel</td>
+                  <td>ICT</td>
+                  <td>ICT &amp; Infrastructure</td>
+                  <td><span class="priority-indicator priority-high"><span class="priority-dot"></span>High</span></td>
+                  <td><span class="badge badge-progress"><span class="badge-dot"></span>In Progress</span></td>
+                  <td class="text-mono">2026-10-03</td>
+                  <td class="text-right">
+                    <a href="case.html" class="btn btn-secondary btn-xs">View Case</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="cell-id">#RH-2026-8410</td>
+                  <td class="cell-primary">Duplicate Remita library levy deduction on portal</td>
+                  <td>Finance/Bursary</td>
+                  <td>Bursary &amp; Accounts</td>
+                  <td><span class="priority-indicator priority-medium"><span class="priority-dot"></span>Medium</span></td>
+                  <td><span class="badge badge-resolved"><span class="badge-dot"></span>Resolved</span></td>
+                  <td class="text-mono">2026-09-26</td>
+                  <td class="text-right">
+                    <a href="case.html" class="btn btn-secondary btn-xs">Rate &amp; View</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="cell-id">#RH-2026-8384</td>
+                  <td class="cell-primary">Broken study desk lamp socket in PG Hostel Room 204</td>
+                  <td>Accommodation</td>
+                  <td>Student Affairs</td>
+                  <td><span class="priority-indicator priority-low"><span class="priority-dot"></span>Low</span></td>
+                  <td><span class="badge badge-pending"><span class="badge-dot"></span>Pending</span></td>
+                  <td class="text-mono">2026-09-22</td>
+                  <td class="text-right">
+                    <a href="case.html" class="btn btn-secondary btn-xs">View Case</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       COMPLAINT SUBMISSION MODAL (With Automatic Case ID Generation)
+       ==================================================================== -->
+  <div class="modal-backdrop" id="modal-quick-complaint" role="dialog" aria-modal="true" aria-labelledby="modal-quick-complaint-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-quick-complaint-title">Submit a New Complaint</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <form data-complaint-submit-form novalidate>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="quick-subject" class="form-label">Complaint Subject / Title <span class="required">*</span></label>
+            <input
+              type="text"
+              id="quick-subject"
+              name="subject"
+              class="form-control"
+              placeholder="e.g., Unstable power supply in Science Lecture Theatre 2"
+              required
+            />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="quick-category" class="form-label">Category <span class="required">*</span></label>
+              <select id="quick-category" name="category" class="form-select" required>
+                <option value="">Select category...</option>
+                <option value="ICT">ICT</option>
+                <option value="Academic">Academic</option>
+                <option value="Finance/Bursary">Finance/Bursary</option>
+                <option value="Accommodation">Accommodation</option>
+                <option value="Security">Security</option>
+                <option value="Facilities">Facilities</option>
+                <option value="Administration">Administration</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="quick-priority" class="form-label">Priority Level <span class="required">*</span></label>
+              <select id="quick-priority" name="priority" class="form-select" required>
+                <option value="medium" selected>Medium (Standard 24h SLA)</option>
+                <option value="high">High (Urgent 4h–12h SLA)</option>
+                <option value="low">Low (Routine 48h SLA)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="quick-description" class="form-label">Detailed Description <span class="required">*</span></label>
+            <textarea
+              id="quick-description"
+              name="description"
+              class="form-textarea"
+              rows="4"
+              placeholder="Provide specific location, dates, receipt numbers, or details to assist investigation..."
+              required
+            ></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit &amp; Generate Case ID</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       COMPLAINT CONFIRMATION RECEIPT MODAL (Displays Generated Case ID)
+       ==================================================================== -->
+  <div class="modal-backdrop" id="modal-case-generated" role="dialog" aria-modal="true" aria-labelledby="modal-generated-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-generated-title">Complaint Logged Successfully</h3>
+        <button type="button" class="modal-close" data-modal-close aria-label="Close modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-success" style="margin-bottom: var(--space-4);">
+          <div class="alert-content">
+            <div class="alert-title">Official Case ID Generated</div>
+            <div class="alert-text">
+              Your complaint has been registered and routed to the appropriate department. Save your tracking ID below:
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 text-center" style="background: var(--bg-subtle); border: 1px dashed var(--border-strong); border-radius: var(--radius-md); margin-bottom: var(--space-4);">
+          <div style="font-size: var(--text-xs); text-transform: uppercase; letter-spacing: var(--tracking-wider); color: var(--text-muted); margin-bottom: 4px;">
+            Generated Case Tracking Number
+          </div>
+          <div class="text-mono" style="font-size: var(--text-2xl); font-weight: var(--weight-bold); color: var(--color-primary);" data-generated-case-id>
+            #RH-2026-8501
+          </div>
+        </div>
+
+        <div class="info-kv-list">
+          <div class="info-kv-row">
+            <span class="info-kv-label">Subject</span>
+            <span class="info-kv-value" data-generated-subject>—</span>
+          </div>
+          <div class="info-kv-row">
+            <span class="info-kv-label">Category &amp; Routing</span>
+            <span class="info-kv-value" data-generated-category>—</span>
+          </div>
+          <div class="info-kv-row">
+            <span class="info-kv-label">Initial Status</span>
+            <span class="info-kv-value"><span class="badge badge-pending"><span class="badge-dot"></span>Pending Triage</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>Done</button>
+        <a href="complaints.html" class="btn btn-primary">View in My Complaints</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

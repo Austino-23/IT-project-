@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Case Management — ResolveHub</title>
+  <meta name="description" content="Manage assigned complaints in ResolveHub. Filter cases by keyword, category, priority, status, and submission date." />
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+
+  <div class="app-shell">
+    <!-- ==================================================================
+         1. STAFF SIDEBAR NAVIGATION
+         ================================================================== -->
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">ResolveHub</a>
+        <span class="sidebar-portal-label">Staff Portal</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Staff Workspace Navigation">
+        <div class="sidebar-section-label">Resolution Workspace</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-link-main">Dashboard</span>
+        </a>
+        <a href="cases.html" class="sidebar-link active">
+          <span class="sidebar-link-main">Cases</span>
+          <span class="sidebar-count">38</span>
+        </a>
+        <a href="reports.html" class="sidebar-link">
+          <span class="sidebar-link-main">Reports</span>
+        </a>
+
+        <div class="sidebar-section-label">Account</div>
+        <a href="../auth.html" class="sidebar-link">
+          <span class="sidebar-link-main">Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">TB</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Engr. Tunde Bakare</div>
+            <div class="sidebar-user-role">Senior Officer · ICT Unit</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================================================================
+         2. MAIN WORKSPACE AREA
+         ================================================================== -->
+    <div class="main-wrapper">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" class="sidebar-toggle-btn" data-sidebar-toggle aria-label="Toggle Sidebar">
+            ☰
+          </button>
+          <div class="topbar-breadcrumb">
+            <a href="dashboard.html" style="color: var(--text-muted);">Staff Portal</a>
+            <span>/</span>
+            <strong>Cases</strong>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            onclick="window.ResolveHub.showToast('Export Complete', 'Assigned case queue exported to staff_cases_oct2026.csv', 'success')"
+          >
+            Export CSV
+          </button>
+          <a href="reports.html" class="btn btn-primary btn-sm">SLA Reports</a>
+        </div>
+      </header>
+
+      <!-- Workspace Content -->
+      <main class="workspace-content">
+        <!-- Page Heading -->
+        <div class="flex-between" style="margin-bottom: var(--space-5); flex-wrap: wrap;">
+          <div>
+            <h1 class="page-title">Assigned Case Queue</h1>
+            <p class="page-subtitle">
+              Search, filter, and manage complaints assigned to your resolution desk. Click any case to open the full investigation workspace.
+            </p>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             3. MULTI-CRITERIA FILTER BAR (Search, Category, Priority, Status, Date)
+             ============================================================== -->
+        <section aria-label="Case Filter Controls">
+          <div class="filter-grid">
+            <!-- Search Input -->
+            <div>
+              <label class="form-label" for="staff-search-input">Search Cases</label>
+              <div class="input-group">
+                <span class="input-icon-left" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                </span>
+                <input
+                  type="search"
+                  id="staff-search-input"
+                  class="form-control has-icon-left"
+                  placeholder="Case ID, subject, or user..."
+                  data-staff-search
+                />
+              </div>
+            </div>
+
+            <!-- Category Filter -->
+            <div>
+              <label class="form-label" for="staff-category-filter">Category</label>
+              <select id="staff-category-filter" class="form-select" data-staff-category>
+                <option value="all">All Categories</option>
+                <option value="ict">ICT</option>
+                <option value="academic">Academic</option>
+                <option value="finance">Finance/Bursary</option>
+                <option value="accommodation">Accommodation</option>
+                <option value="security">Security</option>
+                <option value="facilities">Facilities</option>
+                <option value="administration">Administration</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <!-- Priority Filter -->
+            <div>
+              <label class="form-label" for="staff-priority-filter">Priority</label>
+              <select id="staff-priority-filter" class="form-select" data-staff-priority>
+                <option value="all">All Priorities</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+
+            <!-- Status Filter -->
+            <div>
+              <label class="form-label" for="staff-status-filter">Status</label>
+              <select id="staff-status-filter" class="form-select" data-staff-status>
+                <option value="all">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="in-progress">In Progress</option>
+                <option value="escalated">Escalated</option>
+                <option value="resolved">Resolved</option>
+              </select>
+            </div>
+
+            <!-- Date Filter -->
+            <div>
+              <label class="form-label" for="staff-date-filter">Submission Date</label>
+              <input
+                type="date"
+                id="staff-date-filter"
+                class="form-control font-mono"
+                data-staff-date
+              />
+            </div>
+
+            <!-- Reset Button -->
+            <div>
+              <button type="button" class="btn btn-secondary" data-staff-reset>
+                Reset
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==============================================================
+             4. STATUS TABS (All, Pending, In Progress, Escalated, Resolved)
+             ============================================================== -->
+        <div class="filter-bar">
+          <div class="segmented-control" role="tablist" aria-label="Filter cases by lifecycle stage">
+            <button type="button" class="segment-btn active" role="tab" data-staff-tab="all">
+              All
+            </button>
+            <button type="button" class="segment-btn" role="tab" data-staff-tab="pending">
+              Pending
+            </button>
+            <button type="button" class="segment-btn" role="tab" data-staff-tab="in-progress">
+              In Progress
+            </button>
+            <button type="button" class="segment-btn" role="tab" data-staff-tab="escalated">
+              Escalated
+            </button>
+            <button type="button" class="segment-btn" role="tab" data-staff-tab="resolved">
+              Resolved
+            </button>
+          </div>
+
+          <div class="metadata-inline">
+            <span>Showing <strong class="font-mono" data-staff-visible-count>10</strong> of <strong class="font-mono">10</strong> cases in queue</span>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             5. CASES DATA TABLE
+             Columns: Case ID | Subject | User | Category | Priority | Status | Date | Action
+             ============================================================== -->
+        <div class="table-container">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Case ID</th>
+                <th>Subject</th>
+                <th>User</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1 -->
+              <tr data-staff-case-row data-category="ict" data-priority="high" data-status="in-progress" data-date="2026-10-02">
+                <td class="cell-mono">RH-2026-8492</td>
+                <td><strong>Campus Wi-Fi Authentication Failure in Engineering Block B</strong></td>
+                <td>Oluwaseun Adeyemi</td>
+                <td>ICT</td>
+                <td><span class="priority-label priority-high">High</span></td>
+                <td>
+                  <span class="status-badge status-in-progress">
+                    <span class="status-indicator-symbol" aria-hidden="true">●</span> In Progress
+                  </span>
+                </td>
+                <td class="font-mono" style="font-size: var(--text-xs); color: var(--text-muted);">2026-10-02</td>
+                <td style="text-align: right;">
+                  <a href="case.html?id=RH-2026-8492" class="btn btn-primary btn-sm">Open Case</a>
+                </td>
+              </tr>
+
+              <!-- Row 2 -->
+              <tr data-staff-case-row data-category="academic" data-priority="medium" data-status="pending" data-date="2026-10-03">
+                <td class="cell-mono">RH-2026-8489</td>
+                <td><strong>LMS Course Module Upload Error for CSC 401</strong></td>
+                <td>Dr. Emeka Obi</td>
+                <td>Academic</td>
+                <td><span class="priority-label priority-medium">Medium</span></td>
+                <td>
+                  <span class="status-badge status-pending">
+                    <span class="status-indicator-symbol" aria-hidden="true">▲</span> Pending
+                  </span>
+                </td>
+                <td class="font-mono" style="font-size: var(--text-xs); color: var(--text-muted);">2026-10-03</td>
+                <td style="text-align: right;">
+                  <a href="case.html?id=RH-2026-8489" class="btn btn-secondary btn-sm">Open Case</a>
+                </td>
+              </tr>
+
+              <!-- Row 3 -->
+              <tr data-staff-case-row data-category="ict" data-priority="high" data-status="escalated" data-date="2026-10-01">
+                <td class="cell-mono">RH-2026-8475</td>
+                <td><strong>Student Portal Two-Factor Authentication SMS Delay</strong></td>
+                <td>Fatima Bello</td>
+                <td>ICT</td>
+                <td><span class="priority-label priority-high">High</span></td>
+                <td>
+                  <span class="status-badge status-escalated">
+                    <span class="status-indicator-symbol" aria-hidden="true">!</span> Escalated
+                  </span>
+                </td>
+                <td class="font-mono" style="font-size: var(--text-xs); color: var(--text-muted);">2026-10-01</td>
+                <td style="text-align: right;">
+                  <a href="case.html?id=RH-2026-8475" class="btn btn-secondary btn-sm">Open Case</a>
+                </td>
+              </tr>
+
+              <!-- Row 4 -->
+              <tr data-staff-case-row data-category="finance" data-priority="high" data-status="pending" data-date="2026-10-03">
+                <td class="cell-mono">RH-2026-8470</td>
+                <td><strong>Unreflected Remita Tuition Payment Receipt on Portal</strong></td>
+                <td>Chinedu Eze</td>
+                <td>Finance/Bursary</td>
+                <td><span class="priority-label priority-high">High</span></td>
+                <td>
+                  <span class="status-badge status-pending">
+                    <span class="status-indicator-symbol" aria-hidden="true">▲</span> Pending
+                  </span>
+                </td>
+                <td class="font-mono" style="font-size: var(--text-xs); color: var(--text-muted);">2026-10-03</td>
+                <td style="text-align: right;">
+                  <a href="case.html?id=RH-2026-8470" class="btn btn-secondary btn-sm">Open Case</a>
+                </td>
+              </tr>
+
+              <!-- Row 5 -->
+              <tr data-staff-case-row data-category="facilities" data-priority="medium" data-status="in-progress" data-date="2026-09-30">
+                <td class="cell-mono">RH-2026-8461</td>
+                <td><strong>Computer Lab 03 Workstation Ethernet Switch Drop</strong></td>
+                <td>Kelechi Nnaji</td>
+                <td>Facilities</td>
+                <td><span class="priority-label priority-medium">Medium</span></td>
+                <td>
+                  <span class="status-badge status-in-progress">
+                    <span class="status-indicator-symbol" aria-hidden="true">●</span> In Progress
+                  </span>
+                </td>
+                <td class="font-mono" style="font-size: var(--text-xs); color: var(--text-muted);">2026-09-30</td>
+                <td style="text-align: right;">
+                  <a href="case.html?id=RH-2026-8461" class="btn btn-secondary btn-sm">Open Case</a>
+                </td>
+              </tr>
+
+              <!-- Row 6 -->
+              <tr data-staff-case-row data-category="accommodation" data-priority="high" data-status="escalated" data-date="2026-09-29">
+                <td class="cell-mono">RH-2026-8452</td>
+                <td><strong>Smart Biometric Turnstile Fault at Female Hostel Wing A</strong></td>
+                <td>Zainab Lawal</td>
+                <td>Accommodation</td>
+                <td><span class="priority-label priority-high">High</span></td>
+                <td>
+                  <span class="status-badge status-escalated">
+                    <span class="status-indicator-symbol" aria-hidden="true">!</span> Escalated
+                  </span>
+                </td>
+                <td class="font-mono" style="font-size: var(--text-xs); color: var(--text-muted);">2026-09-29</td>
+                <td style="text-align: right;">
+                  <a href="case.html?id=RH-2026-8452" class="btn btn-secondary btn-sm">Open Case</a>
+                </td>
+              </tr>
+
+              <!-- Row 7 -->
+              <tr data-staff-case-row data-category="ict" data-priority="low" data-status="resolved" data-date="2026-09-29">
+                <td class="cell-mono">RH-2026-8440</td>
+                <td><strong>Institutional Email Alias Provisioning Request</strong></td>
+                <td>Amina Yusuf</td>
+                <td>ICT</td>
+                <td><span class="priority-label priority-low">Low</span></td>
+                <td>
+                  <span class="status-badge status-resolved">
+                    <span class="status-indicator-symbol" aria-hidden="true">✓</span> Resolved
+                  </span>
+                </td>
+                <td class="font-mono" style="font-size: var(--text-xs); color: var(--text-muted);">2026-09-29</td>
+                <td style="text-align: right;">
+                  <a href="case.html?id=RH-2026-8440" class="btn btn-secondary btn-sm">Open Case</a>
+                </td>
+              </tr>
+
+              <!-- Row 8 -->
+              <tr data-staff-case-row data-category="security" data-priority="high" data-status="in-progress" data-date="2026-10-01">
+                <td class="cell-mono">RH-2026-8433</td>
+                <td><strong>CCTV Feed Offline at Science Complex Car Park</strong></td>
+                <td>CSO Segun Adebisi</td>
+                <td>Security</td>
+                <td><span class="priority-label priority-high">High</span></td>
+                <td>
+                  <span class="status-badge status-in-progress">
+                    <span class="status-indicator-symbol" aria-hidden="true">●</span> In Progress
+                  </span>
+                </td>
+                <td class="font-mono" style="font-size: var(--text-xs); color: var(--text-muted);">2026-10-01</td>
+                <td style="text-align: right;">
+                  <a href="case.html?id=RH-2026-8433" class="btn btn-secondary btn-sm">Open Case</a>
+                </td>
+              </tr>
+
+              <!-- Row 9 -->
+              <tr data-staff-case-row data-category="administration" data-priority="low" data-status="resolved" data-date="2026-09-27">
+                <td class="cell-mono">RH-2026-8418</td>
+                <td><strong>Staff Biometric ID Card Barcode Sync Issue</strong></td>
+                <td>Bolanle Martins</td>
+                <td>Administration</td>
+                <td><span class="priority-label priority-low">Low</span></td>
+                <td>
+                  <span class="status-badge status-resolved">
+                    <span class="status-indicator-symbol" aria-hidden="true">✓</span> Resolved
+                  </span>
+                </td>
+                <td class="font-mono" style="font-size: var(--text-xs); color: var(--text-muted);">2026-09-27</td>
+                <td style="text-align: right;">
+                  <a href="case.html?id=RH-2026-8418" class="btn btn-secondary btn-sm">Open Case</a>
+                </td>
+              </tr>
+
+              <!-- Row 10 -->
+              <tr data-staff-case-row data-category="other" data-priority="medium" data-status="resolved" data-date="2026-09-25">
+                <td class="cell-mono">RH-2026-8395</td>
+                <td><strong>E-Library Off-Campus VPN Access Certificate Renewal</strong></td>
+                <td>Tosin Ogunleye</td>
+                <td>Other</td>
+                <td><span class="priority-label priority-medium">Medium</span></td>
+                <td>
+                  <span class="status-badge status-resolved">
+                    <span class="status-indicator-symbol" aria-hidden="true">✓</span> Resolved
+                  </span>
+                </td>
+                <td class="font-mono" style="font-size: var(--text-xs); color: var(--text-muted);">2026-09-25</td>
+                <td style="text-align: right;">
+                  <a href="case.html?id=RH-2026-8395" class="btn btn-secondary btn-sm">Open Case</a>
+                </td>
+              </tr>
+
+              <!-- Empty State Row when filters match 0 cases -->
+              <tr id="staff-cases-empty-row" style="display: none;">
+                <td colspan="8" style="text-align: center; padding: var(--space-8);">
+                  <div style="font-weight: var(--weight-semibold); margin-bottom: var(--space-1);">
+                    No cases match your active filter criteria
+                  </div>
+                  <div class="text-muted" style="font-size: var(--text-xs); margin-bottom: var(--space-3);">
+                    Try clearing your search query or selecting "All" in the status tabs above.
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="table-footer">
+            <span>Displaying <strong class="font-mono" data-staff-visible-count>10</strong> matching case records</span>
+            <div class="flex-row">
+              <button type="button" class="btn btn-secondary btn-sm" disabled>Previous</button>
+              <button type="button" class="btn btn-secondary btn-sm">Next Page</button>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

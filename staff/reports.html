@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Department Reports &amp; Analytics — ResolveHub Staff</title>
+  <meta name="description" content="ResolveHub Department Reporting Dashboard. View total complaints, resolution rate, average resolution time, open and overdue cases, and staff workload analytics." />
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+
+  <div class="app-shell">
+    <!-- ==================================================================
+         1. STAFF SIDEBAR NAVIGATION
+         ================================================================== -->
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">ResolveHub</a>
+        <span class="sidebar-portal-label">Staff Portal</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Staff Workspace Navigation">
+        <div class="sidebar-section-label">Resolution Workspace</div>
+        <a href="dashboard.html" class="sidebar-link">
+          <span class="sidebar-link-main">Dashboard</span>
+        </a>
+        <a href="cases.html" class="sidebar-link">
+          <span class="sidebar-link-main">Cases</span>
+          <span class="sidebar-count">38</span>
+        </a>
+        <a href="reports.html" class="sidebar-link active">
+          <span class="sidebar-link-main">Reports</span>
+        </a>
+
+        <div class="sidebar-section-label">Account</div>
+        <a href="../auth.html" class="sidebar-link">
+          <span class="sidebar-link-main">Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">TB</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Engr. Tunde Bakare</div>
+            <div class="sidebar-user-role">Senior Officer · ICT Unit</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================================================================
+         2. MAIN WORKSPACE AREA
+         ================================================================== -->
+    <div class="main-wrapper">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" class="sidebar-toggle-btn" data-sidebar-toggle aria-label="Toggle Sidebar">
+            ☰
+          </button>
+          <div class="topbar-breadcrumb">
+            <a href="dashboard.html" style="color: var(--text-muted);">Staff Portal</a>
+            <span>/</span>
+            <strong>Reports</strong>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            onclick="window.print()"
+          >
+            Print Report
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            onclick="window.ResolveHub.showToast('Report Exported', 'Department SLA report downloaded as ICT_Q3_2026_Report.csv', 'success')"
+          >
+            Download CSV
+          </button>
+        </div>
+      </header>
+
+      <!-- Workspace Content -->
+      <main class="workspace-content">
+        <!-- Page Heading -->
+        <div class="flex-between" style="margin-bottom: var(--space-6); flex-wrap: wrap;">
+          <div>
+            <h1 class="page-title">Department Performance &amp; SLA Reports</h1>
+            <p class="page-subtitle">
+              Operational analytics for the <strong>ICT &amp; Network Infrastructure Department</strong> (Reporting Period: May – October 2026).
+            </p>
+          </div>
+          <div class="page-actions">
+            <a href="cases.html" class="btn btn-secondary btn-sm">View Active Cases</a>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             3. 5 DEPARTMENT KPI SUMMARY CARDS
+             (Total complaints, Resolution rate, Average resolution time, Open cases, Overdue cases)
+             ============================================================== -->
+        <section aria-label="Department Key Performance Indicators">
+          <div class="stats-grid-5">
+            <!-- 1. Total Complaints -->
+            <article class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Total Complaints</span>
+              </div>
+              <div class="stat-value">486</div>
+              <div class="stat-footer">
+                <span class="stat-delta positive">+8.2%</span>
+                <span>logged in current semester</span>
+              </div>
+            </article>
+
+            <!-- 2. Resolution Rate -->
+            <article class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Resolution Rate</span>
+              </div>
+              <div class="stat-value">96.3%</div>
+              <div class="stat-footer">
+                <span class="stat-delta positive">468 / 486</span>
+                <span>verified &amp; closed</span>
+              </div>
+            </article>
+
+            <!-- 3. Average Resolution Time -->
+            <article class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Avg. Resolution Time</span>
+              </div>
+              <div class="stat-value">6.4 hrs</div>
+              <div class="stat-footer">
+                <span class="stat-delta positive">-1.8 hrs</span>
+                <span>faster than 24h SLA target</span>
+              </div>
+            </article>
+
+            <!-- 4. Open Cases -->
+            <article class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Open Cases</span>
+              </div>
+              <div class="stat-value">15</div>
+              <div class="stat-footer">
+                <span class="stat-delta">Active</span>
+                <span>across 5 department officers</span>
+              </div>
+            </article>
+
+            <!-- 5. Overdue Cases -->
+            <article class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Overdue Cases</span>
+              </div>
+              <div class="stat-value" style="color: var(--color-danger);">03</div>
+              <div class="stat-footer">
+                <span class="stat-delta negative">0.6% of total</span>
+                <span>escalated for priority closure</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ==============================================================
+             4. VISUAL CHARTS (Monthly Volume Trend & Sub-Category Breakdown)
+             ============================================================== -->
+        <section class="grid-2" style="margin-bottom: var(--space-6);">
+          <!-- Chart 1: Monthly Submitted vs. Resolved Bar Chart -->
+          <article class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Monthly Complaint Volume vs. Resolved</h2>
+                <p class="card-subtitle">6-month departmental intake and resolution throughput</p>
+              </div>
+              <div class="metadata-inline">
+                <span style="color: var(--color-primary); font-weight: 600;">■ Submitted</span>
+                <span class="metadata-sep">·</span>
+                <span style="color: var(--color-success); font-weight: 600;">■ Resolved</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="vertical-chart" role="img" aria-label="6-month bar chart comparing submitted and resolved cases from May to October 2026">
+                <!-- May -->
+                <div class="v-bar-col">
+                  <span class="v-bar-num">72 / 71</span>
+                  <div class="v-bar-pair">
+                    <div class="v-bar v-bar-submitted" style="height: 72%;" title="May Submitted: 72"></div>
+                    <div class="v-bar v-bar-resolved" style="height: 71%;" title="May Resolved: 71"></div>
+                  </div>
+                  <span class="v-bar-month">May</span>
+                </div>
+
+                <!-- Jun -->
+                <div class="v-bar-col">
+                  <span class="v-bar-num">68 / 67</span>
+                  <div class="v-bar-pair">
+                    <div class="v-bar v-bar-submitted" style="height: 68%;" title="Jun Submitted: 68"></div>
+                    <div class="v-bar v-bar-resolved" style="height: 67%;" title="Jun Resolved: 67"></div>
+                  </div>
+                  <span class="v-bar-month">Jun</span>
+                </div>
+
+                <!-- Jul -->
+                <div class="v-bar-col">
+                  <span class="v-bar-num">84 / 82</span>
+                  <div class="v-bar-pair">
+                    <div class="v-bar v-bar-submitted" style="height: 84%;" title="Jul Submitted: 84"></div>
+                    <div class="v-bar v-bar-resolved" style="height: 82%;" title="Jul Resolved: 82"></div>
+                  </div>
+                  <span class="v-bar-month">Jul</span>
+                </div>
+
+                <!-- Aug -->
+                <div class="v-bar-col">
+                  <span class="v-bar-num">79 / 78</span>
+                  <div class="v-bar-pair">
+                    <div class="v-bar v-bar-submitted" style="height: 79%;" title="Aug Submitted: 79"></div>
+                    <div class="v-bar v-bar-resolved" style="height: 78%;" title="Aug Resolved: 78"></div>
+                  </div>
+                  <span class="v-bar-month">Aug</span>
+                </div>
+
+                <!-- Sep -->
+                <div class="v-bar-col">
+                  <span class="v-bar-num">95 / 92</span>
+                  <div class="v-bar-pair">
+                    <div class="v-bar v-bar-submitted" style="height: 95%;" title="Sep Submitted: 95"></div>
+                    <div class="v-bar v-bar-resolved" style="height: 92%;" title="Sep Resolved: 92"></div>
+                  </div>
+                  <span class="v-bar-month">Sep</span>
+                </div>
+
+                <!-- Oct -->
+                <div class="v-bar-col">
+                  <span class="v-bar-num">88 / 78</span>
+                  <div class="v-bar-pair">
+                    <div class="v-bar v-bar-submitted" style="height: 88%;" title="Oct Submitted: 88"></div>
+                    <div class="v-bar v-bar-resolved" style="height: 78%;" title="Oct Resolved: 78"></div>
+                  </div>
+                  <span class="v-bar-month">Oct</span>
+                </div>
+              </div>
+
+              <div class="metadata-inline" style="margin-top: var(--space-4);">
+                <span>Peak Intake: <strong>September 2026 (95 cases)</strong> during semester registration</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Chart 2: Resolution Time & Volume by Issue Type -->
+          <article class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Complaints by Issue Type &amp; Turnaround</h2>
+                <p class="card-subtitle">Distribution of the 486 departmental cases by technical category</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart-bar-list">
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">Campus Wi-Fi &amp; Access Point Connectivity</span>
+                    <span class="chart-bar-value">164 cases (33.7%) · Avg 5.2h</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill fill-accent" style="width: 33.7%;"></div>
+                  </div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">Student / Staff Portal Login &amp; 2FA</span>
+                    <span class="chart-bar-value">132 cases (27.2%) · Avg 3.8h</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill fill-success" style="width: 27.2%;"></div>
+                  </div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">LMS Course Enrollment &amp; Exam Uploads</span>
+                    <span class="chart-bar-value">94 cases (19.3%) · Avg 7.1h</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill" style="width: 19.3%;"></div>
+                  </div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">Institutional Email &amp; Directory Sync</span>
+                    <span class="chart-bar-value">58 cases (11.9%) · Avg 4.5h</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill fill-success" style="width: 11.9%;"></div>
+                  </div>
+                </div>
+
+                <div class="chart-bar-item">
+                  <div class="chart-bar-meta">
+                    <span class="chart-bar-label">Computer Lab Hardware &amp; Fiber Uplinks</span>
+                    <span class="chart-bar-value">38 cases (7.9%) · Avg 14.2h</span>
+                  </div>
+                  <div class="chart-track">
+                    <div class="chart-fill fill-warning" style="width: 7.9%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- ==============================================================
+             5. STAFF WORKLOAD DISTRIBUTION TABLE
+             ============================================================== -->
+        <section class="card" aria-label="Staff Workload Distribution">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Staff Workload &amp; Resolution Efficiency</h2>
+              <p class="card-subtitle">Active case allocation, turnaround speed, and SLA compliance across department officers</p>
+            </div>
+            <span class="font-mono" style="font-size: var(--text-xs); color: var(--text-muted);">5 Active Officers</span>
+          </div>
+          <div class="table-container" style="border: none; border-radius: 0;">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Staff Officer</th>
+                  <th>Role / Specialty</th>
+                  <th style="text-align: right;">Open Cases</th>
+                  <th style="text-align: right;">Overdue</th>
+                  <th style="text-align: right;">Resolved (Semester)</th>
+                  <th style="text-align: right;">Avg. Resolution Time</th>
+                  <th style="text-align: right;">SLA Compliance</th>
+                  <th style="min-width: 170px;">Queue Utilization</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Engr. Tunde Bakare</strong></td>
+                  <td>Senior Network &amp; Infrastructure Lead</td>
+                  <td class="cell-numeric">5</td>
+                  <td class="cell-numeric" style="color: var(--color-danger);">1</td>
+                  <td class="cell-numeric">142</td>
+                  <td class="cell-numeric">5.8 hrs</td>
+                  <td class="cell-numeric" style="color: var(--color-success); font-weight: 600;">96.5%</td>
+                  <td>
+                    <div class="chart-track" title="82% Queue Capacity">
+                      <div class="chart-fill fill-accent" style="width: 82%;"></div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td><strong>Chisom Eze</strong></td>
+                  <td>Wireless &amp; Access Point Specialist</td>
+                  <td class="cell-numeric">4</td>
+                  <td class="cell-numeric">0</td>
+                  <td class="cell-numeric">118</td>
+                  <td class="cell-numeric">6.1 hrs</td>
+                  <td class="cell-numeric" style="color: var(--color-success); font-weight: 600;">97.4%</td>
+                  <td>
+                    <div class="chart-track" title="70% Queue Capacity">
+                      <div class="chart-fill fill-success" style="width: 70%;"></div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td><strong>Ibrahim Danjuma</strong></td>
+                  <td>Portal Authentication &amp; Systems Admin</td>
+                  <td class="cell-numeric">3</td>
+                  <td class="cell-numeric" style="color: var(--color-danger);">1</td>
+                  <td class="cell-numeric">96</td>
+                  <td class="cell-numeric">4.9 hrs</td>
+                  <td class="cell-numeric" style="color: var(--color-success); font-weight: 600;">95.8%</td>
+                  <td>
+                    <div class="chart-track" title="64% Queue Capacity">
+                      <div class="chart-fill fill-accent" style="width: 64%;"></div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td><strong>Kemi Adebayo</strong></td>
+                  <td>LMS &amp; Academic Software Support</td>
+                  <td class="cell-numeric">2</td>
+                  <td class="cell-numeric">0</td>
+                  <td class="cell-numeric">68</td>
+                  <td class="cell-numeric">7.2 hrs</td>
+                  <td class="cell-numeric" style="color: var(--color-success); font-weight: 600;">97.1%</td>
+                  <td>
+                    <div class="chart-track" title="50% Queue Capacity">
+                      <div class="chart-fill fill-success" style="width: 50%;"></div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td><strong>Samuel Okon</strong></td>
+                  <td>Computer Lab Hardware Technician</td>
+                  <td class="cell-numeric">1</td>
+                  <td class="cell-numeric" style="color: var(--color-danger);">1</td>
+                  <td class="cell-numeric">44</td>
+                  <td class="cell-numeric">9.4 hrs</td>
+                  <td class="cell-numeric" style="color: var(--color-warning); font-weight: 600;">93.2%</td>
+                  <td>
+                    <div class="chart-track" title="45% Queue Capacity">
+                      <div class="chart-fill fill-warning" style="width: 45%;"></div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>
